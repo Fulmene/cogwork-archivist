@@ -1,6 +1,7 @@
 package alchemagis.magic;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Deck {
 
@@ -10,16 +11,16 @@ public class Deck {
         this.cards = cards;
     }
 
-    public List<Card> getCards() {
-        return this.cards;
-    }
-
     public int size() {
         return this.cards.size();
     }
 
     public void add(final Card card) {
         this.cards.add(card);
+    }
+
+    public Stream<Card> stream() {
+        return this.cards.stream();
     }
 
 }

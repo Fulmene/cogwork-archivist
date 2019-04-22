@@ -19,6 +19,7 @@ public final class DeckGenerator {
         final Deck generatedDeck = new Deck(startingCards);
 
         while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
+            
         }
 
         return generatedDeck;

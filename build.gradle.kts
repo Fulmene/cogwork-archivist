@@ -26,6 +26,13 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation("junit:junit:4.12")
+
+    implementation("com.fasterxml.jackson.core:jackson-core:2.9.8")
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.8")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.9.8")
+    implementation("com.fasterxml.jackson.module:jackson-modules-java8:2.9.8")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8")
+
 }
 
 application {
