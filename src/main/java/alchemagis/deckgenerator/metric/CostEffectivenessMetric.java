@@ -1,6 +1,7 @@
 package alchemagis.deckgenerator.metric;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -14,10 +15,11 @@ public final class CostEffectivenessMetric extends Metric {
     private Map<String, Double> costEffectivenessTable;
 
     public CostEffectivenessMetric(File tableFile) {
+        this.costEffectivenessTable = new HashMap<>();
         MappingIterator<Map<String, String>> it = CsvUtil.readCsvFile(tableFile);
         while (it.hasNext()) {
             Map<String, String> values = it.next();
-            costEffectivenessTable.put(values.get("Card Name"), Double.parseDouble(values.get("Cost Effectiveness")));
+            this.costEffectivenessTable.put(values.get("Card Name"), Double.parseDouble(values.get("Cost Effectiveness")));
         }
     }
 
