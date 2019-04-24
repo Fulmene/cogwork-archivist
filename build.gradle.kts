@@ -37,5 +37,5 @@ dependencies {
 
 application {
     // Define the main class for the application
-    mainClassName = "alchemagis.App"
+    mainClassName = "alchemagis.Main"
 }
