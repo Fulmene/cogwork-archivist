@@ -1,6 +1,8 @@
 package alchemagis.deckgenerator;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import alchemagis.deckgenerator.metric.Metric;
 import alchemagis.magic.Card;
@@ -12,7 +14,13 @@ public final class DeckGenerator {
 
     private CardPool cardPool;
     private List<Metric> metrics;
-    private List<Double> utilityScores;
+    private Map<String, Double> utilityScores;
+
+    public DeckGenerator(CardPool cardPool, List<Metric> metrics) {
+        this.cardPool = cardPool;
+        this.metrics = metrics;
+        this.utilityScores = new HashMap<>();
+    }
 
     public Deck generateDeck() {
         return this.generateDeck(List.of(this.cardPool.getRandomCard()));
@@ -22,6 +30,7 @@ public final class DeckGenerator {
         final Deck generatedDeck = new Deck(startingCards);
 
         while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
+            this.utilityScores.clear();
             Card maxUtilityCard = cardPool.stream().max(
                 (c1, c2) ->
                     Double.compare(
@@ -35,9 +44,14 @@ public final class DeckGenerator {
     }
 
     private double getUtilityScore(Deck deck, Card card) {
-        return this.metrics.stream().
-            mapToDouble(m -> m.getMetricScore(deck, card)).
-            sum();
+        if (!this.utilityScores.containsKey(card.getName())) {
+            this.utilityScores.put(
+                card.getName(),
+                this.metrics.stream().
+                    mapToDouble(m -> m.getMetricScore(deck, card)).
+                    sum());
+        }
+        return this.utilityScores.get(card.getName());
     }
 
 }
