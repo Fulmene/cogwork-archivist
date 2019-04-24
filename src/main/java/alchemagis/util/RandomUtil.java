@@ -4,6 +4,10 @@ import java.util.Random;
 
 public final class RandomUtil {
 
-    public static final Random random = new Random();
+    private static final Random random = new Random();
+
+    public static int getRandomInt(int upper) {
+        return random.nextInt(upper);
+    }
 
 }
