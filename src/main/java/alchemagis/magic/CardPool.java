@@ -1,6 +1,9 @@
 package alchemagis.magic;
 
 import java.util.List;
+import java.util.stream.Stream;
+
+import alchemagis.util.RandomUtil;
 
 public final class CardPool {
 
@@ -14,6 +17,14 @@ public final class CardPool {
 
     public List<Card> getCards() {
         return this.cards;
+    }
+
+    public Stream<Card> stream() {
+        return this.cards.stream();
+    }
+
+    public Card getRandomCard() {
+        return cards.get(RandomUtil.getRandomInt(cards.size()));
     }
 
 }
