@@ -1,10 +1,10 @@
-package alchemagis.deckgenerator.metric;
+package alchemagis.deckgenerator.metric.synergy;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.DoubleStream;
 
-import alchemagis.deckgenerator.synergy.Synergy;
+import alchemagis.deckgenerator.metric.Metric;
 import alchemagis.magic.Card;
 import alchemagis.magic.Deck;
 

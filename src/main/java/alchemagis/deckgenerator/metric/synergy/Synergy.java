@@ -1,4 +1,4 @@
-package alchemagis.deckgenerator.synergy;
+package alchemagis.deckgenerator.metric.synergy;
 
 import alchemagis.magic.Card;
 
