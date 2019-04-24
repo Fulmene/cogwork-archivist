@@ -15,7 +15,7 @@ public class CostEffectivenessMetric extends Metric {
     }
 
     private double getCostEffectiveness(Card card) {
-        return costEffectivenessTable.get(card.getName());
+        return this.costEffectivenessTable.get(card.getName());
     }
 
 }
