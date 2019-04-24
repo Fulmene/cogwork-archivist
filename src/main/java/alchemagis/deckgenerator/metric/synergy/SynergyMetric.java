@@ -13,7 +13,7 @@ public final class SynergyMetric extends Metric {
     private Map<String, List<Synergy>> synergyTable;
 
     @Override
-    public double getRawMetricScore(Deck deck, Card card) {
+    protected double getRawMetricScore(Deck deck, Card card) {
         return deck.stream().
             flatMapToDouble(c ->
                 DoubleStream.concat(
