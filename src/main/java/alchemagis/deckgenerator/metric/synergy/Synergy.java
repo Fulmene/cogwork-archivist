@@ -1,5 +1,8 @@
 package alchemagis.deckgenerator.metric.synergy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import alchemagis.magic.Card;
 
 public abstract class Synergy {
@@ -12,6 +15,11 @@ public abstract class Synergy {
 
     protected Synergy(double synergyWeight) {
         this.synergyWeight = synergyWeight;
+    }
+
+    public static List<Synergy> parseSynergies(String synergiesString) {
+        // TODO stub
+        return new ArrayList<>();
     }
 
     public final double getScore(Card card) {

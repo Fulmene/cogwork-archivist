@@ -1,16 +1,30 @@
 package alchemagis.deckgenerator.metric.synergy;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.DoubleStream;
 
+import com.fasterxml.jackson.databind.MappingIterator;
+
 import alchemagis.deckgenerator.metric.Metric;
 import alchemagis.magic.Card;
 import alchemagis.magic.Deck;
+import alchemagis.util.CsvUtil;
 
 public final class SynergyMetric extends Metric {
 
     private Map<String, List<Synergy>> synergyTable;
+
+    public SynergyMetric(File tableFile) {
+        this.synergyTable = new HashMap<>();
+        MappingIterator<Map<String, String>> it = CsvUtil.readCsvFile(tableFile);
+        while (it.hasNext()) {
+            Map<String, String> values = it.next();
+            this.synergyTable.put(values.get("Card Name"), Synergy.parseSynergies(values.get("Synergies")));
+        }
+    }
 
     @Override
     protected double getRawMetricScore(Deck deck, Card card) {
