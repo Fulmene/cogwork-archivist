@@ -12,6 +12,8 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     application
+
+    eclipse
 }
 
 repositories {
