@@ -1,4 +1,4 @@
-package alchemagis.deckgenerator.metric.synergy;
+package alchemagis.deckgenerator.metric;
 
 import java.io.File;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.stream.DoubleStream;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 
-import alchemagis.deckgenerator.metric.Metric;
+import alchemagis.deckgenerator.metric.synergy.Synergy;
 import alchemagis.magic.Card;
 import alchemagis.magic.Deck;
 import alchemagis.util.CsvUtil;
