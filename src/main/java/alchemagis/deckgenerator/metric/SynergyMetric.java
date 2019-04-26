@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.MappingIterator;
 import alchemagis.deckgenerator.metric.synergy.Synergy;
 import alchemagis.magic.Card;
 import alchemagis.magic.Deck;
-import alchemagis.util.CsvUtil;
+import alchemagis.util.FileUtil;
 
 public final class SynergyMetric extends Metric {
 
@@ -19,7 +19,7 @@ public final class SynergyMetric extends Metric {
 
     public SynergyMetric(File tableFile) {
         this.synergyTable = new HashMap<>();
-        MappingIterator<Map<String, String>> it = CsvUtil.readCsvFile(tableFile);
+        MappingIterator<Map<String, String>> it = FileUtil.readCsvFile(tableFile);
         while (it.hasNext()) {
             Map<String, String> values = it.next();
             this.synergyTable.put(values.get("Card Name"), Synergy.parseSynergies(values.get("Synergies")));

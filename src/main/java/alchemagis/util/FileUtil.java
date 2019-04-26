@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 
-public final class CsvUtil {
+public final class FileUtil {
 
     public static MappingIterator<Map<String, String>> readCsvFile(File csvFile) {
         CsvMapper mapper = new CsvMapper();
