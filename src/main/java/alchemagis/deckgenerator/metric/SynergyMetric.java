@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 
@@ -32,14 +33,20 @@ public final class SynergyMetric extends Metric {
             flatMapToDouble(c ->
                 DoubleStream.concat(
                     this.getSynergyList(card).stream().
-                        mapToDouble(s -> s.getScore(c)),
+                        mapToDouble(s -> s.getScore(this, c)),
                     this.getSynergyList(c).stream().
-                        mapToDouble(s -> s.getScore(card)))).
+                        mapToDouble(s -> s.getScore(this, card)))).
             sum();
     }
 
-    private List<Synergy> getSynergyList(Card card) {
+    public List<Synergy> getSynergyList(Card card) {
         return this.synergyTable.get(card.getName());
+    }
+
+    public<T extends Synergy> Stream<T> classFilterStream(Class<T> clazz, Card card) {
+        return this.getSynergyList(card).stream().
+            filter(clazz::isInstance).
+            map(clazz::cast);
     }
 
 }
