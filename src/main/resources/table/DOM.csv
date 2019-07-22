@@ -1,0 +1,39 @@
+Bloodstone Goblin:4:pkicker
+Champion of the Flame:3:pquality(aura)/pquality(equipment)
+Fervent Strike:3:
+Fiery Intervention:2:damage(5,creature)/destroy(artifact)
+Fight with Fire:3:kicker/damage(5,creature)/damage(x,any)
+Fire Elemental:2:
+Firefist Adept:2:damage(x,creature)/pquality(wizard)
+Frenzied Rage:3:enchant(creature)
+Ghitu Chronicler:3:kicker/pquality(instant)/pquality(sorcery)
+Ghitu Journeymage:2:damage(2,player)/pquality(wizard)
+Ghitu Lavarunner:5:pquality(instant)/pquality(sorcery)
+Goblin Barrage:2:kicker/damage(4,creature)/damage(4,player,planeswalker)
+Goblin Chainwhirler:5:damage(1,creature)/damage(1,player)/damage(1,planeswalker)
+Goblin Warchief:3:pquality(goblin)
+Haphazard Bombardment:1:
+Jaya Ballard:3:pquality(instant)/pquality(sorcery)/discard/draw/mana(red,instant)/mana(red,sorcery)
+Jaya's Immolating Inferno:3:xspell/damage(x,any)/legendarysorcery
+Keldon Overseer:2:kicker/psacrifice
+Keldon Raider:3:discard/draw
+Keldon Warcaller:3:pquality(saga)
+Orcish Vandal:2:pquality(artifact)/damage(2,any)
+Pyromantic Pilgrim:3:
+Radiating Lightning:2:adamage(player)/adamage(creature)
+Rampaging Cyclops:3:
+Run Amok:3:pquality(creature)
+Seismic Shift:1:
+Shivan Fire:3:kicker/damage(2,creature)
+Siege-Gang Commander:3:pquality(goblin)/sacrifice
+Skirk Prospector:4:pquality(goblin)
+Skizzik:2:kicker
+Squee, the Immortal:3:
+The First Eruption:2:damage(1,nonflying)/mana(red)/damage(3,creature)
+The Flame of Keld:4:discard/draw/pdamage(red,any)
+Two-Headed Giant:4:
+Valduk, Keeper of the Flame:3:pquality(aura)/pquality(equipment)/token(elemental)
+Verix Bladewing:4:kicker/flying/token(dragon)
+Warcry Phoenix:2:flying/pquality(creature)
+Warlord's Fury:3:draw
+Wizard's Lightning:4:pquality(wizard)/damage(3,any)

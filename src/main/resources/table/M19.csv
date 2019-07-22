@@ -1,0 +1,46 @@
+Act of Treason:3:psacrifice
+Alpine Moon:3:
+Amulet of Safekeeping:2:
+Apex of Power:2:
+Arcane Encyclopedia:1:
+Banefire:5:xspell/damage(x,any)
+Boggart Brute:3:
+Catalyst Elemental:3:mana(red)
+Crash Through:3:draw
+Dark-Dweller Oracle:3:sacrifice
+Demanding Dragon:3:damage(5,player)
+Dismissive Pyromancer:3:discard/draw/damage(4,creature)
+Doublecast:3:pquality(instant)/pquality(sorcery)
+Dragon Egg:2:pdie/token(dragon)
+Electrify:2:damage(4,creature)
+Fiery Finish:1:damage(7,creature)
+Fire Elemental:2:
+Goblin Instigator:3:token(goblin)
+Goblin Motivator:2:pquality(creature)
+Goblin Trashmaster:2:pquality(goblin)
+Guttersnipe:3:pquality(instant)/pquality(sorcery)
+Havoc Devils:3:
+Hostile Minotaur:3:
+Inferno Hellion:2:
+Kargan Dragonrider:4:flying/pquality(dragon)
+Lathliss, Dragon Queen:3:flying/token(dragon)/pquality(dragon)
+Lava Axe:1:damage(5,player,planeswalker)
+Lightning Mare:3:
+Lightning Strike:4:adamage(3,any)
+Onakke Ogre:2:
+Radiating Lightning:2:damage(3,player)/damage(1,creature)
+Sarkhan, Fireblood:3:pquality(dragon)/draw/discard
+Sarkhan's Unsealing:3:pquality(creature)/ppower(>=4)/ppower(>=7)
+Shivan Dragon:2:flying
+Shock:4:damage(2,any)
+Siegebreaker Giant:2:
+Smelt:3:
+Sparktongue Dragon:1:flying/damage(3,any)
+Spit Flame:3:damage(4,creature)/pquality(dragon)
+Tectonic Rift:1:
+Thud:3:sacrifice/damage(x,any)
+Tormenting Voice:4:discard/draw
+Trumpet Blast:2:ptype(creature)
+Viashino Pyromancer:5:damage(2,player,planeswalker)
+Volcanic Dragon:2:
+Volley Veteran:3:damage(x,creature)/pquality(goblin)

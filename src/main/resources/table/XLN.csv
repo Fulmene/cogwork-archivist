@@ -1,0 +1,39 @@
+Angrath's Marauders:1:pdamage(any,any)
+Bonded Horncrest:3:pquality(creature)
+Brazen Buccaneers:2:explore
+Burning Sun's Avatar:3:damage(3,creature)/damage(3,player)
+Captain Lannery Storm:3:token(treasure)/pquality(treasure)
+Captivating Crew:3:psacrifice
+Charging Monstrosaur:3:
+Dinosaur Stampede:2:pquality(dinosaur)
+Dual Shot:2:damage(1,creature)
+Fathom Fleet Firebrand:3:
+Fiery Cannonade:3:damage(2,creature)/pquality(pirate)
+Firecannon Blast:3:damage(x,creature)
+Fire Shrine Keeper:3:damage(3,creature)
+Frenzied Raptor:2:
+Headstrong Brute:3:pquality(pirate)
+Hijack:2:
+Lightning-Rig Crew:3:damage(1,player)/pquality(pirate)
+Makeshift Munitions:3:damage(1,any)/pquality(creature)/pquality(artifact)
+Nest Robber:3:
+Otepec Huntmaster:3:pquality(dinosaur)
+Raptor Hatchling:3:penrage/token(dinosaur)
+Repeating Barrage:2:damage(3,any)
+Rigging Runner:4:
+Rile:4:damage(1,creature)/draw
+Rowdy Crew:2:draw/discard
+Rummaging Goblin:2:discard/draw
+Star of Extinction:2:damage(20,creature,planeswalker)
+Storm Fleet Arsonist:3:
+Storm Fleet Pyromancer:2:damage(2,any)
+Sunbird's Invocation:2:pcmcx
+Sun-Crowned Hunters:2:penrage/damage(3,player)
+Swashbuckling:2:enchant(creature)
+Thrash of Raptors:3:pquality(dinosaur)
+Tilonalli's Knight:3:pquality(dinosaur)
+Tilonalli's Skinshifter:1:pquality(nonlegendary,creature)
+Trove of Temptation:2:token(treasure)
+Unfriendly Fire:1:damage(4,any)
+Vance's Blasting Cannons:2:damage(3,any)
+Wily Goblin:2:token(treasure)
