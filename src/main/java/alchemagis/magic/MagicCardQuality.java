@@ -1,5 +1,7 @@
 package alchemagis.magic;
 
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +62,7 @@ public final class MagicCardQuality {
     }
 
     @SuppressWarnings("serial")
-    public static class IllegalQualityException extends Exception {
+    public static class IllegalQualityException extends IOException {
         private String quality;
 
         private IllegalQualityException(String quality) {
