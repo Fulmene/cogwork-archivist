@@ -32,7 +32,7 @@ public abstract class Synergy {
         String synergyType = synergySplit[0];
         String[] synergyParameter = null;
         if (synergySplit.length > 1)
-            synergyParameter = synergySplit[1].split("/");
+            synergyParameter = synergySplit[1].split(",");
         try {
             switch (synergyType) {
                 case "ascend":
