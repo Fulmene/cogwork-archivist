@@ -29,7 +29,11 @@ public class ManaSynergy extends Synergy {
 
     @Override
     protected double getRawScore(SynergyMetric metric, Card card) {
-        return 0.0;
+        // TODO card requires this mana
+        if (this.quality.isSatisfied(card))
+            return 1.0;
+        else
+            return 0.0;
     }
 
 }
