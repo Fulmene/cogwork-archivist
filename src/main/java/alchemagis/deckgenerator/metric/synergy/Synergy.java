@@ -64,11 +64,27 @@ public abstract class Synergy {
                 case "legendarysorcery":
                     return LegendarySorcerySynergy.INSTANCE;
                 case "mana":
-                    if (synergyParameter.length == 1)
+                    if (synergyParameter.length == 1) {
                         return new ManaSynergy(synergyParameter[0]);
+                    } else if (synergyParameter.length > 1) {
+                        String[] qualities = Arrays.copyOfRange(synergyParameter, 1, synergyParameter.length);
+                        return new ManaSynergy(synergyParameter[0], qualities);
+                    } else {
+                        throw new SynergyFormatException();
+                    }
+                case "mentor":
+                    return MentorSynergy.INSTANCE;
+                case "sacrifice":
+                    return SacrificeSynergy.INSTANCE;
+                case "token":
+                    return new TokenSynergy(synergyParameter[0]);
+                case "xspell":
+                    return XSpellSynergy.INSTANCE;
             }
         } catch (IllegalQualityException e) {
             // TODO do something for illegal quality
+        } catch (SynergyFormatException e) {
+            // TODO do something for illegal synergy
         }
         return null;
     }
