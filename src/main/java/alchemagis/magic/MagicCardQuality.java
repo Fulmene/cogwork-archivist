@@ -59,9 +59,8 @@ public final class MagicCardQuality {
         return satisfied;
     }
 
+    @SuppressWarnings("serial")
     public static class IllegalQualityException extends Exception {
-
-        public static final long serialVersionUID = 1l;
         private String quality;
 
         private IllegalQualityException(String quality) {
