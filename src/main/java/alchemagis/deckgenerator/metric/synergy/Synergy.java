@@ -80,6 +80,21 @@ public abstract class Synergy {
                     return new TokenSynergy(synergyParameter[0]);
                 case "xspell":
                     return XSpellSynergy.INSTANCE;
+                case "pcmcx":
+                    return PassiveCMCXSynergy.INSTANCE;
+                // TODO case "pdamage":
+                case "pdie":
+                    return PassiveDieSynergy.INSTANCE;
+                case "penrage":
+                    return PassiveEnrageSynergy.INSTANCE;
+                case "pgrave":
+                    return PassiveGraveyardSynergy.INSTANCE;
+                case "pkicker":
+                    return PassiveKickerSynergy.INSTANCE;
+                case "pquality":
+                    return new PassiveQualitySynergy(synergyParameter);
+                case "psacrifice":
+                    return PassiveSacrificeSynergy.INSTANCE;
             }
         } catch (IllegalQualityException e) {
             // TODO do something for illegal quality
