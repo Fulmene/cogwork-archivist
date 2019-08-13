@@ -27,5 +27,6 @@ public final class MagicConstants {
     );
     // TODO add actual keywords
     public static final List<String> keywords = List.of();
+    public static final List<String> targets = List.of("player", "planeswalker", "permanent");
 
 }
