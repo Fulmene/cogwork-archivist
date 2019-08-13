@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
 import alchemagis.magic.MagicCardQuality.IllegalQualityException;
+import alchemagis.magic.MagicConstants;
 
 public abstract class Synergy {
 
@@ -82,7 +83,19 @@ public abstract class Synergy {
                     return XSpellSynergy.INSTANCE;
                 case "pcmcx":
                     return PassiveCMCXSynergy.INSTANCE;
-                // TODO case "pdamage":
+                case "pdamage":
+                    int i = 0;
+                    for (i = 0; i < synergyParameter.length; i++)
+                        if (MagicConstants.targets.contains(synergyParameter[i]))
+                            break;
+                    if (i == synergyParameter.length) {
+                        i--;
+                        if (!(synergyParameter[i].equals("creature") || synergyParameter[i].equals("any")))
+                            throw new SynergyFormatException();
+                    }
+                    return new PassiveDamageSynergy(
+                        Arrays.copyOfRange(synergyParameter, 0, i),
+                        Arrays.copyOfRange(synergyParameter, i, synergyParameter.length));
                 case "pdie":
                     return PassiveDieSynergy.INSTANCE;
                 case "penrage":
