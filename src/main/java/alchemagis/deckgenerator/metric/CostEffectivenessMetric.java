@@ -20,8 +20,6 @@ public final class CostEffectivenessMetric extends Metric {
             MappingIterator<Map<String, String>> it = FileUtil.readCsv(tableURL);
             while (it.hasNext()) {
                 Map<String, String> values = it.next();
-                System.out.println(values.get("Card Name"));
-                System.out.println(values.get("Cost Effectiveness"));
                 this.costEffectivenessTable.put(values.get("Card Name"), Double.parseDouble(values.get("Cost Effectiveness")));
             }
         }

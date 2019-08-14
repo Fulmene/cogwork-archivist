@@ -1,11 +1,12 @@
 package alchemagis.util;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.RuntimeException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,26 +21,30 @@ import alchemagis.magic.CardSet;
 
 public final class FileUtil {
 
-    public static CardSet readMtgJsonSetFile(File setFile) {
+    public static CardSet readMtgJsonSet(URL setURL) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(setFile, CardSet.class);
+            return mapper.readValue(setURL, CardSet.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static MappingIterator<Map<String, String>> readCsvFile(File csvFile) {
+    private static final CsvSchema schema = CsvSchema.builder().
+        addColumn("Card Name").
+        addColumn("Cost Effectiveness").
+        addColumn("Synergies").
+        setColumnSeparator(':').
+        build();
+
+    public static MappingIterator<Map<String, String>> readCsv(URL csvURL) {
         CsvMapper mapper = new CsvMapper();
-        CsvSchema schema = CsvSchema.emptySchema().withHeader();
         ObjectReader oReader = mapper.readerFor(Map.class).with(schema);
 
-        try (Reader reader = new FileReader(csvFile)) {
-            return oReader.readValues(reader);
-        } catch (FileNotFoundException e1) {
-            throw new RuntimeException(e1);
-        } catch (IOException e2) {
-            throw new RuntimeException(e2);
+        try {
+            return oReader.readValues(csvURL);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
