@@ -1,6 +1,6 @@
 package alchemagis.deckgenerator.metric;
 
-import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,12 +14,16 @@ public final class CostEffectivenessMetric extends Metric {
 
     private Map<String, Double> costEffectivenessTable;
 
-    public CostEffectivenessMetric(File tableFile) {
+    public CostEffectivenessMetric(URL ...tableURLs) {
         this.costEffectivenessTable = new HashMap<>();
-        MappingIterator<Map<String, String>> it = FileUtil.readCsvFile(tableFile);
-        while (it.hasNext()) {
-            Map<String, String> values = it.next();
-            this.costEffectivenessTable.put(values.get("Card Name"), Double.parseDouble(values.get("Cost Effectiveness")));
+        for (URL tableURL : tableURLs) {
+            MappingIterator<Map<String, String>> it = FileUtil.readCsv(tableURL);
+            while (it.hasNext()) {
+                Map<String, String> values = it.next();
+                System.out.println(values.get("Card Name"));
+                System.out.println(values.get("Cost Effectiveness"));
+                this.costEffectivenessTable.put(values.get("Card Name"), Double.parseDouble(values.get("Cost Effectiveness")));
+            }
         }
     }
 

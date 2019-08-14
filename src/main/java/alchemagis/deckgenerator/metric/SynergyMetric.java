@@ -1,6 +1,6 @@
 package alchemagis.deckgenerator.metric;
 
-import java.io.File;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +18,14 @@ public final class SynergyMetric extends Metric {
 
     private Map<String, List<Synergy>> synergyTable;
 
-    public SynergyMetric(File tableFile) {
+    public SynergyMetric(URL ...tableURLs) {
         this.synergyTable = new HashMap<>();
-        MappingIterator<Map<String, String>> it = FileUtil.readCsvFile(tableFile);
-        while (it.hasNext()) {
-            Map<String, String> values = it.next();
-            this.synergyTable.put(values.get("Card Name"), Synergy.parseSynergies(values.get("Synergies")));
+        for (URL tableURL : tableURLs) {
+            MappingIterator<Map<String, String>> it = FileUtil.readCsv(tableURL);
+            while (it.hasNext()) {
+                Map<String, String> values = it.next();
+                this.synergyTable.put(values.get("Card Name"), Synergy.parseSynergies(values.get("Synergies")));
+            }
         }
     }
 
