@@ -26,7 +26,7 @@ public final class MagicConstants {
             "alara", "arkhos", "azgol", "belenon", "bolas’s meditation realm", "dominaria", "equilor", "ergamon", "fabacin", "innistrad", "iquatana", "ir", "kaldheim", "kamigawa", "karsus", "kephalai", "kinshala", "kolbahan", "kyneth", "lorwyn", "luvion", "mercadia", "mirrodin", "moag", "mongseng", "muraganda", "new phyrexia", "phyrexia", "pyrulea", "rabiah", "rath", "ravnica", "regatha", "segovia", "serra’s realm", "shadowmoor", "shandalar", "ulgrotha", "valla", "vryn", "wildfire", "xerex", "zendikar"
     );
     // TODO add actual keywords
-    public static final List<String> keywords = List.of();
+    public static final List<String> keywords = List.of("multicolor");
     public static final List<String> targets = List.of("player", "planeswalker", "permanent");
 
 }
