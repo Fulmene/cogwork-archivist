@@ -1,6 +1,6 @@
 package alchemagis.magic;
 
-import java.io.File;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.function.Function;
@@ -14,8 +14,8 @@ public final class CardPool {
 
     private Set<Card> cards;
 
-    public static CardPool loadCardPool(File ...files) {
-        return new CardPool(Arrays.stream(files).map(FileUtil::readMtgJsonSetFile).toArray(CardSet[]::new));
+    public static CardPool loadCardPool(URL ...setURLs) {
+        return new CardPool(Arrays.stream(setURLs).map(FileUtil::readMtgJsonSet).toArray(CardSet[]::new));
     }
 
     public CardPool(CardSet ...sets) {
