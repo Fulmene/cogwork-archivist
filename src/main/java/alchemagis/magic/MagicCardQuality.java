@@ -30,19 +30,21 @@ public final class MagicCardQuality {
         this.subtypes = new ArrayList<>();
         this.keywords = new ArrayList<>();
 
-        for (String q : qualities) {
-            if (MagicConstants.colors.contains(q))
-                this.colors.add(q);
-            else if (MagicConstants.subtypes.contains(q))
-                this.subtypes.add(q);
-            else if (MagicConstants.types.contains(q))
-                this.types.add(q);
-            else if (MagicConstants.subtypes.contains(q))
-                this.types.add(q);
-            else if (MagicConstants.keywords.contains(q))
-                this.keywords.add(q);
-            else
-                throw new IllegalQualityException(q);
+        if (!(qualities.length == 1 && qualities[0].equals("any"))) {
+            for (String q : qualities) {
+                if (MagicConstants.colors.contains(q))
+                    this.colors.add(q);
+                else if (MagicConstants.subtypes.contains(q))
+                    this.subtypes.add(q);
+                else if (MagicConstants.types.contains(q))
+                    this.types.add(q);
+                else if (MagicConstants.subtypes.contains(q))
+                    this.types.add(q);
+                else if (MagicConstants.keywords.contains(q))
+                    this.keywords.add(q);
+                else
+                    throw new IllegalQualityException(q);
+            }
         }
     }
 
