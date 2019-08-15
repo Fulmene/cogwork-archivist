@@ -2,6 +2,7 @@ package alchemagis.deckgenerator.metric.synergy;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,9 +24,13 @@ public abstract class Synergy {
     }
 
     public static List<Synergy> parseSynergies(String synergiesString) {
-        return Arrays.stream(synergiesString.split("/")).
-            map(Synergy::parseSingleSynergy).
-            collect(Collectors.toUnmodifiableList());
+        if (synergiesString.isEmpty())
+            return Collections.emptyList();
+        else {
+            return Arrays.stream(synergiesString.split("/")).
+                map(Synergy::parseSingleSynergy).
+                collect(Collectors.toUnmodifiableList());
+        }
     }
 
     private static Synergy parseSingleSynergy(String synergy) {
@@ -71,7 +76,7 @@ public abstract class Synergy {
                         String[] qualities = Arrays.copyOfRange(synergyParameter, 1, synergyParameter.length);
                         return new ManaSynergy(synergyParameter[0], qualities);
                     } else {
-                        throw new SynergyFormatException();
+                        throw new SynergyFormatException(synergy);
                     }
                 case "mentor":
                     return MentorSynergy.INSTANCE;
@@ -91,7 +96,7 @@ public abstract class Synergy {
                     if (i == synergyParameter.length) {
                         i--;
                         if (!(synergyParameter[i].equals("creature") || synergyParameter[i].equals("any")))
-                            throw new SynergyFormatException();
+                            throw new SynergyFormatException(synergy);
                     }
                     return new PassiveDamageSynergy(
                         Arrays.copyOfRange(synergyParameter, 0, i),
@@ -104,6 +109,10 @@ public abstract class Synergy {
                     return PassiveGraveyardSynergy.INSTANCE;
                 case "pkicker":
                     return PassiveKickerSynergy.INSTANCE;
+                case "ppower":
+                    return new PassivePowerSynergy(synergyParameter[0], Integer.parseInt(synergyParameter[1]));
+                case "ppowerx":
+                    return PassivePowerXSynergy.INSTANCE;
                 case "pquality":
                     return new PassiveQualitySynergy(synergyParameter);
                 case "psacrifice":
@@ -111,10 +120,12 @@ public abstract class Synergy {
             }
         } catch (IllegalQualityException e) {
             // TODO do something for illegal quality
+            throw new RuntimeException(e);
         } catch (SynergyFormatException e) {
             // TODO do something for illegal synergy
+            throw new RuntimeException(e);
         }
-        return null;
+        throw new RuntimeException(new SynergyFormatException(synergy));
     }
 
     public final double getScore(SynergyMetric metric, Card card) {
@@ -124,6 +135,10 @@ public abstract class Synergy {
     protected abstract double getRawScore(SynergyMetric metric, Card card);
 
     @SuppressWarnings("serial")
-    public static class SynergyFormatException extends IOException {}
+    public static class SynergyFormatException extends IOException {
+        public SynergyFormatException(String synergy) {
+            super("Unknown synergy " + synergy);
+        }
+    }
 
 }
