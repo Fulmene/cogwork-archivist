@@ -31,7 +31,11 @@ public final class CostEffectivenessMetric extends Metric {
     }
 
     private double getCostEffectiveness(Card card) {
-        return this.costEffectivenessTable.get(card.getName());
+        Double costEffectiveness = this.costEffectivenessTable.get(card.getName());
+        if (costEffectiveness == null)
+            return 0.0;
+        else
+            return costEffectiveness;
     }
 
 }

@@ -1,6 +1,7 @@
 package alchemagis.deckgenerator.metric;
 
 import java.net.URL;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,11 @@ public final class SynergyMetric extends Metric {
     }
 
     public List<Synergy> getSynergyList(Card card) {
-        return this.synergyTable.get(card.getName());
+        List<Synergy> synergyList = this.synergyTable.get(card.getName());
+        if (synergyList == null)
+            return Collections.emptyList();
+        else
+            return synergyList;
     }
 
     public<T extends Synergy> Stream<T> classFilterStream(Class<T> clazz, Card card) {
