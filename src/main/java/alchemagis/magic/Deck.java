@@ -1,5 +1,6 @@
 package alchemagis.magic;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
@@ -9,7 +10,7 @@ public class Deck {
     private List<Card> cards;
 
     public Deck(List<Card> cards) {
-        this.cards = cards;
+        this.cards = new ArrayList<>(cards);
     }
 
     public List<Card> getList() {
