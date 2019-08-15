@@ -2,13 +2,14 @@ package alchemagis.magic;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import alchemagis.util.FileUtil;
-import alchemagis.util.RandomUtil;
+import alchemagis.util.NumberUtil;
 
 public final class CardPool {
 
@@ -34,7 +35,12 @@ public final class CardPool {
     }
 
     public Card getRandomCard() {
-        return null;
+        Iterator<Card> it = cards.iterator();
+        int target = NumberUtil.getRandomInt(cards.size());
+        for (int i = 0; i < target; i++) {
+            it.next();
+        }
+        return it.next();
     }
 
 }
