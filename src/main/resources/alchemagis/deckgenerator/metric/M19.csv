@@ -30,7 +30,7 @@ Lightning Strike:4:damage(3,any)
 Onakke Ogre:2:
 Radiating Lightning:2:damage(3,player)/damage(1,creature)
 Sarkhan, Fireblood:3:pquality(dragon)/draw/discard
-Sarkhan's Unsealing:3:pquality(creature)/ppower(>=4)/ppower(>=7)
+Sarkhan's Unsealing:3:pquality(creature)/ppower(>=,4)/ppower(>=,7)
 Shivan Dragon:2:flying
 Shock:4:damage(2,any)
 Siegebreaker Giant:2:

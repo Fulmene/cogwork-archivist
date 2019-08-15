@@ -1,7 +1,7 @@
 Bloodstone Goblin:4:pkicker
 Champion of the Flame:3:pquality(aura)/pquality(equipment)
 Fervent Strike:3:
-Fiery Intervention:2:damage(5,creature)/destroy(artifact)
+Fiery Intervention:2:damage(5,creature)
 Fight with Fire:3:kicker/damage(5,creature)/damage(x,any)
 Fire Elemental:2:
 Firefist Adept:2:damage(x,creature)/pquality(wizard)
@@ -20,7 +20,7 @@ Keldon Raider:3:discard/draw
 Keldon Warcaller:3:pquality(saga)
 Orcish Vandal:2:pquality(artifact)/damage(2,any)
 Pyromantic Pilgrim:3:
-Radiating Lightning:2:adamage(player)/adamage(creature)
+Radiating Lightning:2:damage(3,player)/damage(1,creature)
 Rampaging Cyclops:3:
 Run Amok:3:pquality(creature)
 Seismic Shift:1:
