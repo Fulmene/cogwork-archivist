@@ -1,10 +1,14 @@
 package alchemagis;
 
 import java.io.File;
-import java.lang.Exception;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +28,8 @@ public class Main {
         DeckGenerator generator = DeckGenerator.createDeckGenerator(sets);
         Deck deck = generator.generateDeck();
 
-        System.out.println(deck);
+        new File("result/").mkdirs();
+        Files.write(Paths.get("result/" + LocalDateTime.now()), deck.stream().map(Card::getName).collect(Collectors.toList()));
     }
 
 }
