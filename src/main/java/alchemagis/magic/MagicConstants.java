@@ -5,6 +5,7 @@ import java.util.List;
 public final class MagicConstants {
 
     public static final int MIN_DECK_SIZE = 60;
+    public static final int MAX_COPIES = 4;
 
     public static final List<String> colors = List.of("white", "blue", "black", "red", "green");
     public static final List<String> supertypes = List.of("basic", "legendary", "ongoing", "snow", "world");
@@ -28,5 +29,13 @@ public final class MagicConstants {
     // TODO add actual keywords
     public static final List<String> keywords = List.of("multicolor");
     public static final List<String> targets = List.of("player", "planeswalker", "permanent");
+
+    public static final boolean canHaveAnyNumberOf(Card card) {
+        try {
+            return new MagicCardQuality("basic", "land").isSatisfied(card) || card.getText().contains("A deck can have any number of cards named " + card.getName());
+        } catch (MagicCardQuality.IllegalQualityException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

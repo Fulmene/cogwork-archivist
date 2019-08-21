@@ -56,12 +56,15 @@ public final class DeckGenerator {
 
         while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
             this.utilityScores.clear();
-            Card maxUtilityCard = cardPool.stream().max(
-                (c1, c2) ->
+            Card maxUtilityCard = cardPool.stream().
+                filter(c ->
+                    MagicConstants.canHaveAnyNumberOf(c) ||
+                    generatedDeck.count(c) < MagicConstants.MAX_COPIES).
+                max((c1, c2) ->
                     Double.compare(
                         this.getUtilityScore(generatedDeck, c1),
                         this.getUtilityScore(generatedDeck, c2))).
-            get();
+                get();
             generatedDeck.add(maxUtilityCard);
         }
 

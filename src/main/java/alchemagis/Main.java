@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,7 +30,7 @@ public class Main {
         Deck deck = generator.generateDeck();
 
         new File("result/").mkdirs();
-        Files.write(Paths.get("result/" + LocalDateTime.now()), deck.stream().map(Card::getName).collect(Collectors.toList()));
+        Files.write(Paths.get("result/" + LocalDateTime.now()), Collections.singletonList(deck.toString()));
     }
 
 }
