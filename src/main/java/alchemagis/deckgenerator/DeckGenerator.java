@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import alchemagis.deckgenerator.metric.Metric;
 import alchemagis.deckgenerator.metric.CostEffectivenessMetric;
@@ -51,7 +52,14 @@ public final class DeckGenerator {
         return this.generateDeck(List.of(this.cardPool.getRandomCard()));
     }
 
-    public Deck generateDeck(List<Card> startingCards) {
+    public Deck generateDeck(String ...cardNames) {
+        return this.generateDeck(
+            Arrays.stream(cardNames).
+                map(this.cardPool::getCard).
+                collect(Collectors.toList()));
+    }
+
+    public Deck generateDeck(Iterable<Card> startingCards) {
         final Deck generatedDeck = new Deck(startingCards);
 
         while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
