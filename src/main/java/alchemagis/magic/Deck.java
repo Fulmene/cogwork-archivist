@@ -5,16 +5,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.google.common.collect.Multiset;
+import com.google.common.collect.HashMultiset;
+
 public class Deck {
 
-    private List<Card> cards;
+    private Multiset<Card> cards;
 
-    public Deck(List<Card> cards) {
-        this.cards = new ArrayList<>(cards);
-    }
-
-    public List<Card> getList() {
-        return List.copyOf(cards);
+    public Deck(Iterable<? extends Card> cards) {
+        this.cards = HashMultiset.create(cards);
     }
 
     public int size() {
@@ -25,26 +24,21 @@ public class Deck {
         this.cards.add(card);
     }
 
-    public Stream<Card> stream() {
-        return this.cards.stream();
+    public int count(final Card card) {
+        return this.cards.count(card);
     }
 
-    public void sort() {
-        // TODO sort by card type
-        /*
-        Collections.sort(
-            cards,
-            (Card c1, Card c2) -> {
-                int cardTypeCompareResult = cardTypeCompare(
-            });
-        */
+    public Stream<Card> stream() {
+        return this.cards.stream();
     }
 
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        for (Card card : cards) {
-            str.append(card.getName());
+        for (Multiset.Entry<Card> cardEntry : this.cards.entrySet()) {
+            str.append(cardEntry.getCount());
+            str.append(' ');
+            str.append(cardEntry.getElement().getName());
             str.append('\n');
         }
         return str.toString();
