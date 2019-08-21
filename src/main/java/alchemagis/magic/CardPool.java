@@ -2,8 +2,11 @@ package alchemagis.magic;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,21 +16,26 @@ import alchemagis.util.NumberUtil;
 
 public final class CardPool {
 
-    private Set<Card> cards;
+    private List<Card> cards;
 
     public static CardPool loadCardPool(URL ...setURLs) {
         return new CardPool(Arrays.stream(setURLs).map(FileUtil::readMtgJsonSet).toArray(CardSet[]::new));
     }
 
     public CardPool(CardSet ...sets) {
-        this.cards = Arrays.stream(sets).
+        Set<Card> cardPoolSet = Arrays.stream(sets).
             map(s -> s.getCards().stream()).
             flatMap(Function.identity()).
             collect(Collectors.toSet());
+        this.cards = List.copyOf(cardPoolSet);
     }
 
-    public Set<Card> getCards() {
+    public List<Card> getCards() {
         return this.cards;
+    }
+
+    public Card getCard(String name) {
+        return this.cards.stream().filter(c -> c.getName().equalsIgnoreCase(name)).findAny().get();
     }
 
     public Stream<Card> stream() {
@@ -35,12 +43,7 @@ public final class CardPool {
     }
 
     public Card getRandomCard() {
-        Iterator<Card> it = cards.iterator();
-        int target = NumberUtil.getRandomInt(cards.size());
-        for (int i = 0; i < target; i++) {
-            it.next();
-        }
-        return it.next();
+        return this.cards.get(NumberUtil.getRandomInt(cards.size()));
     }
 
 }
