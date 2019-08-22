@@ -1,5 +1,6 @@
 package alchemagis.util;
 
+import java.util.List;
 import java.util.Random;
 
 public final class NumberUtil {
@@ -47,6 +48,25 @@ public final class NumberUtil {
     private static final Random random = new Random();
     public static int getRandomInt(int upper) {
         return random.nextInt(upper);
+    }
+
+    public static double positiveEuclideanDistance(List<Integer> v1, List<Integer> v2) {
+        int result = 0;
+        int size = Integer.max(v1.size(), v2.size());
+        for (int i = 0; i < size; i++) {
+            int x1, x2;
+            if (i < v1.size())
+                x1 = v1.get(i);
+            else
+                x1 = 0;
+            if (i < v2.size())
+                x2 = v2.get(i);
+            else
+                x2 = 0;
+            if (x1 > x2)
+                result += (x1-x2)*(x1-x2);
+        }
+        return Math.sqrt(result);
     }
 
 }
