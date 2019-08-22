@@ -24,9 +24,10 @@ import alchemagis.util.FileUtil;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        String[] sets = {"XLN", "RIX", "DOM", "M19", "GRN"};
+        List<String> sets = List.of("XLN", "RIX", "DOM", "M19", "GRN");
+        List<Integer> manaCurve = List.of(12, 12, 11, 3);
 
-        DeckGenerator generator = DeckGenerator.createDeckGenerator(sets);
+        DeckGenerator generator = DeckGenerator.createDeckGenerator(sets, manaCurve);
         Deck deck = generator.generateDeck();
 
         new File("result/").mkdirs();
