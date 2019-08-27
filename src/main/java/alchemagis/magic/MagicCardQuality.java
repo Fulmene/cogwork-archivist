@@ -1,7 +1,5 @@
 package alchemagis.magic;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,14 +21,18 @@ public final class MagicCardQuality {
         this.keywords = new ArrayList<>();
     }
 
-    public MagicCardQuality(String... qualities) throws IllegalQualityException {
+    public MagicCardQuality(String... qualities) {
+        this(List.of(qualities));
+    }
+
+    public MagicCardQuality(List<String> qualities) {
         this.colors = new ArrayList<>();
         this.supertypes = new ArrayList<>();
         this.types = new ArrayList<>();
         this.subtypes = new ArrayList<>();
         this.keywords = new ArrayList<>();
 
-        if (!(qualities.length == 1 && qualities[0].equals("any"))) {
+        if (!(qualities.size() == 1 && qualities.get(0).equals("any"))) {
             for (String q : qualities) {
                 if (MagicConstants.colors.contains(q) || MagicConstants.colors.contains(q.substring(3)))
                     this.colors.add(q);
@@ -85,7 +87,7 @@ public final class MagicCardQuality {
     }
 
     @SuppressWarnings("serial")
-    public static class IllegalQualityException extends IOException {
+    public static class IllegalQualityException extends RuntimeException {
         private IllegalQualityException(String quality) {
             super("Unknown quality " + quality);
         }

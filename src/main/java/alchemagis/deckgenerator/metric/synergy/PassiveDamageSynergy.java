@@ -12,9 +12,9 @@ public class PassiveDamageSynergy extends Synergy {
     private final MagicCardQuality quality;
     private final List<String> targets;
 
-    public PassiveDamageSynergy(String[] qualities, String[] targets) throws MagicCardQuality.IllegalQualityException {
+    public PassiveDamageSynergy(List<String> qualities, List<String> targets) {
         this.quality = new MagicCardQuality(qualities);
-        this.targets = List.of(targets);
+        this.targets = targets;
     }
 
     @Override

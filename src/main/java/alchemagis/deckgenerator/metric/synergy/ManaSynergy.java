@@ -1,5 +1,7 @@
 package alchemagis.deckgenerator.metric.synergy;
 
+import java.util.List;
+
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
 import alchemagis.magic.MagicCardQuality;
@@ -14,7 +16,7 @@ public class ManaSynergy extends Synergy {
         this.quality = MagicCardQuality.ANY;
     }
 
-    public ManaSynergy(String color, String... qualities) throws MagicCardQuality.IllegalQualityException {
+    public ManaSynergy(String color, List<String> qualities) {
         this.color = color;
         this.quality = new MagicCardQuality(qualities);
     }

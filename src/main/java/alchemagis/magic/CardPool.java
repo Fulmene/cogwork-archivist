@@ -1,12 +1,10 @@
 package alchemagis.magic;
 
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
+import java.net.MalformedURLException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,12 +16,20 @@ public final class CardPool {
 
     private List<Card> cards;
 
-    public static CardPool loadCardPool(URL ...setURLs) {
-        return new CardPool(Arrays.stream(setURLs).map(FileUtil::readMtgJsonSet).toArray(CardSet[]::new));
+    public static CardPool loadCardPool(Collection<String> setNames) {
+        return new CardPool(setNames.stream().
+            map(name -> {
+                try {
+                    return new URL("file:///home/adelaide/Downloads/AllSetFiles/" + name + ".json");
+                } catch (MalformedURLException e) {
+                    throw new RuntimeException(e); }
+            }).
+            map(FileUtil::readMtgJsonSet).
+            collect(Collectors.toList()));
     }
 
-    public CardPool(CardSet ...sets) {
-        Set<Card> cardPoolSet = Arrays.stream(sets).
+    public CardPool(Collection<CardSet> sets) {
+        Set<Card> cardPoolSet = sets.stream().
             map(s -> s.getCards().stream()).
             flatMap(Function.identity()).
             collect(Collectors.toSet());

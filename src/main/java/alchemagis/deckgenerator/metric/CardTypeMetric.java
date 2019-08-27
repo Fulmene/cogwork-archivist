@@ -1,7 +1,6 @@
 package alchemagis.deckgenerator.metric;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import alchemagis.magic.Card;

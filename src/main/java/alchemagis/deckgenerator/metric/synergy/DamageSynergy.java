@@ -10,9 +10,9 @@ public class DamageSynergy extends Synergy {
     private final int amount;
     private final List<String> targets;
 
-    public DamageSynergy(int amount, String... targets) {
+    public DamageSynergy(int amount, List<String> targets) {
         this.amount = amount;
-        this.targets = List.of(targets);
+        this.targets = targets;
     }
 
     @Override

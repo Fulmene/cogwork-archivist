@@ -1,8 +1,5 @@
 package alchemagis.deckgenerator;
 
-import java.io.File;
-import java.net.URL;
-import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,16 +24,9 @@ public final class DeckGenerator {
     private Map<String, Double> utilityScores;
 
     public static DeckGenerator createDeckGenerator(Collection<String> sets, List<Integer> manaCurve, List<Integer> cardTypeList) {
-        URL[] setURLs = sets.stream().
-            map(name -> { try { return new URL("file:///home/adelaide/Downloads/AllSetFiles/" + name + ".json"); } catch (MalformedURLException e) { throw new RuntimeException(e); } }).
-            toArray(URL[]::new);
-        URL[] metricTableURLs = sets.stream().
-            map(name -> Metric.class.getResource(name + ".csv")).
-            toArray(URL[]::new);
-
-        CardPool cardPool = CardPool.loadCardPool(setURLs);
-        Metric costEffectivenessMetric = new CostEffectivenessMetric(metricTableURLs);
-        Metric synergyMetric = new SynergyMetric(metricTableURLs);
+        CardPool cardPool = CardPool.loadCardPool(sets);
+        Metric costEffectivenessMetric = new CostEffectivenessMetric(sets);
+        Metric synergyMetric = new SynergyMetric(sets);
         Metric manaCurveMetric = new ManaCurveMetric(manaCurve);
         Metric cardTypeMetric = new CardTypeMetric(cardTypeList);
 

@@ -1,5 +1,7 @@
 package alchemagis.deckgenerator.metric.synergy;
 
+import java.util.List;
+
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
 import alchemagis.magic.MagicCardQuality;
@@ -8,7 +10,7 @@ public class PassiveQualitySynergy extends Synergy {
 
     private final MagicCardQuality quality;
 
-    public PassiveQualitySynergy(String... qualities) throws MagicCardQuality.IllegalQualityException {
+    public PassiveQualitySynergy(List<String> qualities) {
         this.quality = new MagicCardQuality(qualities);
     }
 
