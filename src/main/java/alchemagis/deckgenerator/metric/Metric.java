@@ -19,6 +19,8 @@ public abstract class Metric {
         return this.metricWeight * this.getRawMetricScore(deck, card);
     }
 
+    public void preprocessDeck(Deck deck) {}
+
     protected abstract double getRawMetricScore(Deck deck, Card card);
 
 }
