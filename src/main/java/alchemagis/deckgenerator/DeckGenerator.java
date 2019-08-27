@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import alchemagis.deckgenerator.metric.Metric;
+import alchemagis.deckgenerator.metric.CardTypeMetric;
 import alchemagis.deckgenerator.metric.CostEffectivenessMetric;
 import alchemagis.deckgenerator.metric.ManaCurveMetric;
 import alchemagis.deckgenerator.metric.SynergyMetric;
@@ -25,7 +26,7 @@ public final class DeckGenerator {
     private List<Metric> metrics;
     private Map<String, Double> utilityScores;
 
-    public static DeckGenerator createDeckGenerator(Collection<String> sets, List<Integer> manaCurve) {
+    public static DeckGenerator createDeckGenerator(Collection<String> sets, List<Integer> manaCurve, List<Integer> cardTypeList) {
         URL[] setURLs = sets.stream().
             map(name -> { try { return new URL("file:///home/adelaide/Downloads/AllSetFiles/" + name + ".json"); } catch (MalformedURLException e) { throw new RuntimeException(e); } }).
             toArray(URL[]::new);
@@ -37,13 +38,15 @@ public final class DeckGenerator {
         Metric costEffectivenessMetric = new CostEffectivenessMetric(metricTableURLs);
         Metric synergyMetric = new SynergyMetric(metricTableURLs);
         Metric manaCurveMetric = new ManaCurveMetric(manaCurve);
+        Metric cardTypeMetric = new CardTypeMetric(cardTypeList);
 
         return new DeckGenerator(
             cardPool,
             List.of(
                 costEffectivenessMetric,
                 synergyMetric,
-                manaCurveMetric));
+                manaCurveMetric,
+                cardTypeMetric));
     }
 
     public DeckGenerator(CardPool cardPool, List<Metric> metrics) {
@@ -68,6 +71,7 @@ public final class DeckGenerator {
 
         while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
             this.utilityScores.clear();
+            this.metrics.stream().forEach(m -> m.preprocessDeck(generatedDeck));
             Card maxUtilityCard = cardPool.stream().
                 filter(c ->
                     generatedDeck.count(c) < MagicConstants.MAX_COPIES ||

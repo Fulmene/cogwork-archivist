@@ -26,12 +26,17 @@ public class Main {
     public static void main(String[] args) throws Exception {
         List<String> sets = List.of("XLN", "RIX", "DOM", "M19", "GRN");
         List<Integer> manaCurve = List.of(12, 12, 11, 3);
+        List<Integer> cardTypeList = List.of(24, 20, 16);
 
-        DeckGenerator generator = DeckGenerator.createDeckGenerator(sets, manaCurve);
-        Deck deck = generator.generateDeck();
+        DeckGenerator generator = DeckGenerator.createDeckGenerator(sets, manaCurve, cardTypeList);
+        Deck deck = generator.generateDeck(
+            "Wizard's Lightning",
+            "Wizard's Lightning",
+            "Wizard's Lightning",
+            "Wizard's Lightning");
 
         new File("result/").mkdirs();
-        Files.write(Paths.get("result/" + LocalDateTime.now()), Collections.singletonList(deck.toString()));
+        Files.write(Paths.get("result/" + LocalDateTime.now() + ".txt"), Collections.singletonList(deck.toString()));
     }
 
 }
