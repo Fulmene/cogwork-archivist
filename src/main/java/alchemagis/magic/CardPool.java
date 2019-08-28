@@ -5,6 +5,8 @@ import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
+import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,10 +31,11 @@ public final class CardPool {
     }
 
     public CardPool(Collection<CardSet> sets) {
+        // Create a TreeSet to sort and uniq the cards from the sets
         Set<Card> cardPoolSet = sets.stream().
             map(s -> s.getCards().stream()).
             flatMap(Function.identity()).
-            collect(Collectors.toSet());
+            collect(Collectors.toCollection(() -> new TreeSet<Card>((c1, c2) -> c1.getName().compareToIgnoreCase(c2.getName()))));
         this.cards = List.copyOf(cardPoolSet);
     }
 
@@ -41,7 +44,21 @@ public final class CardPool {
     }
 
     public Card getCard(String name) {
-        return this.cards.stream().filter(c -> c.getName().equalsIgnoreCase(name)).findAny().get();
+        // Binary search since the cards are sorted by name in the constructor
+        int first = 0;
+        int last = this.cards.size();
+        while (first < last) {
+            int mid = first + (last-first)/2;
+            Card target = cards.get(mid);
+            int comparison = name.compareToIgnoreCase(target.getName());
+            if (comparison < 0)
+                last = mid;
+            else if (comparison > 0)
+                first = mid+1;
+            else
+                return target;
+        }
+        throw new NoSuchElementException("No cards named " + name + "in the card pool");
     }
 
     public Stream<Card> stream() {
