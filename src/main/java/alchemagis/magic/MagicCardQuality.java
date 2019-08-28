@@ -1,5 +1,6 @@
 package alchemagis.magic;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +14,16 @@ public final class MagicCardQuality {
 
     public static final MagicCardQuality ANY = new MagicCardQuality();
 
-    public MagicCardQuality() {
-        this.colors = new ArrayList<>();
-        this.supertypes = new ArrayList<>();
-        this.types = new ArrayList<>();
-        this.subtypes = new ArrayList<>();
-        this.keywords = new ArrayList<>();
+    private MagicCardQuality() {
+        this.colors = List.of();
+        this.supertypes = List.of();
+        this.types = List.of();
+        this.subtypes = List.of();
+        this.keywords = List.of();
     }
 
     public MagicCardQuality(String... qualities) {
-        this(List.of(qualities));
+        this(Arrays.asList(qualities));
     }
 
     public MagicCardQuality(List<String> qualities) {

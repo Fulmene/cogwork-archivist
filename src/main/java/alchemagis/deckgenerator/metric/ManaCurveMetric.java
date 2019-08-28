@@ -21,7 +21,7 @@ public final class ManaCurveMetric extends Metric {
     @Override
     public void preprocessDeck(Deck deck) {
         this.deckCurve = new ArrayList<>();
-        deck.stream().forEach(c -> incrementCurve(this.deckCurve, c));
+        deck.forEach(c -> incrementCurve(this.deckCurve, c));
         this.score = new ArrayList<>();
         this.landScore = -NumberUtil.positiveEuclideanDistance(this.deckCurve, this.manaCurve);
     }

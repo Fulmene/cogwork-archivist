@@ -32,11 +32,11 @@ public abstract class Synergy {
     }
 
     private static Synergy parseSingleSynergy(String synergy) {
-        List<String> synergySplit = List.of(synergy.split("[()]"));
+        List<String> synergySplit = Arrays.asList(synergy.split("[()]"));
         String synergyType = synergySplit.get(0);
         List<String> synergyParameter = null;
         if (synergySplit.size() > 1)
-            synergyParameter = List.of(synergySplit.get(1).split(","));
+            synergyParameter = Arrays.asList(synergySplit.get(1).split(","));
         switch (synergyType) {
             case "ascend":
                 return AscendSynergy.INSTANCE;

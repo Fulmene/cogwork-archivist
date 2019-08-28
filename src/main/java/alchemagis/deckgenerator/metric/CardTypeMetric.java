@@ -23,7 +23,7 @@ public final class CardTypeMetric extends Metric {
         this.deckTypeCount.add(0);
         this.deckTypeCount.add(0);
         this.deckTypeCount.add(0);
-        deck.stream().forEach(c -> {
+        deck.forEach(c -> {
             int category = getCategory(c);
             this.deckTypeCount.set(category, this.deckTypeCount.get(category)+1);
         });
