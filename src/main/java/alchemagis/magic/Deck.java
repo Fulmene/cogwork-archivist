@@ -1,7 +1,7 @@
 package alchemagis.magic;
 
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Stream;
@@ -10,7 +10,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 import com.google.common.collect.HashMultiset;
 
-public class Deck {
+public class Deck implements Iterable<Card> {
 
     private Multiset<Card> cards;
 
@@ -36,6 +36,11 @@ public class Deck {
 
     public Stream<Card> stream() {
         return this.cards.stream();
+    }
+
+    @Override
+    public Iterator<Card> iterator() {
+        return this.cards.iterator();
     }
 
     public Multiset<Card> getCards() {
