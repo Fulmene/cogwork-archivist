@@ -23,7 +23,7 @@ public final class ManaCurveMetric extends Metric {
         this.deckCurve = new ArrayList<>();
         deck.forEach(c -> incrementCurve(this.deckCurve, c));
         this.score = new ArrayList<>();
-        this.landScore = -NumberUtil.positiveEuclideanDistance(this.deckCurve, this.manaCurve);
+        this.landScore = -NumberUtil.euclideanDistance(this.deckCurve, this.manaCurve);
     }
 
     @Override
@@ -37,7 +37,7 @@ public final class ManaCurveMetric extends Metric {
             while (this.score.size() <= cmc)
                 this.score.add(null);
             if (this.score.get(cmc) == null)
-                this.score.set(cmc, -NumberUtil.positiveEuclideanDistance(curve, this.manaCurve));
+                this.score.set(cmc, -NumberUtil.euclideanDistance(curve, this.manaCurve));
             return this.score.get(cmc);
         }
     }

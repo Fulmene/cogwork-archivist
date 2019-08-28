@@ -50,7 +50,7 @@ public final class NumberUtil {
         return random.nextInt(upper);
     }
 
-    public static double positiveEuclideanDistance(List<Integer> v1, List<Integer> v2) {
+    public static double euclideanDistance(List<Integer> v1, List<Integer> v2) {
         int result = 0;
         int size = Integer.max(v1.size(), v2.size());
         for (int i = 0; i < size; i++) {
@@ -63,8 +63,7 @@ public final class NumberUtil {
                 x2 = v2.get(i);
             else
                 x2 = 0;
-            if (x1 > x2)
-                result += (x1-x2)*(x1-x2);
+            result += (x1-x2)*(x1-x2);
         }
         return Math.sqrt(result);
     }

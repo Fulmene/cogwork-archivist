@@ -40,7 +40,7 @@ public final class CardTypeMetric extends Metric {
         if (this.score.get(category) == null) {
             List<Integer> count = new ArrayList<>(this.deckTypeCount);
             count.set(category, count.get(category)+1);
-            this.score.set(category, -NumberUtil.positiveEuclideanDistance(count, this.cardTypeCount));
+            this.score.set(category, -NumberUtil.euclideanDistance(count, this.cardTypeCount));
         }
         return this.score.get(category);
     }
