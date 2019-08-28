@@ -1,6 +1,7 @@
 package alchemagis.magic;
 
-import java.lang.NumberFormatException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -37,12 +38,12 @@ public class Card {
         @JsonProperty("text") String text
     ) {
         this.name = name;
-        this.colors = List.of(colors);
+        this.colors = createColorList(colors);
         this.manaCost = manaCost;
         this.convertedManaCost = (int)convertedManaCost;
-        this.supertypes = List.of(supertypes);
-        this.types = List.of(types);
-        this.subtypes = List.of(subtypes);
+        this.supertypes = createTypeList(supertypes);
+        this.types = createTypeList(types);
+        this.subtypes = createTypeList(subtypes);
         try {
             this.power = Integer.parseInt(power);
         } catch (NumberFormatException e) {
@@ -54,6 +55,28 @@ public class Card {
             this.toughness = 0;
         }
         this.text = (text == null) ? "" : text;
+    }
+
+    private static final List<String> createColorList(String[] colors) {
+        List<String> colorList = new ArrayList<>();
+        for (String c : colors) {
+            switch (c) {
+                case "W" : colorList.add("white"); break;
+                case "U" : colorList.add("blue"); break;
+                case "B" : colorList.add("black"); break;
+                case "R" : colorList.add("red"); break;
+                case "G" : colorList.add("green"); break;
+                default: throw new IllegalArgumentException("Unknown color symbol " + c);
+            }
+        }
+        return Collections.unmodifiableList(colorList);
+    }
+
+    private static final List<String> createTypeList(String[] types) {
+        List<String> typeList = new ArrayList<>();
+        for (String t : types)
+            typeList.add(t.toLowerCase());
+        return Collections.unmodifiableList(typeList);
     }
 
     public String getName() {
