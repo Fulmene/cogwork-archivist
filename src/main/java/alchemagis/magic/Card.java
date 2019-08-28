@@ -105,12 +105,12 @@ public class Card {
         if (!(o instanceof Card))
             return false;
         Card other = (Card) o;
-        return this.name.equals(other.name);
+        return this.name.equalsIgnoreCase(other.name);
     }
 
     @Override
     public int hashCode() {
-        return this.name.hashCode();
+        return this.name.toLowerCase().hashCode();
     }
 
 }
