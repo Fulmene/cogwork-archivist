@@ -2,6 +2,7 @@ package alchemagis.deckgenerator;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,12 +47,16 @@ public final class DeckGenerator {
     }
 
     public Deck generateDeck() {
-        return this.generateDeck(List.of(this.cardPool.getRandomCard()));
+        return this.generateDeck(Collections.singletonList(this.cardPool.getRandomCard()));
     }
 
     public Deck generateDeck(String ...cardNames) {
+        return this.generateDeck(Arrays.asList(cardNames));
+    }
+
+    public Deck generateDeck(List<String> cardNames) {
         return this.generateDeck(
-            Arrays.stream(cardNames).
+            cardNames.stream().
                 map(this.cardPool::getCard).
                 collect(Collectors.toList()));
     }
@@ -61,7 +66,8 @@ public final class DeckGenerator {
 
         while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
             this.utilityScores.clear();
-            this.metrics.stream().forEach(m -> m.preprocessDeck(generatedDeck));
+            for (Metric m : metrics)
+                m.preprocessDeck(generatedDeck);
             Card maxUtilityCard = cardPool.stream().
                 filter(c ->
                     generatedDeck.count(c) < MagicConstants.MAX_COPIES ||
