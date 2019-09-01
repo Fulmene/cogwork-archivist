@@ -26,7 +26,7 @@ public final class CostEffectivenessMetric extends Metric {
 
     @Override
     protected double getRawMetricScore(Deck deck, Card card) {
-        return this.getCostEffectiveness(card);
+        return this.getCostEffectiveness(card) / deck.size();
     }
 
     private double getCostEffectiveness(Card card) {

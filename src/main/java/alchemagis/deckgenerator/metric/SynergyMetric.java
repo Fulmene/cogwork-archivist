@@ -38,7 +38,7 @@ public final class SynergyMetric extends Metric {
                         mapToDouble(s -> s.getScore(this, c)),
                     this.getSynergyList(c).stream().
                         mapToDouble(s -> s.getScore(this, card)))).
-            sum();
+            sum() / deck.size();
     }
 
     public List<Synergy> getSynergyList(Card card) {
