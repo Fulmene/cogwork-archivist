@@ -76,7 +76,9 @@ public class Deck implements Iterable<Card> {
         int compareCMC = Integer.compare(card1.getConvertedManaCost(), card2.getConvertedManaCost());
         if (compareCMC != 0)
             return compareCMC;
-        else
-            return card1.getName().compareToIgnoreCase(card2.getName());
+        int compareCount = Integer.compare(entry2.getCount(), entry1.getCount());
+        if (compareCount != 0)
+            return compareCount;
+        return card1.getName().compareToIgnoreCase(card2.getName());
     }
 }
