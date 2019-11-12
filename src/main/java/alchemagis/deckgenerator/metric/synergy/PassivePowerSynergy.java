@@ -16,8 +16,8 @@ public class PassivePowerSynergy extends Synergy {
     }
 
     @Override
-    protected double getRawScore(SynergyMetric metric, Card card) {
-        if (NumberUtil.testComparison(card.getPower(), operation, targetPower))
+    protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
+        if (NumberUtil.testComparison(otherCard.getPower(), operation, targetPower))
             return 1.0;
         else
             return 0.0;

@@ -121,15 +121,15 @@ public abstract class Synergy {
         throw new SynergyFormatException(synergy);
     }
 
-    public final double getScore(SynergyMetric metric, Card card1, Card card2) {
-        double score = this.synergyWeight * this.getRawScore(metric, card1, card2);
+    public final double getScore(SynergyMetric metric, Card selfCard, Card otherCard) {
+        double score = this.synergyWeight * this.getRawScore(metric, selfCard, otherCard);
         if (!NumberUtil.isNearZero(score)) {
-            log.debug("            Score for {} -> {}: {}", card1, card2, score);
+            log.debug("            Score for {} -> {}: {}", selfCard, otherCard, score);
         }
         return score;
     }
 
-    protected abstract double getRawScore(SynergyMetric metric, Card card1, Card card2);
+    protected abstract double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard);
 
     @SuppressWarnings("serial")
     public static class SynergyFormatException extends RuntimeException {

@@ -18,12 +18,12 @@ public class PassiveDamageSynergy extends Synergy {
     }
 
     @Override
-    protected double getRawScore(SynergyMetric metric, Card card) {
-        if (this.quality.isSatisfied(card)) {
-            if (card.getTypes().contains("creature"))
+    protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
+        if (this.quality.isSatisfied(otherCard)) {
+            if (otherCard.getTypes().contains("creature"))
                 return 1.0;
             else {
-                List<Synergy> otherSynergies = metric.getSynergyList(card);
+                List<Synergy> otherSynergies = metric.getSynergyList(otherCard);
 
                 if (otherSynergies.stream().anyMatch(BecomeCreatureSynergy.class::isInstance))
                     return 1.0;

@@ -8,10 +8,11 @@ public class MentorSynergy extends Synergy {
     public static final MentorSynergy INSTANCE = new MentorSynergy();
 
     @Override
-    protected double getRawScore(SynergyMetric metric, Card card) {
-        // TODO add self to parameter
-        //if (card.getTypes().contains("creature") && card.getPower() <
-        return 0.0;
+    protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
+        if (otherCard.getTypes().contains("creature") && otherCard.getPower() < selfCard.getPower())
+            return 1.0;
+        else
+            return 0.0;
     }
 
 }

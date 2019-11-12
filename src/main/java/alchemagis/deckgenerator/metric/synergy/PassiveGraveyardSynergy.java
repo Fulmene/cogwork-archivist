@@ -11,8 +11,8 @@ public class PassiveGraveyardSynergy extends Synergy {
     private static List<Class<? extends Synergy>> matchingSynergies = List.of(DiscardSynergy.class, SacrificeSynergy.class);
 
     @Override
-    protected double getRawScore(SynergyMetric metric, Card card) {
-        List<Synergy> otherSynergies = metric.getSynergyList(card);
+    protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
+        List<Synergy> otherSynergies = metric.getSynergyList(otherCard);
         if (otherSynergies.stream().anyMatch(s -> matchingSynergies.stream().anyMatch(c -> c.isInstance(s))))
             return 1.0;
         else

@@ -15,8 +15,8 @@ public class PassiveQualitySynergy extends Synergy {
     }
 
     @Override
-    protected double getRawScore(SynergyMetric metric, Card card) {
-        if (this.quality.isSatisfied(card))
+    protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
+        if (this.quality.isSatisfied(otherCard))
             return 1.0;
         else
             return 0.0;

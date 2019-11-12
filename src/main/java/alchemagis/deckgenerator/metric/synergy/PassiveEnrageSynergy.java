@@ -10,8 +10,8 @@ public class PassiveEnrageSynergy extends Synergy {
     public static final PassiveEnrageSynergy INSTANCE = new PassiveEnrageSynergy();
 
     @Override
-    protected double getRawScore(SynergyMetric metric, Card card) {
-        Stream<DamageSynergy> otherDamageSynergies = metric.classFilterStream(DamageSynergy.class, card);
+    protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
+        Stream<DamageSynergy> otherDamageSynergies = metric.classFilterStream(DamageSynergy.class, otherCard);
 
         if (otherDamageSynergies.anyMatch(d -> d.getTargets().contains("creature")))
             return 1.0;

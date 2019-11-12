@@ -1,9 +1,6 @@
 package alchemagis.deckgenerator.metric.synergy;
 
-import alchemagis.deckgenerator.metric.SynergyMetric;
-import alchemagis.magic.Card;
-
-public class TokenSynergy extends Synergy {
+public class TokenSynergy extends ActiveSynergy {
 
     private final String tokenType;
 
@@ -13,11 +10,6 @@ public class TokenSynergy extends Synergy {
 
     public String getTokenType() {
         return this.tokenType;
-    }
-
-    @Override
-    protected double getRawScore(SynergyMetric metric, Card card) {
-        return 0.0;
     }
 
 }
