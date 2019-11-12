@@ -14,6 +14,7 @@ public final class CostEffectivenessMetric extends Metric {
     private Map<String, Double> costEffectivenessTable;
 
     public CostEffectivenessMetric(Iterable<String> setNames) {
+        this.metricWeight = 0.2;
         this.costEffectivenessTable = new HashMap<>();
         for (String name : setNames) {
             MappingIterator<Map<String, String>> it = FileUtil.readCsv(Metric.class.getResource(name + ".csv"));
@@ -26,7 +27,7 @@ public final class CostEffectivenessMetric extends Metric {
 
     @Override
     protected double getRawMetricScore(Deck deck, Card card) {
-        return this.getCostEffectiveness(card) / deck.size();
+        return this.getCostEffectiveness(card);
     }
 
     private double getCostEffectiveness(Card card) {

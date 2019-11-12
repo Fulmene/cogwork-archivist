@@ -8,21 +8,10 @@ import alchemagis.magic.MagicCardQuality;
 
 public class ManaSynergy extends Synergy {
 
-    private String color;
     private MagicCardQuality quality;
 
-    public ManaSynergy(String color) {
-        this.color = color;
-        this.quality = MagicCardQuality.ANY;
-    }
-
-    public ManaSynergy(String color, List<String> qualities) {
-        this.color = color;
+    public ManaSynergy(List<String> qualities) {
         this.quality = new MagicCardQuality(qualities);
-    }
-
-    public String getColor() {
-        return this.color;
     }
 
     public MagicCardQuality getQuality() {
@@ -31,7 +20,6 @@ public class ManaSynergy extends Synergy {
 
     @Override
     protected double getRawScore(SynergyMetric metric, Card card) {
-        // TODO card requires this mana
         if (this.quality.isSatisfied(card))
             return 1.0;
         else

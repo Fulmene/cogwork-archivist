@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import alchemagis.deckgenerator.metric.Metric;
 import alchemagis.deckgenerator.metric.CardTypeMetric;
 import alchemagis.deckgenerator.metric.CostEffectivenessMetric;
@@ -19,6 +22,8 @@ import alchemagis.magic.Deck;
 import alchemagis.magic.MagicConstants;
 
 public final class DeckGenerator {
+
+    private static final Logger log = LogManager.getLogger(DeckGenerator.class);
 
     private CardPool cardPool;
     private List<Metric> metrics;
@@ -64,7 +69,11 @@ public final class DeckGenerator {
     public Deck generateDeck(Iterable<Card> startingCards) {
         final Deck generatedDeck = new Deck(startingCards);
 
+        log.debug("Start deck generation");
+        log.debug("Starting cards: {}", startingCards);
+
         while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
+            log.debug("Card #{}", generatedDeck.size()+1);
             this.utilityScores.clear();
             for (Metric m : metrics)
                 m.preprocessDeck(generatedDeck);
@@ -78,6 +87,7 @@ public final class DeckGenerator {
                         this.getUtilityScore(generatedDeck, c2))).
                 get();
             generatedDeck.add(maxUtilityCard);
+            log.debug("Added {}", maxUtilityCard);
         }
 
         return generatedDeck;
@@ -85,11 +95,12 @@ public final class DeckGenerator {
 
     private double getUtilityScore(Deck deck, Card card) {
         if (!this.utilityScores.containsKey(card.getName())) {
-            this.utilityScores.put(
-                card.getName(),
-                this.metrics.stream().
-                    mapToDouble(m -> m.getMetricScore(deck, card)).
-                    sum());
+            log.debug("    Calculating utility score for {}", card);
+            double score = this.metrics.stream().
+                mapToDouble(m -> m.getMetricScore(deck, card)).
+                sum();
+            this.utilityScores.put(card.getName(), score);
+            log.debug("    Utility score for {}: {}", card, score);
         }
         return this.utilityScores.get(card.getName());
     }

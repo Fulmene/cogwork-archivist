@@ -30,6 +30,9 @@ public final class MagicConstants {
     public static final List<String> keywords = List.of("multicolor");
     public static final List<String> targets = List.of("player", "planeswalker", "permanent");
 
+    public static final int MAX_MEANINGFUL_POWER = 7;
+    public static final int MAX_MEANINGFUL_CMC = 6;
+
     public static final boolean canHaveAnyNumberOf(Card card) {
         return new MagicCardQuality("basic", "land").isSatisfied(card) || card.getText().contains("A deck can have any number of cards named " + card.getName());
     }

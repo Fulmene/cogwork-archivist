@@ -14,7 +14,7 @@ Glaive of the Guildpact:3:pquality(gate)
 Goblin Banneret:4:mentor
 Goblin Cratermaker:4:sacrifice/damage(2,creature)
 Goblin Locksmith:3:
-Gravitic Punch:3:damage(x,player)/jumpstart/pquality(creature)/ppowerx
+Gravitic Punch:3:damage(x,player)/jumpstart/ppowerx
 Hellkite Whelp:3:flying
 Inescapable Blaze:2:damage(6,any)
 Lava Coil:5:damage(4,creature)

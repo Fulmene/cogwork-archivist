@@ -5,11 +5,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
 import alchemagis.magic.MagicConstants;
+import alchemagis.util.NumberUtil;
 
 public abstract class Synergy {
+
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     private final double synergyWeight;
 
@@ -67,11 +73,8 @@ public abstract class Synergy {
             case "legendarysorcery":
                 return LegendarySorcerySynergy.INSTANCE;
             case "mana":
-                if (synergyParameter.size() == 1) {
-                    return new ManaSynergy(synergyParameter.get(0));
-                } else if (synergyParameter.size() > 1) {
-                    List<String> qualities = synergyParameter.subList(1, synergyParameter.size());
-                    return new ManaSynergy(synergyParameter.get(0), qualities);
+                if (synergyParameter.size() >= 1 && MagicConstants.colors.contains(synergyParameter.get(0))) {
+                    return new ManaSynergy(synergyParameter);
                 } else {
                     throw new SynergyFormatException(synergy);
                 }
@@ -118,11 +121,15 @@ public abstract class Synergy {
         throw new SynergyFormatException(synergy);
     }
 
-    public final double getScore(SynergyMetric metric, Card card) {
-        return this.synergyWeight * this.getRawScore(metric, card);
+    public final double getScore(SynergyMetric metric, Card card1, Card card2) {
+        double score = this.synergyWeight * this.getRawScore(metric, card1, card2);
+        if (!NumberUtil.isNearZero(score)) {
+            log.debug("            Score for {} -> {}: {}", card1, card2, score);
+        }
+        return score;
     }
 
-    protected abstract double getRawScore(SynergyMetric metric, Card card);
+    protected abstract double getRawScore(SynergyMetric metric, Card card1, Card card2);
 
     @SuppressWarnings("serial")
     public static class SynergyFormatException extends RuntimeException {

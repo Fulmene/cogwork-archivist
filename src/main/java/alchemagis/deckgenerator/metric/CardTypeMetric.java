@@ -10,11 +10,13 @@ import alchemagis.util.NumberUtil;
 public final class CardTypeMetric extends Metric {
 
     private List<Integer> cardTypeCount;
+    private double maxDistance;
     private List<Integer> deckTypeCount;
     private List<Double> score;
 
     public CardTypeMetric(List<Integer> cardTypeCount) {
         this.cardTypeCount = cardTypeCount;
+        this.maxDistance = NumberUtil.euclideanDistance(cardTypeCount, List.of());
     }
 
     @Override
@@ -40,7 +42,7 @@ public final class CardTypeMetric extends Metric {
         if (this.score.get(category) == null) {
             List<Integer> count = new ArrayList<>(this.deckTypeCount);
             count.set(category, count.get(category)+1);
-            this.score.set(category, -NumberUtil.euclideanDistance(count, this.cardTypeCount));
+            this.score.set(category, (this.maxDistance - NumberUtil.euclideanDistance(count, this.cardTypeCount)) / this.maxDistance);
         }
         return this.score.get(category);
     }

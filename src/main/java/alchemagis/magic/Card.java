@@ -136,4 +136,9 @@ public class Card {
         return this.name.toLowerCase().hashCode();
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
 }

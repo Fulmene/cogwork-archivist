@@ -1,9 +1,14 @@
 package alchemagis.deckgenerator.metric;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import alchemagis.magic.Card;
 import alchemagis.magic.Deck;
 
 public abstract class Metric {
+
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     protected double metricWeight;
 
@@ -16,7 +21,10 @@ public abstract class Metric {
     }
 
     public final double getMetricScore(Deck deck, Card card) {
-        return this.metricWeight * this.getRawMetricScore(deck, card);
+        double rawScore = this.getRawMetricScore(deck, card);
+        double score = this.metricWeight * rawScore;
+        log.debug("        Total score: {}", score);
+        return score;
     }
 
     public void preprocessDeck(Deck deck) {}

@@ -68,4 +68,9 @@ public final class NumberUtil {
         return Math.sqrt(result);
     }
 
+    private static final double EPSILON = 1e-15;
+    public static boolean isNearZero(double d) {
+        return Math.abs(d) < EPSILON;
+    }
+
 }

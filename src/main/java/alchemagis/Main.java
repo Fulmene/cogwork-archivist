@@ -23,6 +23,8 @@ public class Main {
             "Wizard's Lightning",
             "Wizard's Lightning");
 
+        System.out.println(deck);
+
         Path resultDirectory = Paths.get("result/");
         Files.createDirectories(resultDirectory);
         Files.writeString(resultDirectory.resolve(LocalDateTime.now() + ".txt"), deck.toString());
