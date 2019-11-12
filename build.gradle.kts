@@ -34,7 +34,10 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.9.8")
     implementation("com.fasterxml.jackson.module:jackson-modules-java8:2.9.8")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.9.8")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.8")
 
+    implementation("org.apache.logging.log4j:log4j-api:2.12.1")
+    implementation("org.apache.logging.log4j:log4j-core:2.12.1")
 }
 
 application {
