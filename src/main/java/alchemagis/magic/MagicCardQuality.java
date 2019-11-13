@@ -35,15 +35,15 @@ public final class MagicCardQuality {
 
         if (!(qualities.size() == 1 && qualities.get(0).equals("any"))) {
             for (String q : qualities) {
-                if (MagicConstants.colors.contains(q) || MagicConstants.colors.contains(q.substring(3)))
+                if (MagicConstants.colors.contains(q) || (q.startsWith("non") && MagicConstants.colors.contains(q.substring(3))))
                     this.colors.add(q);
-                else if (MagicConstants.supertypes.contains(q) || MagicConstants.supertypes.contains(q.substring(3)))
+                else if (MagicConstants.supertypes.contains(q) || (q.startsWith("non") && MagicConstants.supertypes.contains(q.substring(3))))
                     this.supertypes.add(q);
-                else if (MagicConstants.types.contains(q) || MagicConstants.types.contains(q.substring(3)))
+                else if (MagicConstants.types.contains(q) || (q.startsWith("non") && MagicConstants.types.contains(q.substring(3))))
                     this.types.add(q);
-                else if (MagicConstants.subtypes.contains(q) || MagicConstants.subtypes.contains(q.substring(3)))
+                else if (MagicConstants.subtypes.contains(q) || (q.startsWith("non") && MagicConstants.subtypes.contains(q.substring(3))))
                     this.subtypes.add(q);
-                else if (MagicConstants.keywords.contains(q) || MagicConstants.keywords.contains(q.substring(3)))
+                else if (MagicConstants.keywords.contains(q) || (q.startsWith("non") && MagicConstants.keywords.contains(q.substring(3))))
                     this.keywords.add(q);
                 else
                     throw new IllegalQualityException(q);
