@@ -34,7 +34,7 @@ public final class MagicConstants {
     public static final int MAX_MEANINGFUL_CMC = 6;
 
     public static final boolean canHaveAnyNumberOf(Card card) {
-        return new MagicCardQuality("basic", "land").isSatisfied(card) || card.getText().contains("A deck can have any number of cards named " + card.getName());
+        return new MagicCardQualityPredicate("basic", "land").isSatisfied(card) || card.getText().contains("A deck can have any number of cards named " + card.getName());
     }
 
 }

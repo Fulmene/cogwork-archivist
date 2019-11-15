@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class MagicCardQuality {
+public final class MagicCardQualityPredicate {
 
     private final List<String> colors;
     private final List<String> supertypes;
@@ -12,9 +12,9 @@ public final class MagicCardQuality {
     private final List<String> subtypes;
     private final List<String> keywords;
 
-    public static final MagicCardQuality ANY = new MagicCardQuality();
+    public static final MagicCardQualityPredicate ANY = new MagicCardQualityPredicate();
 
-    private MagicCardQuality() {
+    private MagicCardQualityPredicate() {
         this.colors = List.of();
         this.supertypes = List.of();
         this.types = List.of();
@@ -22,11 +22,11 @@ public final class MagicCardQuality {
         this.keywords = List.of();
     }
 
-    public MagicCardQuality(String... qualities) {
+    public MagicCardQualityPredicate(String... qualities) {
         this(Arrays.asList(qualities));
     }
 
-    public MagicCardQuality(List<String> qualities) {
+    public MagicCardQualityPredicate(List<String> qualities) {
         this.colors = new ArrayList<>();
         this.supertypes = new ArrayList<>();
         this.types = new ArrayList<>();

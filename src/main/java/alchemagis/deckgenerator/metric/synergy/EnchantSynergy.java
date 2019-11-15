@@ -4,19 +4,19 @@ import java.util.List;
 
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
-import alchemagis.magic.MagicCardQuality;
+import alchemagis.magic.MagicCardQualityPredicate;
 
 public class EnchantSynergy extends Synergy {
 
-    private final MagicCardQuality quality;
+    private final MagicCardQualityPredicate qualityPredicate;
 
     public EnchantSynergy(List<String> qualities) {
-        this.quality = new MagicCardQuality(qualities);
+        this.qualityPredicate = new MagicCardQualityPredicate(qualities);
     }
 
     @Override
     protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
-        if (this.quality.isSatisfied(otherCard))
+        if (this.qualityPredicate.isSatisfied(otherCard))
             return 1.0;
         else
             return 0.0;

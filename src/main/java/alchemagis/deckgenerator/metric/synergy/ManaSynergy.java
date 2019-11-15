@@ -4,23 +4,23 @@ import java.util.List;
 
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
-import alchemagis.magic.MagicCardQuality;
+import alchemagis.magic.MagicCardQualityPredicate;
 
 public class ManaSynergy extends Synergy {
 
-    private MagicCardQuality quality;
+    private MagicCardQualityPredicate qualityPredicate;
 
     public ManaSynergy(List<String> qualities) {
-        this.quality = new MagicCardQuality(qualities);
+        this.qualityPredicate = new MagicCardQualityPredicate(qualities);
     }
 
-    public MagicCardQuality getQuality() {
-        return this.quality;
+    public MagicCardQualityPredicate getQualityPredicate() {
+        return this.qualityPredicate;
     }
 
     @Override
     protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
-        if (this.quality.isSatisfied(otherCard))
+        if (this.qualityPredicate.isSatisfied(otherCard))
             return 1.0;
         else
             return 0.0;

@@ -5,21 +5,21 @@ import java.util.stream.Stream;
 
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
-import alchemagis.magic.MagicCardQuality;
+import alchemagis.magic.MagicCardQualityPredicate;
 
 public class PassiveDamageSynergy extends Synergy {
 
-    private final MagicCardQuality quality;
+    private final MagicCardQualityPredicate qualityPredicate;
     private final List<String> targets;
 
     public PassiveDamageSynergy(List<String> qualities, List<String> targets) {
-        this.quality = new MagicCardQuality(qualities);
+        this.qualityPredicate = new MagicCardQualityPredicate(qualities);
         this.targets = targets;
     }
 
     @Override
     protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
-        if (this.quality.isSatisfied(otherCard)) {
+        if (this.qualityPredicate.isSatisfied(otherCard)) {
             if (otherCard.getTypes().contains("creature"))
                 return 1.0;
             else {
