@@ -16,7 +16,7 @@ public class EnchantSynergy extends Synergy {
 
     @Override
     protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
-        if (this.qualityPredicate.isSatisfied(otherCard))
+        if (this.qualityPredicate.test(otherCard))
             return 1.0;
         else
             return 0.0;

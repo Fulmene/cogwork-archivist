@@ -3,8 +3,9 @@ package alchemagis.magic;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
-public final class MagicCardQualityPredicate {
+public final class MagicCardQualityPredicate implements Predicate<Card> {
 
     private final List<String> colors;
     private final List<String> supertypes;
@@ -51,7 +52,8 @@ public final class MagicCardQualityPredicate {
         }
     }
 
-    public boolean isSatisfied(Card card) {
+    @Override
+    public boolean test(Card card) {
         boolean satisfied = true;
         for (String c : colors) {
             if (c.startsWith("non"))

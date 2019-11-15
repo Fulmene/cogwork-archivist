@@ -19,7 +19,7 @@ public class PassiveDamageSynergy extends Synergy {
 
     @Override
     protected double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard) {
-        if (this.qualityPredicate.isSatisfied(otherCard)) {
+        if (this.qualityPredicate.test(otherCard)) {
             if (otherCard.getTypes().contains("creature"))
                 return 1.0;
             else {
