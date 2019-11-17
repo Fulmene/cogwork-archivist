@@ -2,7 +2,7 @@ package alchemagis.deckgenerator.metric.synergy;
 
 import java.util.List;
 
-import alchemagis.magic.MagicCardQualityPredicate;
+import alchemagis.magic.quality.MagicCardQualityPredicate;
 
 public abstract class PassiveSynergy extends Synergy {
 

@@ -1,9 +1,12 @@
-package alchemagis.magic;
+package alchemagis.magic.quality;
 
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+
+import alchemagis.magic.Card;
+import alchemagis.magic.MagicConstants;
 
 public final class MagicCardQualityPredicate implements Predicate<Card> {
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
-import alchemagis.magic.MagicCardQualityPredicate;
+import alchemagis.magic.quality.MagicCardQualityPredicate;
 
 public class ManaSynergy extends Synergy {
 

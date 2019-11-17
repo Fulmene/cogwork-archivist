@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
-import alchemagis.magic.MagicCardQualityPredicate;
+import alchemagis.magic.quality.MagicCardQualityPredicate;
 
 public class PassiveDamageSynergy extends Synergy {
 
