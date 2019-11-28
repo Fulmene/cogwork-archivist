@@ -1,12 +1,11 @@
 package alchemagis.magic.quality;
 
-import java.util.List;
-
 public abstract class MagicCardQualityType {
 
-    public static List<MagicCardQualityType> parseQualityTypes(String qualities) {
-        // TODO stub
-        return List.of();
+    public abstract void accept(Visitor v);
+
+    public static interface Visitor {
+        default void visitStat(StatQuality stat) {}
     }
 
 }
