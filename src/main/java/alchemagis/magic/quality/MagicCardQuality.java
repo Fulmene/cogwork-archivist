@@ -5,11 +5,7 @@ import java.util.List;
 
 public final class MagicCardQuality {
 
-    private final ColorQuality colorQuality;
-    private final TypeQuality typeQuality;
-    private final ManaCostQuality manaCostQuality;
-    private final StatQuality statQuality;
-    private final List<MagicCardQualityType> otherQualities;
+    private final List<MagicCardQualityType> qualities;
 
     public MagicCardQuality(String qualities) {
         // TODO parse quality string
@@ -20,7 +16,7 @@ public final class MagicCardQuality {
         return this.qualities;
     }
 
-    public final List<MagicCardQualityType> getQualitiesOfType(Class qualityType) {
+    public final List<MagicCardQualityType> getQualitiesOfType(Class<? extends MagicCardQualityType> qualityType) {
         return this.qualities.stream().filter(qualityType::isInstance).collect(Collectors.toList());
     }
 
