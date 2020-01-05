@@ -5,9 +5,13 @@ import org.apache.logging.log4j.LogManager;
 
 import alchemagis.deckgenerator.metric.SynergyMetric;
 import alchemagis.magic.Card;
+import alchemagis.magic.quality.MagicCardQualityType;
+import alchemagis.magic.quality.ColorQuality;
+import alchemagis.magic.quality.StatQuality;
+import alchemagis.magic.quality.TypeQuality;
 import alchemagis.util.NumberUtil;
 
-public abstract class Synergy {
+public abstract class Synergy implements MagicCardQualityType.Visitor<Double> {
 
     private final Logger log = LogManager.getLogger(this.getClass());
 
@@ -30,5 +34,21 @@ public abstract class Synergy {
     }
 
     protected abstract double getRawScore(SynergyMetric metric, Card selfCard, Card otherCard);
+
+    // Visitor default methods
+    @Override
+    public Double visitColor(ColorQuality color) {
+        return 0.0;
+    }
+
+    @Override
+    public Double visitStat(StatQuality stat) {
+        return 0.0;
+    }
+
+    @Override
+    public Double visitType(TypeQuality type) {
+        return 0.0;
+    }
 
 }
