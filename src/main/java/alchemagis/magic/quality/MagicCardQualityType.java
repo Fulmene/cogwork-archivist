@@ -6,8 +6,10 @@ public abstract class MagicCardQualityType {
 
     public static interface Visitor<T> {
         T visitColor(ColorQuality color);
+        T visitManaCost(ManaCostQuality manaCost);
         T visitStat(StatQuality stat);
         T visitType(TypeQuality type);
+        T visitKeyword(KeywordQuality keyword);
     }
 
 }
