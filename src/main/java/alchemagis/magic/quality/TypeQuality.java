@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import alchemagis.magic.MagicConstants;
+
 public final class TypeQuality extends MagicCardQualityType {
 
     private final List<String> types;
@@ -21,11 +23,15 @@ public final class TypeQuality extends MagicCardQualityType {
     }
 
     public boolean isType(String... types) {
-        return Arrays.stream(types).allMatch(t -> this.types.contains(t));
+        return Arrays.stream(types).allMatch(this.types::contains);
     }
 
     public boolean isNontype(String... types) {
-        return Arrays.stream(types).noneMatch(t -> this.types.contains(t));
+        return Arrays.stream(types).noneMatch(this.types::contains);
+    }
+
+    public boolean isPermanent() {
+        return MagicConstants.permanentTypes.stream().anyMatch(this.types::contains);
     }
 
     public <T> T accept(MagicCardQualityType.Visitor<T> visitor) {
