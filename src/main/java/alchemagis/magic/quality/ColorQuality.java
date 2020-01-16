@@ -21,11 +21,11 @@ public final class ColorQuality extends MagicCardQualityType {
     }
 
     public boolean isColor(String... colors) {
-        return Arrays.stream(colors).allMatch(c -> this.colors.contains(c));
+        return Arrays.stream(colors).allMatch(this.colors::contains);
     }
 
     public boolean isNoncolor(String... colors) {
-        return Arrays.stream(colors).noneMatch(c -> this.colors.contains(c));
+        return Arrays.stream(colors).noneMatch(this.colors::contains);
     }
 
     public boolean isMonocolored() {
