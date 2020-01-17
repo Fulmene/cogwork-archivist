@@ -25,6 +25,10 @@ public final class ManaCostQuality extends MagicCardQualityType {
         return this.convertedManaCost;
     }
 
+    public boolean hasX() {
+        return this.manaCost.contains("X");
+    }
+
     public static final int getConvertedManaCost(List<String> manaCost) {
         return manaCost.stream().mapToInt(s -> {
                 String[] manaSymbols = s.split("/");
