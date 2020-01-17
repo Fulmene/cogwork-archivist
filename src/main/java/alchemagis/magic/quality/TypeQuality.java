@@ -3,6 +3,8 @@ package alchemagis.magic.quality;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import alchemagis.magic.MagicConstants;
 
@@ -16,6 +18,11 @@ public final class TypeQuality extends MagicCardQualityType {
 
     public TypeQuality(List<String> types) {
         this.types = Collections.unmodifiableList(types);
+    }
+
+    @SafeVarargs
+    public TypeQuality(List<String>... types) {
+        this.types = Stream.of(types).flatMap(List::stream).collect(Collectors.toList());
     }
 
     public List<String> getTypes() {
