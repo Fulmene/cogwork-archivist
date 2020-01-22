@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonAutoDetect(getterVisibility = JsonAutoDetect.Visibility.NONE)
-public class Card {
+public class Card implements Comparable<Card> {
 
     private final String name;
     private final List<String> colors;
@@ -117,6 +117,11 @@ public class Card {
 
     public String getText() {
         return this.text;
+    }
+
+    @Override
+    public int compareTo(Card other) {
+        return this.name.toLowerCase().compareTo(other.name.toLowerCase());
     }
 
     @Override

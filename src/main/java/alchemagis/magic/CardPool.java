@@ -3,7 +3,9 @@ package alchemagis.magic;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.NoSuchElementException;
@@ -11,6 +13,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import alchemagis.magic.quality.MagicCardQuality;
 import alchemagis.util.FileUtil;
 import alchemagis.util.NumberUtil;
 
@@ -35,7 +38,7 @@ public final class CardPool {
         Set<Card> cardPoolSet = sets.stream().
             map(s -> s.getCards().stream()).
             flatMap(Function.identity()).
-            collect(Collectors.toCollection(() -> new TreeSet<Card>((c1, c2) -> c1.getName().compareToIgnoreCase(c2.getName()))));
+            collect(Collectors.toCollection(TreeSet::new));
         this.cards = List.copyOf(cardPoolSet);
     }
 
