@@ -1,8 +1,5 @@
 package alchemagis.magic;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -20,7 +17,7 @@ public class CardSet {
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public CardSet(@JsonProperty("name") String name, @JsonProperty("cards") Card[] cards) {
         this.name = name;
-        this.cards = Collections.unmodifiableSet(new HashSet<Card>(List.of(cards)));
+        this.cards = Set.of(cards);
     }
 
     public String getName() {
