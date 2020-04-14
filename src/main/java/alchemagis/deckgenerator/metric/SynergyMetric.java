@@ -1,31 +1,36 @@
 package alchemagis.deckgenerator.metric;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
+import java.util.stream.DoubleStream;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 
 import alchemagis.deckgenerator.metric.synergy.Synergy;
+import alchemagis.deckgenerator.metric.synergy.SynergyParser;
 import alchemagis.magic.Card;
+import alchemagis.magic.CardPool;
 import alchemagis.magic.Deck;
 import alchemagis.util.FileUtil;
 
 public final class SynergyMetric extends Metric {
 
+    private CardPool cardPool;
     private Map<String, List<Synergy>> synergyTable;
 
-    public SynergyMetric(Iterable<String> setNames) {
-        this.synergyTable = new HashMap<>();
-        for (String name : setNames) {
-            MappingIterator<Map<String, String>> it = FileUtil.readCsv(Metric.class.getResource(name + ".csv"));
-            while (it.hasNext()) {
-                Map<String, String> values = it.next();
-                this.synergyTable.put(values.get("Card Name"), Synergy.parseSynergies(values.get("Synergies")));
-            }
+    public SynergyMetric(CardPool cardPool) {
+        try {
+            this.cardPool = cardPool;
+            this.synergyTable = FileUtil.readCsv(Metric.class.getResource("synergy.csv")).readAll().stream().
+                filter(l -> cardPool.contains(l.get(0))).
+                collect(Collectors.toMap(l -> l.get(0), l -> SynergyParser.parseSynergies(l.get(1))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -35,10 +40,10 @@ public final class SynergyMetric extends Metric {
             flatMapToDouble(c ->
                 DoubleStream.concat(
                     this.getSynergyList(card).stream().
-                        mapToDouble(s -> s.getScore(this, card, c)),
+                        mapToDouble(s -> s.getScore(cardPool.getCardQuality(c))),
                     this.getSynergyList(c).stream().
-                        mapToDouble(s -> s.getScore(this, c, card)))).
-            sum() / deck.size() / Math.max(1, this.getSynergyList(card).size());
+                        mapToDouble(s -> s.getScore(cardPool.getCardQuality(card))))).
+            sum(); // / deck.size() / Math.max(1, this.getSynergyList(card).size());
     }
 
     public List<Synergy> getSynergyList(Card card) {

@@ -25,14 +25,16 @@ public final class DeckGenerator {
 
     private static final Logger log = LogManager.getLogger(DeckGenerator.class);
 
-    private CardPool cardPool;
-    private List<Metric> metrics;
-    private Map<String, Double> utilityScores;
+    private final CardPool cardPool;
+    private final List<Metric> metrics;
+    private final Map<String, Double> utilityScores;
+
+    // TODO use a builder
 
     public static DeckGenerator createDeckGenerator(Collection<String> sets, List<Integer> manaCurve, List<Integer> cardTypeList) {
         CardPool cardPool = CardPool.loadCardPool(sets);
-        Metric costEffectivenessMetric = new CostEffectivenessMetric(sets);
-        Metric synergyMetric = new SynergyMetric(sets);
+        Metric costEffectivenessMetric = new CostEffectivenessMetric(cardPool);
+        Metric synergyMetric = new SynergyMetric(cardPool);
         Metric manaCurveMetric = new ManaCurveMetric(manaCurve);
         Metric cardTypeMetric = new CardTypeMetric(cardTypeList);
 
@@ -51,12 +53,8 @@ public final class DeckGenerator {
         this.utilityScores = new HashMap<>();
     }
 
-    public Deck generateDeck() {
-        return this.generateDeck(Collections.singletonList(this.cardPool.getRandomCard()));
-    }
-
     public Deck generateDeck(String ...cardNames) {
-        return this.generateDeck(Arrays.asList(cardNames));
+        return this.generateDeck(List.of(cardNames));
     }
 
     public Deck generateDeck(List<String> cardNames) {
@@ -77,10 +75,9 @@ public final class DeckGenerator {
             this.utilityScores.clear();
             for (Metric m : metrics)
                 m.preprocessDeck(generatedDeck);
-            Card maxUtilityCard = cardPool.stream().
+            Card maxUtilityCard = cardPool.getCards().stream().
                 filter(c ->
-                    generatedDeck.count(c) < MagicConstants.MAX_COPIES ||
-                    MagicConstants.canHaveAnyNumberOf(c)).
+                    generatedDeck.count(c) < cardPool.count(c)).
                 max((c1, c2) ->
                     Double.compare(
                         this.getUtilityScore(generatedDeck, c1),

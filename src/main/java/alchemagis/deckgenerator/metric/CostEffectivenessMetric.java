@@ -1,27 +1,30 @@
 package alchemagis.deckgenerator.metric;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.MappingIterator;
 
 import alchemagis.magic.Card;
+import alchemagis.magic.CardPool;
 import alchemagis.magic.Deck;
 import alchemagis.util.FileUtil;
 
 public final class CostEffectivenessMetric extends Metric {
 
+    private CardPool cardPool;
     private Map<String, Double> costEffectivenessTable;
 
-    public CostEffectivenessMetric(Iterable<String> setNames) {
-        this.metricWeight = 0.2;
-        this.costEffectivenessTable = new HashMap<>();
-        for (String name : setNames) {
-            MappingIterator<Map<String, String>> it = FileUtil.readCsv(Metric.class.getResource(name + ".csv"));
-            while (it.hasNext()) {
-                Map<String, String> values = it.next();
-                this.costEffectivenessTable.put(values.get("Card Name"), Double.parseDouble(values.get("Cost Effectiveness")));
-            }
+    public CostEffectivenessMetric(CardPool cardPool) {
+        try {
+            this.cardPool = cardPool;
+            this.costEffectivenessTable = FileUtil.readCsv(Metric.class.getResource("costeffectiveness.csv")).readAll().stream().
+                filter(l -> cardPool.contains(l.get(0))).
+                collect(Collectors.toMap(l -> l.get(0), l -> Double.parseDouble(l.get(1))));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

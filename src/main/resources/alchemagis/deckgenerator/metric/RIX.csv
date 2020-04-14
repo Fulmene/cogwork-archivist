@@ -1,30 +1,30 @@
-Blood Sun:2:draw
-Bombard:2:damage(4,creature)
-Brass's Bounty:2:pquality(land)/token(treasure)
-Brazen Freebooter:3:token(treasure)
-Buccaneer's Bravado:3:pquality(creature)/pquality(pirate)
+Blood Sun:2
+Bombard:2
+Brass's Bounty:2:quality(land)
+Brazen Freebooter:3:
+Buccaneer's Bravado:3:quality(pirate)
 Charging Tuskodon:2:
-Daring Buccaneer:3:pquality(pirate)
+Daring Buccaneer:3:quality(pirate)
 Dire Fleet Daredevil:4:
 Etali, Primal Storm:3:
-Fanatical Firebrand:5:damage(1,any)
-Forerunner of the Empire:2:pquality(dinosaur)/damage(1,creature)
-Form of the Dinosaur:2:damage(15,creature)
-Frilled Deathspitter:3:penrage/damage(2,player)
+Fanatical Firebrand:5:
+Forerunner of the Empire:2:quality(dinosaur)
+Form of the Dinosaur:2:
+Frilled Deathspitter:3:damage
 Goblin Trailblazer:3:
 Mutiny:2:
-Needletooth Raptor:2:penrage/damage(5,creature)
+Needletooth Raptor:2:damage
 Orazca Raptor:2:
-Pirate's Pillage:3:token(treasure)/discard/draw
-Reckless Rage:4:damage(2,creature)/damage(4,creature)
-Rekindling Phoenix:5:pdie
-See Red:2:pquality(creature)
-Shake the Foundations:3:damage(1,creature)/draw
-Silverclad Ferocidons:2:penrage
-Stampeding Horncrest:3:pquality(dinosaur)
-Storm Fleet Swashbuckler:3:ascend
+Pirate's Pillage:3:
+Reckless Rage:4:
+Rekindling Phoenix:5:die
+See Red:2:quality(creature)
+Shake the Foundations:3:
+Silverclad Ferocidons:2:damage
+Stampeding Horncrest:3:quality(dinosaur)
+Storm Fleet Swashbuckler:3:quality(permanent)
 Sun-Collared Raptor:3:
 Swap Goblin:3:
 Swaggering Corsair:2:
-Tilonalli's Crown:2:damage(1,creature)
-Tilonalli's Summoner:3:ascend
+Tilonalli's Crown:2:
+Tilonalli's Summoner:3:quality(permanent)

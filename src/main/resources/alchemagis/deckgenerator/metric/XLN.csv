@@ -1,39 +1,39 @@
-Angrath's Marauders:1:pdamage(any,any)
-Bonded Horncrest:3:pquality(creature)
-Brazen Buccaneers:2:explore
-Burning Sun's Avatar:3:damage(3,creature)/damage(3,player)
-Captain Lannery Storm:3:token(treasure)/pquality(treasure)
-Captivating Crew:3:psacrifice
+Angrath's Marauders:1:damage
+Bonded Horncrest:3:quality(creature)
+Brazen Buccaneers:2:
+Burning Sun's Avatar:3:
+Captain Lannery Storm:3:quality(treasure)
+Captivating Crew:3:sacrifice
 Charging Monstrosaur:3:
-Dinosaur Stampede:2:pquality(dinosaur)
-Dual Shot:2:damage(1,creature)
+Dinosaur Stampede:2:quality(dinosaur)
+Dual Shot:2:
 Fathom Fleet Firebrand:3:
-Fiery Cannonade:3:damage(2,creature)/pquality(pirate)
-Firecannon Blast:3:damage(x,creature)
-Fire Shrine Keeper:3:damage(3,creature)
+Fiery Cannonade:3:quality(pirate)
+Firecannon Blast:3:
+Fire Shrine Keeper:3:
 Frenzied Raptor:2:
-Headstrong Brute:3:pquality(pirate)
+Headstrong Brute:3:quality(pirate)
 Hijack:2:
-Lightning-Rig Crew:3:damage(1,player)/pquality(pirate)
-Makeshift Munitions:3:damage(1,any)/pquality(creature)/pquality(artifact)
+Lightning-Rig Crew:3:quality(pirate)
+Makeshift Munitions:3:quality(creature;artifact)
 Nest Robber:3:
-Otepec Huntmaster:3:pquality(dinosaur)
-Raptor Hatchling:3:penrage/token(dinosaur)
-Repeating Barrage:2:damage(3,any)
+Otepec Huntmaster:3:quality(dinosaur)
+Raptor Hatchling:3:damage
+Repeating Barrage:2:
 Rigging Runner:4:
-Rile:4:damage(1,creature)/draw
-Rowdy Crew:2:draw/discard
-Rummaging Goblin:2:discard/draw
-Star of Extinction:2:damage(20,creature,planeswalker)
+Rile:4:
+Rowdy Crew:2:
+Rummaging Goblin:2:
+Star of Extinction:2:
 Storm Fleet Arsonist:3:
-Storm Fleet Pyromancer:2:damage(2,any)
-Sunbird's Invocation:2:pcmcx
-Sun-Crowned Hunters:2:penrage/damage(3,player)
+Storm Fleet Pyromancer:2:
+Sunbird's Invocation:2:cmcx
+Sun-Crowned Hunters:2:enrage
 Swashbuckling:2:enchant(creature)
-Thrash of Raptors:3:pquality(dinosaur)
-Tilonalli's Knight:3:pquality(dinosaur)
-Tilonalli's Skinshifter:1:pquality(nonlegendary,creature)
-Trove of Temptation:2:token(treasure)
-Unfriendly Fire:1:damage(4,any)
-Vance's Blasting Cannons:2:damage(3,any)
-Wily Goblin:2:token(treasure)
+Thrash of Raptors:3:quality(dinosaur)
+Tilonalli's Knight:3:quality(dinosaur)
+Tilonalli's Skinshifter:1:quality(nonlegendary,creature)
+Trove of Temptation:2:
+Unfriendly Fire:1:
+Vance's Blasting Cannons:2:
+Wily Goblin:2:

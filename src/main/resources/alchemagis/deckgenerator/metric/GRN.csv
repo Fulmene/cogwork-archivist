@@ -1,36 +1,36 @@
-Arclight Phoenix:2:pgrave/flying/pquality(instant)/pquality(sorcery)
-Barging Sergeant:1:mentor
-Book Devourer:1:discard/draw
-Command the Storm:2:damage(5,creature)
-Cosmotronic Wave:2:damage(1,creature)
-Direct Current:3:damage(2,any)/jumpstart
-Electrostatic Field:4:pquality(instant)/pquality(sorcery)
-Erratic Cyclops:2:pquality(instant)/pquality(sorcery)
+Arclight Phoenix:3:graveyard/quality(instant;sorcery)
+Barging Sergeant:1:power(<,4)
+Book Devourer:1:
+Command the Storm:2:
+Cosmotronic Wave:2:
+Direct Current:3:graveyard
+Electrostatic Field:4:quality(instant;sorcery)
+Erratic Cyclops:2:quality(instant;sorcery)
 Experimental Frenzy:4:
 Fearless Halberdier:2:
-Fire Urchin:3:pquality(instant)/pquality(sorcery)
-Gatekeeper Gargoyle:2:pquality(gate)/flying
-Glaive of the Guildpact:3:pquality(gate)
-Goblin Banneret:4:mentor
-Goblin Cratermaker:4:sacrifice/damage(2,creature)
+Fire Urchin:3:quality(instant;sorcery)
+Gatekeeper Gargoyle:2:quality(gate)
+Glaive of the Guildpact:3:quality(gate)
+Goblin Banneret:4:power(<,3)
+Goblin Cratermaker:4:
 Goblin Locksmith:3:
-Gravitic Punch:3:damage(x,player)/jumpstart/ppowerx
-Hellkite Whelp:3:flying
-Inescapable Blaze:2:damage(6,any)
-Lava Coil:5:damage(4,creature)
-Legion Warboss:4:mentor/token(goblin)
+Gravitic Punch:3:graveyard/quality(creature)/powerx
+Hellkite Whelp:3:
+Inescapable Blaze:2:
+Lava Coil:5:
+Legion Warboss:4:power(<,2)
 Maniacal Rage:3:
-Maximize Velocity:4:jumpstart/pquality(creature)
-Mountain:5:mana(red)
+Maximize Velocity:4:graveyard/quality(creature)
+Mountain:5:
 Ornery Goblin:3:
-Precision Bolt:2:damage(3,any)
-Rampaging Monument:3:pquality(multicolor)
-Risk Factor:4:draw/damage(4,player)/jumpstart
-Rubblebelt Boar:3:pquality(creature)
-Runaway Steam-Kin:4:pquality(red)/mana(red)
-Silent Dart:1:damage(3,creature)
-Smelt-Ward Minotaur:3:pquality(instant)/pquality(sorcery)
-Street Riot:1:pquality(creature)
-Sure Strike:2:pquality(creature)
-Torch Courier:3:sacrifice/pquality(creature)
-Wojek Bodyguard:3:pquality(creature)/mentor
+Precision Bolt:2:
+Rampaging Monument:3:quality(multicolor)
+Risk Factor:4:graveyard
+Rubblebelt Boar:3:quality(creature)
+Runaway Steam-Kin:5:quality(red)
+Silent Dart:1:
+Smelt-Ward Minotaur:3:quality(instant;sorcery)
+Street Riot:1:quality(creature)
+Sure Strike:2:quality(creature)
+Torch Courier:3:quality(creature)
+Wojek Bodyguard:3:quality(creature)/power(<,3)
