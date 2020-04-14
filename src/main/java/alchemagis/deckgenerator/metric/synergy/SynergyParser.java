@@ -1,112 +1,105 @@
 package alchemagis.deckgenerator.metric.synergy;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 import java.util.stream.Collectors;
-
-import alchemagis.magic.MagicConstants;
 
 public class SynergyParser {
 
     public static List<Synergy> parseSynergies(String synergiesString) {
-        if (synergiesString.isEmpty())
-            return Collections.emptyList();
-        else {
-            return Arrays.stream(synergiesString.split("/")).
-                map(SynergyParser::parseSingleSynergy).
-                collect(Collectors.toUnmodifiableList());
+        return Arrays.stream(synergiesString.split("/")).
+            map(SynergyParser::parseSynergy).
+            collect(Collectors.toList());
+    }
+
+
+    private static String lookAround(String delimiters) {
+        return "(?<=[" + delimiters + "])|(?=[" + delimiters + "])";
+    }
+
+    private static String DELIMITERS = "\\[\\]&|~";
+
+    private static int precedence(String operator) {
+        switch (operator) {
+            case "~": return 3;
+            case "&": return 2;
+            case "|": return 1;
+            case "[": return 0;
+            default : throw new SynergyFormatException("operator " + operator);
         }
     }
 
-    private static Synergy parseSingleSynergy(String synergy) {
-        List<String> synergySplit = Arrays.asList(synergy.split("[()]"));
-        String synergyType = synergySplit.get(0);
-        List<String> synergyParameter = null;
-        if (synergySplit.size() > 1)
-            synergyParameter = Arrays.asList(synergySplit.get(1).split(","));
-        switch (synergyType) {
-            case "ascend":
-                return AscendSynergy.INSTANCE;
-            case "becomecreature":
-                return BecomeCreatureSynergy.INSTANCE;
+    public static Synergy parseSynergy(String synergyString) {
+        if (synergyString.matches("[" + DELIMITERS + "]*"))
+            return BaseSynergy.NONE;
+
+        String[] tokens = ("[" + synergyString + "]").split(lookAround(DELIMITERS));
+        Stack<Synergy> operandStack = new Stack<>();
+        Stack<String> operatorStack = new Stack<>();
+        for (String t : tokens) {
+            switch (t) {
+                case "~":
+                case "&":
+                case "|":
+                    while (precedence(operatorStack.peek()) >= precedence(t)) {
+                        popOperatorStack(operandStack, operatorStack);
+                    }
+                    operatorStack.push(t);
+                    break;
+                case "[":
+                    operatorStack.push(t);
+                    break;
+                case "]": 
+                    while (!operatorStack.peek().equals("["))
+                        popOperatorStack(operandStack, operatorStack);
+                    operatorStack.pop();
+                    break;
+                default: operandStack.push(parseBaseSynergy(t)); 
+            }
+        }
+        return operandStack.pop();
+    }
+
+    private static void popOperatorStack(Stack<Synergy> operandStack, Stack<String> operatorStack) {
+        String op = operatorStack.pop();
+        switch (op) {
+            case "~":
+                Synergy base = operandStack.pop();
+                operandStack.push(new UnaryOperatedSynergy(base, op));
+                break;
+            case "&":
+            case "|":
+                Synergy rhs = operandStack.pop();
+                Synergy lhs = operandStack.pop();
+                operandStack.push(new BinaryOperatedSynergy(lhs, op, rhs));
+                break;
+            default :
+                throw new SynergyFormatException("operator " + op);
+        }
+    }
+
+    public static BaseSynergy parseBaseSynergy(String baseSynergyString) {
+        String[] synergyArgs = baseSynergyString.split("[(),]");
+        switch (synergyArgs[0]) {
+            case "cmcx":
+                return CmcXSynergy.INSTANCE;
             case "damage":
-                int amount;
-                if ("x".equals(synergyParameter.get(0)))
-                    amount = -1;
-                else
-                    amount = Integer.parseInt(synergyParameter.get(0));
-                List<String> targets = synergyParameter.subList(1, synergyParameter.size());
-                return new DamageSynergy(amount, targets);
-            case "discard":
-                return DiscardSynergy.INSTANCE;
-            case "draw":
-                return DrawSynergy.INSTANCE;
-            case "enchant":
-                return new EnchantSynergy(synergyParameter);
-            case "explore":
-                return ExploreSynergy.INSTANCE;
-            case "flying":
-                return FlyingSynergy.INSTANCE;
-            case "jumpstart":
-                return JumpStartSynergy.INSTANCE;
+                return DamageSynergy.INSTANCE;
+            case "die":
+                return DieSynergy.INSTANCE;
+            case "graveyard":
+                return GraveyardSynergy.INSTANCE;
             case "kicker":
                 return KickerSynergy.INSTANCE;
-            case "legendarysorcery":
-                return LegendarySorcerySynergy.INSTANCE;
-            case "mana":
-                if (synergyParameter.size() >= 1 && MagicConstants.colors.contains(synergyParameter.get(0))) {
-                    return new ManaSynergy(synergyParameter);
-                } else {
-                    throw new SynergyFormatException(synergy);
-                }
-            case "mentor":
-                return MentorSynergy.INSTANCE;
+            case "powerx":
+                return PowerXSynergy.INSTANCE;
             case "sacrifice":
                 return SacrificeSynergy.INSTANCE;
-            case "token":
-                return new TokenSynergy(synergyParameter.get(0));
-            case "xspell":
-                return XSpellSynergy.INSTANCE;
-            case "pcmcx":
-                return PassiveCMCXSynergy.INSTANCE;
-            case "pdamage":
-                int i = 0;
-                for (i = 0; i < synergyParameter.size(); i++)
-                    if (MagicConstants.targets.contains(synergyParameter.get(i)))
-                        break;
-                if (i == synergyParameter.size()) {
-                    i--;
-                    if (!(synergyParameter.get(i).equals("creature") || synergyParameter.get(i).equals("any")))
-                        throw new SynergyFormatException(synergy);
-                }
-                return new PassiveDamageSynergy(
-                        synergyParameter.subList(0, i),
-                        synergyParameter.subList(i, synergyParameter.size()));
-            case "pdie":
-                return PassiveDieSynergy.INSTANCE;
-            case "penrage":
-                return PassiveEnrageSynergy.INSTANCE;
-            case "pgrave":
-                return PassiveGraveyardSynergy.INSTANCE;
-            case "pkicker":
-                return PassiveKickerSynergy.INSTANCE;
-            case "ppower":
-                return new PassivePowerSynergy(synergyParameter.get(0), Integer.parseInt(synergyParameter.get(1)));
-            case "ppowerx":
-                return PassivePowerXSynergy.INSTANCE;
-            case "pquality":
-                return new PassiveQualitySynergy(synergyParameter);
-            case "psacrifice":
-                return PassiveSacrificeSynergy.INSTANCE;
-        }
-        throw new SynergyFormatException(synergy);
-    }
-
-    @SuppressWarnings("serial")
-    public static class SynergyFormatException extends RuntimeException {
-        private SynergyFormatException(String synergy) {
-            super("Unknown synergy " + synergy);
+            case "power":
+                return PowerSynergy.getInstance(synergyArgs[1], synergyArgs[2]);
+            default:
+                return QualitySynergy.getInstance(synergyArgs[0]);
         }
     }
 
