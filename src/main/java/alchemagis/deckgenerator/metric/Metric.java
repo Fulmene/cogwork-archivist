@@ -10,21 +10,13 @@ public abstract class Metric {
 
     private final Logger log = LogManager.getLogger(this.getClass());
 
-    protected double metricWeight;
-
     protected Metric() {
-        this.metricWeight = 1.0;
-    }
-
-    protected Metric(double metricWeight) {
-        this.metricWeight = metricWeight;
     }
 
     public final double getMetricScore(Deck deck, Card card) {
         double rawScore = this.getRawMetricScore(deck, card);
-        double score = this.metricWeight * rawScore;
-        log.debug("        Total score: {}", score);
-        return score;
+        log.debug("        Total score: {}", rawScore);
+        return rawScore;
     }
 
     public void preprocessDeck(Deck deck) {}
