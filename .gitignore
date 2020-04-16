@@ -12,3 +12,6 @@ bin
 
 # Ignore program output
 result
+
+# Ignore logs
+*.log
