@@ -7,7 +7,13 @@ import alchemagis.magic.Card;
 
 public final class MagicCardQuality {
 
+    public static final MagicCardQuality NONE = new MagicCardQuality();
+
     private final List<MagicCardQualityType> qualities;
+
+    private MagicCardQuality() {
+        this.qualities = List.of();
+    }
 
     public MagicCardQuality(Card card) {
         this.qualities = List.of(
