@@ -2,8 +2,6 @@ package alchemagis.magic;
 
 import java.util.List;
 
-import alchemagis.magic.quality.MagicCardQualityPredicate;
-
 public final class MagicConstants {
 
     public static final int MIN_DECK_SIZE = 60;
@@ -29,6 +27,7 @@ public final class MagicConstants {
             // planar types
             "alara", "arkhos", "azgol", "belenon", "bolas’s meditation realm", "dominaria", "equilor", "ergamon", "fabacin", "innistrad", "iquatana", "ir", "kaldheim", "kamigawa", "karsus", "kephalai", "kinshala", "kolbahan", "kyneth", "lorwyn", "luvion", "mercadia", "mirrodin", "moag", "mongseng", "muraganda", "new phyrexia", "phyrexia", "pyrulea", "rabiah", "rath", "ravnica", "regatha", "segovia", "serra’s realm", "shadowmoor", "shandalar", "ulgrotha", "valla", "vryn", "wildfire", "xerex", "zendikar"
     );
+
     // TODO add actual keywords
     public static final List<String> keywords = List.of("multicolor");
     public static final List<String> targets = List.of("player", "planeswalker", "permanent");
@@ -37,7 +36,14 @@ public final class MagicConstants {
     public static final int MAX_MEANINGFUL_CMC = 6;
 
     public static final boolean canHaveAnyNumberOf(Card card) {
-        return new MagicCardQualityPredicate("basic", "land").test(card) || card.getText().contains("A deck can have any number of cards named " + card.getName());
+        return (card.getSupertypes().contains("basic") && card.getTypes().contains("land")) || card.getText().contains("A deck can have any number of cards named " + card.getName());
+    }
+
+    public static final int getMaxCopies(Card card) {
+        if (canHaveAnyNumberOf(card))
+            return MIN_DECK_SIZE;
+        else
+            return MAX_COPIES;
     }
 
 }
