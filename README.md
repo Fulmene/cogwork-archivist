@@ -1,3 +1,3 @@
-Alchemagis
+Cogwork
 
-Deck brewer for Magic the Gathering
+Automated deck builder for Magic: the Gathering

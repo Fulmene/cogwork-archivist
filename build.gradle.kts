@@ -42,5 +42,5 @@ dependencies {
 
 application {
     // Define the main class for the application
-    mainClassName = "alchemagis.Main"
+    mainClassName = "mtgcogwork.Main"
 }

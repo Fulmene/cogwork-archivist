@@ -8,7 +8,7 @@ Configuration:
                 Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %25logger{1} - %msg%n"
         File:
             name: File
-            fileName: alchemagis.log
+            fileName: mtgcogwork.log
             PatternLayout:
                 Pattern: "%d{HH:mm:ss.SSS} [%t] %-5level %25logger{1} - %msg%n"
     Loggers:
