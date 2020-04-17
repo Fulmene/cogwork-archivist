@@ -21,4 +21,5 @@ public final class PowerSynergy extends BaseSynergy {
         else
             return false;
     }
+
 }

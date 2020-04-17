@@ -2,7 +2,6 @@ package mtgcogwork.util;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Map;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.MappingIterator;
@@ -24,13 +23,6 @@ public final class FileUtil {
             throw new RuntimeException(e);
         }
     }
-
-    private static final CsvSchema schema = CsvSchema.builder().
-        addColumn("Card Name").
-        addColumn("Cost Effectiveness").
-        addColumn("Synergies").
-        setColumnSeparator(':').
-        build();
 
     public static MappingIterator<List<String>> readCsv(URL csvURL) {
         CsvMapper mapper = new CsvMapper().enable(CsvParser.Feature.WRAP_AS_ARRAY);

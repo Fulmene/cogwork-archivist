@@ -2,14 +2,11 @@ package mtgcogwork.deckgenerator.metric;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
-import java.util.stream.DoubleStream;
 import java.util.stream.Collectors;
-
-import com.fasterxml.jackson.databind.MappingIterator;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 import mtgcogwork.deckgenerator.metric.synergy.Synergy;
 import mtgcogwork.deckgenerator.metric.synergy.SynergyParser;
@@ -43,7 +40,7 @@ public final class SynergyMetric extends Metric {
                         mapToDouble(s -> s.getScore(cardPool.getCardQuality(c))),
                     this.getSynergyList(c).stream().
                         mapToDouble(s -> s.getScore(cardPool.getCardQuality(card))))).
-            sum() / deck.size(); // Math.max(1, this.getSynergyList(card).size());
+            sum() / deck.size();
     }
 
     public List<Synergy> getSynergyList(Card card) {

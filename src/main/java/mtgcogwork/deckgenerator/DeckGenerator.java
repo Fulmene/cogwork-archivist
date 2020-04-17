@@ -1,20 +1,18 @@
 package mtgcogwork.deckgenerator;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import mtgcogwork.deckgenerator.metric.Metric;
 import mtgcogwork.deckgenerator.metric.CardTypeMetric;
 import mtgcogwork.deckgenerator.metric.CostEffectivenessMetric;
 import mtgcogwork.deckgenerator.metric.ManaCurveMetric;
+import mtgcogwork.deckgenerator.metric.Metric;
 import mtgcogwork.deckgenerator.metric.SynergyMetric;
 import mtgcogwork.magic.Card;
 import mtgcogwork.magic.CardPool;

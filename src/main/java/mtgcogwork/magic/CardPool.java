@@ -1,25 +1,19 @@
 package mtgcogwork.magic;
 
-import java.net.URL;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.NoSuchElementException;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
-import com.google.common.collect.HashMultiset;
 
 import mtgcogwork.magic.quality.MagicCardQuality;
 import mtgcogwork.util.FileUtil;
-import mtgcogwork.util.NumberUtil;
 
 public final class CardPool {
 
