@@ -1,5 +1,8 @@
 package alchemagis.deckgenerator.metric.synergy;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import alchemagis.magic.quality.MagicCardQuality;
 import alchemagis.magic.quality.MagicCardQualityType;
 import alchemagis.magic.quality.ColorQuality;
@@ -9,6 +12,17 @@ import alchemagis.magic.quality.StatQuality;
 import alchemagis.magic.quality.TypeQuality;
 
 public abstract class BaseSynergy extends Synergy implements MagicCardQualityType.Visitor<Boolean> {
+
+    private static final Map<String, BaseSynergy> INSTANCES = new HashMap<>();
+
+    public static final BaseSynergy getInstance(String synergyString) {
+        BaseSynergy target = INSTANCES.get(synergyString);
+        if (target == null) {
+            target = SynergyParser.parseBaseSynergy(synergyString);
+            INSTANCES.put(synergyString, target);
+        }
+        return target;
+    }
 
     public static final Synergy NONE = new BaseSynergy() {};
 

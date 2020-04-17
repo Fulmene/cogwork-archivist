@@ -1,26 +1,12 @@
 package alchemagis.deckgenerator.metric.synergy;
 
-import java.util.Map;
-import java.util.HashMap;
-
 import alchemagis.magic.MagicConstants;
 import alchemagis.magic.quality.ColorQuality;
 import alchemagis.magic.quality.TypeQuality;
 
 public abstract class QualitySynergy extends BaseSynergy {
 
-    private static final Map<String, QualitySynergy> INSTANCES = new HashMap<>();
-
-    public static final QualitySynergy getInstance(String quality) {
-        QualitySynergy target = INSTANCES.get(quality);
-        if (target == null) {
-            target = createQualitySynergy(quality);
-            INSTANCES.put(quality, target);
-        }
-        return target;
-    }
-
-    private static final QualitySynergy createQualitySynergy(String quality) {
+    public static final QualitySynergy createQualitySynergy(String quality) {
         if (MagicConstants.colors.contains(quality))
             return new ColorSynergy(quality);
         else if (MagicConstants.supertypes.contains(quality) || MagicConstants.types.contains(quality) || MagicConstants.subtypes.contains(quality))

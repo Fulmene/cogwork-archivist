@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
+import alchemagis.util.NumberUtil;
+
 public class SynergyParser {
 
     public static List<Synergy> parseSynergies(String synergiesString) {
@@ -83,23 +85,25 @@ public class SynergyParser {
         String[] synergyArgs = baseSynergyString.split("[(),]");
         switch (synergyArgs[0]) {
             case "cmcx":
-                return CmcXSynergy.INSTANCE;
+                return new CmcXSynergy();
             case "damage":
-                return DamageSynergy.INSTANCE;
+                return new DamageSynergy();
             case "die":
-                return DieSynergy.INSTANCE;
+                return new DieSynergy();
             case "graveyard":
-                return GraveyardSynergy.INSTANCE;
+                return new GraveyardSynergy();
             case "kicker":
-                return KickerSynergy.INSTANCE;
+                return new KickerSynergy();
             case "powerx":
-                return PowerXSynergy.INSTANCE;
+                return new PowerXSynergy();
             case "sacrifice":
-                return SacrificeSynergy.INSTANCE;
+                return new SacrificeSynergy();
             case "power":
-                return PowerSynergy.getInstance(synergyArgs[1], synergyArgs[2]);
+                return new PowerSynergy(NumberUtil.getComparisonOperation(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
+            case "none":
+                return new BaseSynergy() {};
             default:
-                return QualitySynergy.getInstance(synergyArgs[0]);
+                return QualitySynergy.createQualitySynergy(synergyArgs[0]);
         }
     }
 
