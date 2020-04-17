@@ -24,6 +24,16 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'
 
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.10.3'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.10.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.10.3'
+    implementation 'com.fasterxml.jackson.module:jackson-modules-java8:2.10.3'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.10.3'
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.10.3'
+
+    implementation 'org.apache.logging.log4j:log4j-api:2.12.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.12.1'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
 }
