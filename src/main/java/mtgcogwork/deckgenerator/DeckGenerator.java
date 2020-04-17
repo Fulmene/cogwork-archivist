@@ -1,6 +1,8 @@
 package mtgcogwork.deckgenerator;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,31 +25,61 @@ public final class DeckGenerator {
 
     private static final Logger log = LogManager.getLogger(DeckGenerator.class);
 
+    public static final class Builder {
+
+        private final CardPool cardPool;
+        private final List<Metric> metrics;
+
+        private Builder(CardPool cardPool) {
+            this.cardPool = cardPool;
+            this.metrics = new ArrayList<>();
+        }
+
+        public final DeckGenerator build() {
+            return new DeckGenerator(this);
+        }
+
+        public final Builder withCostEffectivenessMetric() {
+            this.metrics.add(new CostEffectivenessMetric(this.cardPool));
+            return this;
+        }
+
+        public final Builder withSynergyMetric() {
+            this.metrics.add(new SynergyMetric(this.cardPool));
+            return this;
+        }
+
+        public final Builder withManaCurveMetric(List<Integer> manaCurve) {
+            this.metrics.add(new ManaCurveMetric(manaCurve));
+            return this;
+        }
+
+        public final Builder withCardTypeMetric(List<Integer> cardTypeCount) {
+            this.metrics.add(new CardTypeMetric(cardTypeCount));
+            return this;
+        }
+
+    }
+
+    public static final Builder builder(Collection<String> sets) {
+        return new Builder(CardPool.loadCardPool(sets));
+    }
+
+    public static final Builder builder(CardPool cardPool) {
+        return new Builder(cardPool);
+    }
+
     private final CardPool cardPool;
     private final List<Metric> metrics;
     private final Map<String, Double> utilityScores;
 
-    // TODO use a builder
-
-    public static DeckGenerator createDeckGenerator(Collection<String> sets, List<Integer> manaCurve, List<Integer> cardTypeList) {
-        CardPool cardPool = CardPool.loadCardPool(sets);
-        Metric costEffectivenessMetric = new CostEffectivenessMetric(cardPool);
-        Metric synergyMetric = new SynergyMetric(cardPool);
-        Metric manaCurveMetric = new ManaCurveMetric(manaCurve);
-        Metric cardTypeMetric = new CardTypeMetric(cardTypeList);
-
-        return new DeckGenerator(
-            cardPool,
-            List.of(
-                costEffectivenessMetric,
-                synergyMetric,
-                manaCurveMetric,
-                cardTypeMetric));
+    private DeckGenerator(Builder builder) {
+        this(builder.cardPool, builder.metrics);
     }
 
-    public DeckGenerator(CardPool cardPool, List<Metric> metrics) {
+    private DeckGenerator(CardPool cardPool, List<Metric> metrics) {
         this.cardPool = cardPool;
-        this.metrics = metrics;
+        this.metrics = Collections.unmodifiableList(metrics);
         this.utilityScores = new HashMap<>();
     }
 

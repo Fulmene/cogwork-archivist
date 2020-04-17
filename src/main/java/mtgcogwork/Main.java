@@ -16,7 +16,12 @@ public class Main {
         List<Integer> manaCurve = List.of(0, 12, 12, 11, 3);
         List<Integer> cardTypeList = List.of(24, 20, 16);
 
-        DeckGenerator generator = DeckGenerator.createDeckGenerator(sets, manaCurve, cardTypeList);
+        DeckGenerator generator = DeckGenerator.builder(sets).
+            withCostEffectivenessMetric().
+            withSynergyMetric().
+            withManaCurveMetric(manaCurve).
+            withCardTypeMetric(cardTypeList).
+            build();
         Deck deck = generator.generateDeck(
             "Wizard's Lightning",
             "Wizard's Lightning",
