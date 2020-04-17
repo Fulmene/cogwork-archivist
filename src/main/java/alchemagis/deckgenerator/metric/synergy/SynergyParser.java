@@ -100,6 +100,8 @@ public class SynergyParser {
                 return new SacrificeSynergy();
             case "power":
                 return new PowerSynergy(NumberUtil.getComparisonOperation(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
+            case "quality":
+                return QualitySynergy.createQualitySynergy(synergyArgs[1]);
             case "none":
                 return new BaseSynergy() {};
             default:
