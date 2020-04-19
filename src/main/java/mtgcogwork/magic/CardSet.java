@@ -1,9 +1,9 @@
 package mtgcogwork.magic;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -20,7 +20,7 @@ public class CardSet {
     @JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
     public CardSet(@JsonProperty("name") String name, @JsonProperty("cards") Card[] cards) {
         this.name = name;
-        this.cards = Collections.unmodifiableSet(new HashSet<Card>(Arrays.asList(cards)));
+        this.cards = Collections.unmodifiableSet(new HashSet<Card>(List.of(cards)));
     }
 
     public String getName() {

@@ -77,11 +77,7 @@ public final class CardPool {
     }
 
     public MagicCardQuality getCardQuality(Card card) {
-        MagicCardQuality quality = this.cardQualityTable.get(card);
-        if (quality == null)
-            return MagicCardQuality.NONE;
-        else
-            return this.cardQualityTable.get(card);
+        return this.cardQualityTable.getOrDefault(card, MagicCardQuality.NONE);
     }
 
 }

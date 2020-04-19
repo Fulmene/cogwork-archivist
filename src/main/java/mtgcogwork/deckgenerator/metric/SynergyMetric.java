@@ -1,12 +1,10 @@
 package mtgcogwork.deckgenerator.metric;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
-import java.util.stream.Stream;
 
 import mtgcogwork.deckgenerator.metric.synergy.Synergy;
 import mtgcogwork.deckgenerator.metric.synergy.SynergyParser;
@@ -44,17 +42,7 @@ public final class SynergyMetric extends Metric {
     }
 
     public List<Synergy> getSynergyList(Card card) {
-        List<Synergy> synergyList = this.synergyTable.get(card.getName());
-        if (synergyList == null)
-            return Collections.emptyList();
-        else
-            return synergyList;
-    }
-
-    public<T extends Synergy> Stream<T> classFilterStream(Class<T> clazz, Card card) {
-        return this.getSynergyList(card).stream().
-            filter(clazz::isInstance).
-            map(clazz::cast);
+        return this.synergyTable.getOrDefault(card.getName(), List.of());
     }
 
 }

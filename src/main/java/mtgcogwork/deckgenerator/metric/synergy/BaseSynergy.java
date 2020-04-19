@@ -16,15 +16,8 @@ public abstract class BaseSynergy extends Synergy implements MagicCardQualityTyp
     private static final Map<String, BaseSynergy> INSTANCES = new HashMap<>();
 
     public static final BaseSynergy getInstance(String synergyString) {
-        BaseSynergy target = INSTANCES.get(synergyString);
-        if (target == null) {
-            target = SynergyParser.parseBaseSynergy(synergyString);
-            INSTANCES.put(synergyString, target);
-        }
-        return target;
+        return INSTANCES.computeIfAbsent(synergyString, SynergyParser::parseBaseSynergy);
     }
-
-    public static final Synergy NONE = new BaseSynergy() {};
 
     protected BaseSynergy() {
     }

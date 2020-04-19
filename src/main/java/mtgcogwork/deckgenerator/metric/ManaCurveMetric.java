@@ -1,6 +1,7 @@
 package mtgcogwork.deckgenerator.metric;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import mtgcogwork.magic.Card;
@@ -10,8 +11,8 @@ import mtgcogwork.util.NumberUtil;
 
 public final class ManaCurveMetric extends Metric {
 
-    private List<Integer> manaCurve;
-    private double maxDistance;
+    private final List<Integer> manaCurve;
+    private final double maxDistance;
     private List<Integer> deckCurve;
     private List<Double> score;
     private Double landScore;
@@ -23,9 +24,20 @@ public final class ManaCurveMetric extends Metric {
 
     @Override
     public void preprocessDeck(Deck deck) {
-        this.deckCurve = new ArrayList<>();
-        deck.forEach(c -> incrementCurve(this.deckCurve, c));
-        this.score = new ArrayList<>();
+        List<Integer> deckCurve = new ArrayList<>();
+        for (int i = 0; i <= MagicConstants.MAX_MEANINGFUL_CMC; i++)
+            deckCurve.add(0);
+        deck.forEach(c -> incrementCurve(deckCurve, c));
+        this.deckCurve = Collections.unmodifiableList(deckCurve);
+
+        List<Double> score = new ArrayList<>();
+        for (int cmc = 0; cmc <= MagicConstants.MAX_MEANINGFUL_CMC; cmc++) {
+            List<Integer> newCurve = new ArrayList<>(this.deckCurve);
+            incrementCurve(newCurve, cmc);
+            score.add((this.maxDistance - NumberUtil.euclideanDistance(newCurve, this.manaCurve)) / this.maxDistance);
+        }
+        this.score = Collections.unmodifiableList(score);
+
         this.landScore = (this.maxDistance - NumberUtil.euclideanDistance(this.deckCurve, this.manaCurve)) / this.maxDistance;
     }
 
@@ -33,25 +45,19 @@ public final class ManaCurveMetric extends Metric {
     protected double getRawMetricScore(Deck deck, Card card) {
         if (card.getTypes().contains("land"))
             return this.landScore;
-        else {
-            List<Integer> curve = new ArrayList<>(this.deckCurve);
-            incrementCurve(curve, card);
-            int cmc = Math.min(MagicConstants.MAX_MEANINGFUL_CMC, card.getConvertedManaCost());
-            while (this.score.size() <= cmc)
-                this.score.add(null);
-            if (this.score.get(cmc) == null)
-                this.score.set(cmc, (this.maxDistance - NumberUtil.euclideanDistance(curve, this.manaCurve)) / this.maxDistance);
-            return this.score.get(cmc);
-        }
+        else
+            return this.score.get(Math.min(MagicConstants.MAX_MEANINGFUL_CMC, card.getConvertedManaCost()));
     }
 
     private static void incrementCurve(List<Integer> curve, Card card) {
-        if (!card.getTypes().contains("land")) {
-            int cmc = Math.min(MagicConstants.MAX_MEANINGFUL_CMC, card.getConvertedManaCost());
-            while (curve.size() <= cmc)
-                curve.add(0);
-            curve.set(cmc, curve.get(cmc)+1);
-        }
+        if (!card.getTypes().contains("land"))
+            incrementCurve(curve, Math.min(MagicConstants.MAX_MEANINGFUL_CMC, card.getConvertedManaCost()));
+    }
+
+    private static void incrementCurve(List<Integer> curve, int cmc) {
+        while (curve.size() <= cmc)
+            curve.add(0);
+        curve.set(cmc, curve.get(cmc)+1);
     }
 
 }

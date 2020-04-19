@@ -1,6 +1,5 @@
 package mtgcogwork.magic.quality;
 
-import java.util.stream.Collectors;
 import java.util.List;
 
 import mtgcogwork.magic.Card;

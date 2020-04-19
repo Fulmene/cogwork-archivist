@@ -1,7 +1,10 @@
 package mtgcogwork.deckgenerator.metric;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import mtgcogwork.magic.Card;
 import mtgcogwork.magic.Deck;
@@ -9,10 +12,29 @@ import mtgcogwork.util.NumberUtil;
 
 public final class CardTypeMetric extends Metric {
 
-    private List<Integer> cardTypeCount;
-    private double maxDistance;
+    private static enum Category {
+        CREATURE(0), LAND(1), OTHER(2);
+
+        private int index;
+
+        private Category(int index) {
+            this.index = index;
+        }
+    };
+
+    private static Category getCategory(Card card) {
+        if (card.getTypes().contains("creature"))
+            return Category.CREATURE;
+        else if (card.getTypes().contains("land"))
+            return Category.LAND;
+        else
+            return Category.OTHER;
+    }
+
+    private final List<Integer> cardTypeCount;
+    private final double maxDistance;
     private List<Integer> deckTypeCount;
-    private List<Double> score;
+    private Map<Category, Double> score;
 
     public CardTypeMetric(List<Integer> cardTypeCount) {
         this.cardTypeCount = cardTypeCount;
@@ -21,39 +43,28 @@ public final class CardTypeMetric extends Metric {
 
     @Override
     public void preprocessDeck(Deck deck) {
-        this.deckTypeCount = new ArrayList<>();
-        this.deckTypeCount.add(0);
-        this.deckTypeCount.add(0);
-        this.deckTypeCount.add(0);
+        List<Integer> deckTypeCount = new ArrayList<>();
+        deckTypeCount.add(0);
+        deckTypeCount.add(0);
+        deckTypeCount.add(0);
         deck.forEach(c -> {
-            int category = getCategory(c);
-            this.deckTypeCount.set(category, this.deckTypeCount.get(category)+1);
+            int index = getCategory(c).index;
+            deckTypeCount.set(index, deckTypeCount.get(index)+1);
         });
+        this.deckTypeCount = Collections.unmodifiableList(deckTypeCount);
 
-        this.score = new ArrayList<>();
-        this.score.add(null);
-        this.score.add(null);
-        this.score.add(null);
+        Map<Category, Double> score = new HashMap<>();
+        for (Category c : Category.values()) {
+            List<Integer> newCount = new ArrayList<>(this.deckTypeCount);
+            newCount.set(c.index, newCount.get(c.index)+1);
+            score.put(c, (this.maxDistance - NumberUtil.euclideanDistance(newCount, this.cardTypeCount)) / this.maxDistance);
+        }
+        this.score = Collections.unmodifiableMap(score);
     }
 
     @Override
     protected double getRawMetricScore(Deck deck, Card card) {
-        int category = getCategory(card);
-        if (this.score.get(category) == null) {
-            List<Integer> count = new ArrayList<>(this.deckTypeCount);
-            count.set(category, count.get(category)+1);
-            this.score.set(category, (this.maxDistance - NumberUtil.euclideanDistance(count, this.cardTypeCount)) / this.maxDistance);
-        }
-        return this.score.get(category);
-    }
-
-    private static int getCategory(Card card) {
-        if (card.getTypes().contains("creature"))
-            return 0;
-        else if (card.getTypes().contains("land"))
-            return 1;
-        else
-            return 2;
+        return this.score.get(getCategory(card));
     }
 
 }

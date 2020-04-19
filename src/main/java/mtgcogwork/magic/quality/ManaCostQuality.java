@@ -4,8 +4,6 @@ import java.util.List;
 
 public final class ManaCostQuality extends MagicCardQualityType {
 
-    // TODO INSTANCES
-
     private final List<String> manaCost;
     private final int convertedManaCost;
 

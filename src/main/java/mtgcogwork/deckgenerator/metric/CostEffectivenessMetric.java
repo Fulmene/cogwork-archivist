@@ -11,7 +11,7 @@ import mtgcogwork.util.FileUtil;
 
 public final class CostEffectivenessMetric extends Metric {
 
-    private Map<String, Double> costEffectivenessTable;
+    private final Map<String, Double> costEffectivenessTable;
 
     public CostEffectivenessMetric(CardPool cardPool) {
         try {
@@ -29,11 +29,7 @@ public final class CostEffectivenessMetric extends Metric {
     }
 
     private double getCostEffectiveness(Card card) {
-        Double costEffectiveness = this.costEffectivenessTable.get(card.getName());
-        if (costEffectiveness == null)
-            return 0.0;
-        else
-            return costEffectiveness;
+        return this.costEffectivenessTable.getOrDefault(card.getName(), 0.0);
     }
 
 }

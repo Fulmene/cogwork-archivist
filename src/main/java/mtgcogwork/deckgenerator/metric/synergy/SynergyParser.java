@@ -34,7 +34,7 @@ public class SynergyParser {
 
     public static Synergy parseSynergy(String synergyString) {
         if (synergyString.matches("[" + DELIMITERS + "]*"))
-            return BaseSynergy.NONE;
+            return BaseSynergy.getInstance("none");
 
         String[] tokens = ("[" + synergyString + "]").split(lookAround(DELIMITERS));
         Stack<Synergy> operandStack = new Stack<>();
