@@ -15,3 +15,6 @@ result
 
 # Ignore logs
 *.log
+
+# Ignore downloaded MTGJSON files
+mtgjson
