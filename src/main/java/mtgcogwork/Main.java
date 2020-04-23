@@ -8,10 +8,19 @@ import java.util.List;
 
 import mtgcogwork.deckgenerator.DeckGenerator;
 import mtgcogwork.magic.Deck;
+import mtgcogwork.util.MtgJsonUtil;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        System.out.println("Checking for update...");
+        if (MtgJsonUtil.checkMtgJsonUpdate()) {
+            System.out.println("Downloading MTGJson files...");
+            MtgJsonUtil.updateMtgJsonFiles();
+        } else {
+            System.out.println("Everything up to date!");
+        }
+
         List<String> sets = List.of("XLN", "RIX", "DOM", "M19", "GRN");
         List<Integer> manaCurve = List.of(0, 12, 12, 11, 3);
         List<Integer> cardTypeList = List.of(24, 20, 16);

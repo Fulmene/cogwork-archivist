@@ -1,7 +1,6 @@
 package mtgcogwork.magic;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -13,7 +12,7 @@ import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 
 import mtgcogwork.magic.quality.MagicCardQuality;
-import mtgcogwork.util.FileUtil;
+import mtgcogwork.util.MtgJsonUtil;
 
 public final class CardPool {
 
@@ -21,16 +20,8 @@ public final class CardPool {
     private final Multiset<Card> cards;
     private final Map<Card, MagicCardQuality> cardQualityTable;
 
-    public static CardPool loadCardPool(Collection<String> setNames) {
-        return createConstructedCardPool(setNames.stream().
-            map(name -> {
-                try {
-                    return new URL("file:///home/adelaide/Downloads/AllSetFiles/" + name + ".json");
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e); }
-            }).
-            map(FileUtil::readMtgJsonSet).
-            collect(Collectors.toList()));
+    public static CardPool loadConstructedCardPool(Collection<String> setCodes) throws IOException {
+        return createConstructedCardPool(MtgJsonUtil.readMtgJsonSet(setCodes));
     }
 
     public static CardPool createConstructedCardPool(Collection<CardSet> sets) {

@@ -1,5 +1,6 @@
 package mtgcogwork.deckgenerator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,7 +29,7 @@ public final class DeckGenerator {
     public static final class Builder {
 
         private final CardPool cardPool;
-        private final List<Metric> metrics;
+        private List<Metric> metrics;
 
         private Builder(CardPool cardPool) {
             this.cardPool = cardPool;
@@ -61,8 +62,8 @@ public final class DeckGenerator {
 
     }
 
-    public static final Builder builder(Collection<String> sets) {
-        return new Builder(CardPool.loadCardPool(sets));
+    public static final Builder builder(Collection<String> sets) throws IOException {
+        return new Builder(CardPool.loadConstructedCardPool(sets));
     }
 
     public static final Builder builder(CardPool cardPool) {
