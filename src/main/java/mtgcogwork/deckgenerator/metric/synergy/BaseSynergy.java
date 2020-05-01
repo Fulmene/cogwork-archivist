@@ -6,13 +6,13 @@ import java.util.Map;
 import mtgcogwork.magic.quality.AbilityQuality;
 import mtgcogwork.magic.quality.ColorQuality;
 import mtgcogwork.magic.quality.KeywordQuality;
+import mtgcogwork.magic.quality.MagicCardQualityList;
 import mtgcogwork.magic.quality.MagicCardQuality;
-import mtgcogwork.magic.quality.MagicCardQualityType;
 import mtgcogwork.magic.quality.ManaCostQuality;
 import mtgcogwork.magic.quality.StatQuality;
 import mtgcogwork.magic.quality.TypeQuality;
 
-public abstract class BaseSynergy extends Synergy implements MagicCardQualityType.Visitor<Boolean> {
+public abstract class BaseSynergy extends Synergy implements MagicCardQuality.Visitor<Boolean> {
 
     private static final Map<String, BaseSynergy> INSTANCES = new HashMap<>();
 
@@ -24,7 +24,7 @@ public abstract class BaseSynergy extends Synergy implements MagicCardQualityTyp
     }
 
     @Override
-    public boolean test(MagicCardQuality quality) {
+    public boolean test(MagicCardQualityList quality) {
         return quality.getQualities().stream().anyMatch(q -> q.accept(this));
     }
 

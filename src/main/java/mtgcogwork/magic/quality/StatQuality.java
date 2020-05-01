@@ -1,6 +1,6 @@
 package mtgcogwork.magic.quality;
 
-public final class StatQuality extends MagicCardQualityType {
+public final class StatQuality extends MagicCardQuality {
 
     private final int power;
     private final int toughness;
@@ -19,7 +19,7 @@ public final class StatQuality extends MagicCardQualityType {
     }
 
     @Override
-    public <T> T accept(MagicCardQualityType.Visitor<T> visitor) {
+    public <T> T accept(MagicCardQuality.Visitor<T> visitor) {
         return visitor.visitStat(this);
     }
 

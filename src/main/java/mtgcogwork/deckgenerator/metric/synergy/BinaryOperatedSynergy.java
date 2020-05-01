@@ -1,6 +1,6 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-import mtgcogwork.magic.quality.MagicCardQuality;
+import mtgcogwork.magic.quality.MagicCardQualityList;
 
 public final class BinaryOperatedSynergy extends Synergy {
 
@@ -15,7 +15,7 @@ public final class BinaryOperatedSynergy extends Synergy {
     }
 
     @Override
-    public boolean test(MagicCardQuality quality) {
+    public boolean test(MagicCardQualityList quality) {
         switch (this.binaryOperator) {
             case "&": return lhs.test(quality) && rhs.test(quality);
             case "|": return lhs.test(quality) || rhs.test(quality);

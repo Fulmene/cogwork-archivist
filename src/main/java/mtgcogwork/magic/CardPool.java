@@ -11,14 +11,14 @@ import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 
-import mtgcogwork.magic.quality.MagicCardQuality;
+import mtgcogwork.magic.quality.MagicCardQualityList;
 import mtgcogwork.util.MtgJsonUtil;
 
 public final class CardPool {
 
     private final Map<String, Card> cardNameMap;
     private final Multiset<Card> cards;
-    private final Map<Card, MagicCardQuality> cardQualityTable;
+    private final Map<Card, MagicCardQualityList> cardQualityTable;
 
     public static CardPool loadConstructedCardPool(Collection<String> setCodes) throws IOException {
         return createConstructedCardPool(MtgJsonUtil.readMtgJsonSet(setCodes));
@@ -36,7 +36,7 @@ public final class CardPool {
     public CardPool(Multiset<Card> cards) {
         this.cardNameMap = cards.elementSet().stream().collect(Collectors.toMap(Card::getName, Function.identity()));
         this.cards = Multisets.unmodifiableMultiset(cards);
-        this.cardQualityTable = cards.elementSet().stream().collect(Collectors.toUnmodifiableMap(Function.identity(), MagicCardQuality::new));
+        this.cardQualityTable = cards.elementSet().stream().collect(Collectors.toUnmodifiableMap(Function.identity(), MagicCardQualityList::new));
     }
 
     public Set<Card> getCards() {
@@ -63,12 +63,12 @@ public final class CardPool {
         return this.cards.count(card);
     }
 
-    public MagicCardQuality getCardQuality(String name) {
+    public MagicCardQualityList getCardQuality(String name) {
         return this.cardQualityTable.get(this.cardNameMap.get(name));
     }
 
-    public MagicCardQuality getCardQuality(Card card) {
-        return this.cardQualityTable.getOrDefault(card, MagicCardQuality.NONE);
+    public MagicCardQualityList getCardQuality(Card card) {
+        return this.cardQualityTable.getOrDefault(card, MagicCardQualityList.NONE);
     }
 
 }

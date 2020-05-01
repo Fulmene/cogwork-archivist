@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import mtgcogwork.magic.MagicConstants;
 
-public final class TypeQuality extends MagicCardQualityType {
+public final class TypeQuality extends MagicCardQuality {
 
     private final List<String> types;
 
@@ -41,7 +41,7 @@ public final class TypeQuality extends MagicCardQualityType {
         return MagicConstants.permanentTypes.stream().anyMatch(this.types::contains);
     }
 
-    public <T> T accept(MagicCardQualityType.Visitor<T> visitor) {
+    public <T> T accept(MagicCardQuality.Visitor<T> visitor) {
         return visitor.visitType(this);
     }
 

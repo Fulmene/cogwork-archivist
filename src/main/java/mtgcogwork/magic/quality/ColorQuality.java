@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class ColorQuality extends MagicCardQualityType {
+public final class ColorQuality extends MagicCardQuality {
 
     private final List<String> colors;
 
@@ -41,7 +41,7 @@ public final class ColorQuality extends MagicCardQualityType {
     }
 
     @Override
-    public <T> T accept(MagicCardQualityType.Visitor<T> visitor) {
+    public <T> T accept(MagicCardQuality.Visitor<T> visitor) {
         return visitor.visitColor(this);
     }
 

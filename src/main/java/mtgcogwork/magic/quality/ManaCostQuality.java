@@ -2,7 +2,7 @@ package mtgcogwork.magic.quality;
 
 import java.util.List;
 
-public final class ManaCostQuality extends MagicCardQualityType {
+public final class ManaCostQuality extends MagicCardQuality {
 
     private final List<String> manaCost;
     private final int convertedManaCost;
@@ -18,7 +18,7 @@ public final class ManaCostQuality extends MagicCardQualityType {
         }
     }
 
-    public <T> T accept(MagicCardQualityType.Visitor<T> visitor) {
+    public <T> T accept(MagicCardQuality.Visitor<T> visitor) {
         return visitor.visitManaCost(this);
     }
 

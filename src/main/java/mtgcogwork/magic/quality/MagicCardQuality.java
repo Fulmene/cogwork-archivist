@@ -1,30 +1,16 @@
 package mtgcogwork.magic.quality;
 
-import java.util.List;
+public abstract class MagicCardQuality {
 
-import mtgcogwork.magic.Card;
+    public abstract <T> T accept(Visitor<T> visitor);
 
-public final class MagicCardQuality {
-
-    public static final MagicCardQuality NONE = new MagicCardQuality();
-
-    private final List<MagicCardQualityType> qualities;
-
-    private MagicCardQuality() {
-        this.qualities = List.of();
-    }
-
-    public MagicCardQuality(Card card) {
-        this.qualities = List.of(
-            new ColorQuality(card.getColors()),
-            new ManaCostQuality(card.getManaCost()),
-            new StatQuality(card.getPower(), card.getToughness()),
-            new TypeQuality(card.getSupertypes(), card.getTypes(), card.getSubtypes())
-        );
-    }
-
-    public final List<MagicCardQualityType> getQualities() {
-        return this.qualities;
+    public static interface Visitor<T> {
+        T visitColor(ColorQuality color);
+        T visitManaCost(ManaCostQuality manaCost);
+        T visitStat(StatQuality stat);
+        T visitType(TypeQuality type);
+        T visitKeyword(KeywordQuality keyword);
+        T visitAbility(AbilityQuality ability);
     }
 
 }

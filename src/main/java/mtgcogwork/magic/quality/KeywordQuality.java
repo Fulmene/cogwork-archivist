@@ -3,7 +3,7 @@ package mtgcogwork.magic.quality;
 import java.util.Collections;
 import java.util.List;
 
-public class KeywordQuality extends MagicCardQualityType {
+public class KeywordQuality extends MagicCardQuality {
 
     private final List<String> keywords;
 
@@ -15,7 +15,7 @@ public class KeywordQuality extends MagicCardQualityType {
         return this.keywords.contains(keyword);
     }
 
-    public <T> T accept(MagicCardQualityType.Visitor<T> visitor) {
+    public <T> T accept(MagicCardQuality.Visitor<T> visitor) {
         return visitor.visitKeyword(this);
     }
 
