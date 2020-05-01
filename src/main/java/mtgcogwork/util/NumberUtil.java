@@ -25,6 +25,7 @@ public final class NumberUtil {
                 throw new IllegalArgumentException("Unknown operation " + operationString);
         }
     }
+
     public static <T extends Comparable<T>> boolean testComparison(T lhs, ComparisonOperation operation, T rhs) {
         int compareResult = lhs.compareTo(rhs);
         switch (operation) {

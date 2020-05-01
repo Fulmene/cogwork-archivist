@@ -32,7 +32,7 @@ public class MtgJsonUtil {
         }
     }
     private static final String versionFileName = "version.json";
-    private static final List<String> targetFiles = List.of("version.json", "AllPrintings.json", "AllCards.json", "AllSetFiles.zip");
+    private static final List<String> targetFiles = List.of("AllPrintings.json", "AllCards.json", "AllSetFiles.zip", "version.json");
 
     public static boolean checkMtgJsonUpdate() throws IOException {
         Path versionPath = MTGJSON_DIR.resolve(versionFileName);
@@ -63,15 +63,6 @@ public class MtgJsonUtil {
                 sets.add(set);
             }
             return Collections.unmodifiableList(sets);
-        }
-    }
-
-    @Deprecated
-    public static CardSet readMtgJsonSet(URL setURL) {
-        try {
-            return mapper.readValue(setURL, CardSet.class);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
