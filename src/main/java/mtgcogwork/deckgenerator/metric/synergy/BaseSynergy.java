@@ -1,12 +1,13 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
-import mtgcogwork.magic.quality.MagicCardQuality;
-import mtgcogwork.magic.quality.MagicCardQualityType;
+import mtgcogwork.magic.quality.AbilityQuality;
 import mtgcogwork.magic.quality.ColorQuality;
 import mtgcogwork.magic.quality.KeywordQuality;
+import mtgcogwork.magic.quality.MagicCardQuality;
+import mtgcogwork.magic.quality.MagicCardQualityType;
 import mtgcogwork.magic.quality.ManaCostQuality;
 import mtgcogwork.magic.quality.StatQuality;
 import mtgcogwork.magic.quality.TypeQuality;
@@ -50,6 +51,11 @@ public abstract class BaseSynergy extends Synergy implements MagicCardQualityTyp
 
     @Override
     public Boolean visitType(TypeQuality type) {
+        return false;
+    }
+
+    @Override
+    public Boolean visitAbility(AbilityQuality ability) {
         return false;
     }
 
