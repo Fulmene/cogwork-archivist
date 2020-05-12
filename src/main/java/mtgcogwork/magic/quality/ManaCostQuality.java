@@ -45,4 +45,9 @@ public final class ManaCostQuality extends MagicCardQuality {
             sum();
     }
 
+    @Override
+    public String toString() {
+        return "manacost({" + String.join("}{", this.manaCost) + "})";
+    }
+
 }

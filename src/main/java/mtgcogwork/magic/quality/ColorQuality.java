@@ -45,4 +45,9 @@ public final class ColorQuality extends MagicCardQuality {
         return visitor.visitColor(this);
     }
 
+    @Override
+    public String toString() {
+        return "color(" + String.join(",", this.colors) + ")";
+    }
+
 }

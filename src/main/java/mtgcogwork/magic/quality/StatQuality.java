@@ -23,4 +23,9 @@ public final class StatQuality extends MagicCardQuality {
         return visitor.visitStat(this);
     }
 
+    @Override
+    public String toString() {
+        return String.format("stat(%d,%d)", this.power, this.toughness);
+    }
+
 }

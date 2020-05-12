@@ -45,4 +45,9 @@ public final class TypeQuality extends MagicCardQuality {
         return visitor.visitType(this);
     }
 
+    @Override
+    public String toString() {
+        return "type(" + String.join(",", this.types) + ")";
+    }
+
 }
