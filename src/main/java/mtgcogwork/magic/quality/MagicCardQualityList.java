@@ -38,6 +38,8 @@ public final class MagicCardQualityList {
     private static final List<MagicCardQuality> getBasicQualityList(Card card) {
         List<MagicCardQuality> qualities = new ArrayList<>();
 
+        qualities.add(new NameQuality(card.getName()));
+
         qualities.add(new ColorQuality(card.getColors()));
 
         qualities.add(new ManaCostQuality(card.getManaCost()));
