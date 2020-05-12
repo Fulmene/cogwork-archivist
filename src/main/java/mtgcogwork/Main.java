@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import mtgcogwork.deckgenerator.DeckGenerator;
+import mtgcogwork.magic.CardPool;
 import mtgcogwork.magic.Deck;
 import mtgcogwork.util.MtgJsonUtil;
 
@@ -25,7 +26,9 @@ public class Main {
         List<Integer> manaCurve = List.of(0, 12, 12, 11, 3);
         List<Integer> cardTypeList = List.of(24, 20, 16);
 
-        DeckGenerator generator = DeckGenerator.builder(sets).
+        CardPool cardPool = CardPool.loadConstructedCardPool(sets);
+
+        DeckGenerator generator = DeckGenerator.builder(cardPool).
             withCostEffectivenessMetric().
             withSynergyMetric().
             withManaCurveMetric(manaCurve).
