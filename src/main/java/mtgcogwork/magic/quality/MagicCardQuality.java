@@ -1,6 +1,15 @@
 package mtgcogwork.magic.quality;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class MagicCardQuality {
+
+    private static final Map<String, MagicCardQuality> INSTANCES = new HashMap<>();
+
+    public static final MagicCardQuality getInstance(String qualityString) {
+        return INSTANCES.computeIfAbsent(qualityString, QualityParser::parseQuality);
+    }
 
     public abstract <T> T accept(Visitor<T> visitor);
 
