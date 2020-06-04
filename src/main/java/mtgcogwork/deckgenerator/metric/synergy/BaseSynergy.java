@@ -5,7 +5,6 @@ import java.util.Map;
 
 import mtgcogwork.magic.quality.AbilityQuality;
 import mtgcogwork.magic.quality.ColorQuality;
-import mtgcogwork.magic.quality.KeywordQuality;
 import mtgcogwork.magic.quality.MagicCardQuality;
 import mtgcogwork.magic.quality.MagicCardQualityList;
 import mtgcogwork.magic.quality.ManaCostQuality;
@@ -37,11 +36,6 @@ public abstract class BaseSynergy extends Synergy implements MagicCardQuality.Vi
 
     @Override
     public Boolean visitColor(ColorQuality color) {
-        return false;
-    }
-
-    @Override
-    public Boolean visitKeyword(KeywordQuality keyword) {
         return false;
     }
 

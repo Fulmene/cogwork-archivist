@@ -20,7 +20,6 @@ public abstract class MagicCardQuality {
         T visitName(NameQuality name);
         T visitStat(StatQuality stat);
         T visitType(TypeQuality type);
-        T visitKeyword(KeywordQuality keyword);
     }
 
 }
