@@ -7,14 +7,13 @@ import java.util.stream.Collectors;
 
 import mtgcogwork.util.NumberUtil;
 
-public class SynergyParser {
+public final class SynergyParser {
 
     public static List<Synergy> parseSynergies(String synergiesString) {
         return Arrays.stream(synergiesString.split("/")).
             map(SynergyParser::parseSynergy).
             collect(Collectors.toList());
     }
-
 
     private static String lookAround(String delimiters) {
         return "(?<=[" + delimiters + "])|(?=[" + delimiters + "])";
