@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
-import mtgcogwork.util.NumberUtil;
+import mtgcogwork.util.NumberUtil.ComparisonOperation;
 
 public final class SynergyParser {
 
@@ -87,8 +87,8 @@ public final class SynergyParser {
                 return new CmcXSynergy();
             case "damage":
                 return new DamageSynergy();
-            case "die":
-                return new DieSynergy();
+            case "thisdies":
+                return new ThisDiesSynergy();
             case "graveyard":
                 return new GraveyardSynergy();
             case "kicker":
@@ -98,7 +98,7 @@ public final class SynergyParser {
             case "sacrifice":
                 return new SacrificeSynergy();
             case "power":
-                return new PowerSynergy(NumberUtil.getComparisonOperation(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
+                return new PowerSynergy(ComparisonOperation.fromString(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
             case "quality":
                 return QualitySynergy.createQualitySynergy(synergyArgs[1]);
             case "none":

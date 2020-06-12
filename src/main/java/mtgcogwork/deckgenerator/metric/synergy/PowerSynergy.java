@@ -1,7 +1,6 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
 import mtgcogwork.magic.quality.StatQuality;
-import mtgcogwork.util.NumberUtil;
 import mtgcogwork.util.NumberUtil.ComparisonOperation;
 
 public final class PowerSynergy extends BaseSynergy {
@@ -16,10 +15,7 @@ public final class PowerSynergy extends BaseSynergy {
 
     @Override
     public Boolean visitStat(StatQuality stat) {
-        if (NumberUtil.testComparison(stat.getPower(), this.comp, this.threshold))
-            return true;
-        else
-            return false;
+        return this.comp.testComparison(stat.getPower(), this.threshold);
     }
 
 }
