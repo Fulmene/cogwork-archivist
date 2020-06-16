@@ -21,7 +21,7 @@ import mtgcogwork.magic.Card;
 import mtgcogwork.magic.CardPool;
 import mtgcogwork.magic.ConstructedCardPool;
 import mtgcogwork.magic.Deck;
-import mtgcogwork.magic.MagicConstants;
+import mtgcogwork.magic.Format;
 
 public final class DeckGenerator {
 
@@ -30,10 +30,12 @@ public final class DeckGenerator {
     public static final class Builder {
 
         private final CardPool cardPool;
+        private final Format format;
         private List<Metric> metrics;
 
-        private Builder(CardPool cardPool) {
+        private Builder(CardPool cardPool, Format format) {
             this.cardPool = cardPool;
+            this.format = format;
             this.metrics = new ArrayList<>();
         }
 
@@ -64,23 +66,25 @@ public final class DeckGenerator {
     }
 
     public static final Builder builder(Collection<String> sets) throws IOException {
-        return new Builder(ConstructedCardPool.load(sets));
+        return new Builder(ConstructedCardPool.load(sets), Format.CONSTRUCTED);
     }
 
     public static final Builder builder(CardPool cardPool) {
-        return new Builder(cardPool);
+        return new Builder(cardPool, Format.LIMITED);
     }
 
     private final CardPool cardPool;
+    private final Format format;
     private final List<Metric> metrics;
     private final Map<String, Double> utilityScores;
 
     private DeckGenerator(Builder builder) {
-        this(builder.cardPool, builder.metrics);
+        this(builder.cardPool, builder.format, builder.metrics);
     }
 
-    private DeckGenerator(CardPool cardPool, List<Metric> metrics) {
+    private DeckGenerator(CardPool cardPool, Format format, List<Metric> metrics) {
         this.cardPool = cardPool;
+        this.format = format;
         this.metrics = Collections.unmodifiableList(metrics);
         this.utilityScores = new HashMap<>();
     }
@@ -102,7 +106,7 @@ public final class DeckGenerator {
         log.debug("Start deck generation");
         log.debug("Starting cards: {}", startingCards);
 
-        while (generatedDeck.size() < MagicConstants.MIN_DECK_SIZE) {
+        while (generatedDeck.size() < this.format.minDeckSize) {
             log.debug("Card #{}", generatedDeck.size()+1);
             this.utilityScores.clear();
             for (Metric m : metrics)
