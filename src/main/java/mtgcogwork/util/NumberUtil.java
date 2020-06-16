@@ -2,35 +2,30 @@ package mtgcogwork.util;
 
 import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
 
 public final class NumberUtil {
 
-    public static enum ComparisonOperation { EQ("="), NE("!="), LT("<"), MT(">"), LE("<="), ME(">=");
+    public static enum ComparisonOperation {
+        EQ("=", x -> x == 0),
+        NE("!=", x -> x != 0),
+        LT("<", x -> x < 0),
+        MT(">", x -> x > 0),
+        LE("<=", x -> x <= 0),
+        ME(">=", x -> x >= 0),
+        ;
 
-        public final String sign;
+        private final String sign;
+        private final Predicate<Integer> comparePredicate;
 
-        private ComparisonOperation(String sign) {
+        private ComparisonOperation(String sign, Predicate<Integer> comparePredicate) {
             this.sign = sign;
+            this.comparePredicate = comparePredicate;
         }
 
         public <T extends Comparable<U>, U> boolean testComparison(T lhs, U rhs) {
             int compareResult = lhs.compareTo(rhs);
-            switch (this) {
-                case EQ:
-                    return compareResult == 0;
-                case NE:
-                    return compareResult != 0;
-                case LT:
-                    return compareResult < 0;
-                case MT:
-                    return compareResult > 0;
-                case LE:
-                    return compareResult <= 0;
-                case ME:
-                    return compareResult >= 0;
-                default:
-                    throw new Error("This shouldn't happen");
-            }
+            return this.comparePredicate.test(compareResult);
         }
 
         public static ComparisonOperation fromString(String s) {
