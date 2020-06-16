@@ -7,7 +7,7 @@ public final class NumberUtil {
 
     public static enum ComparisonOperation { EQ("="), NE("!="), LT("<"), MT(">"), LE("<="), ME(">=");
 
-        private String sign;
+        public final String sign;
 
         private ComparisonOperation(String sign) {
             this.sign = sign;
