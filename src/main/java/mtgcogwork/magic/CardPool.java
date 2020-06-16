@@ -1,37 +1,20 @@
 package mtgcogwork.magic;
 
-import java.io.IOException;
-import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Multisets;
 
 import mtgcogwork.magic.quality.MagicCardQualityList;
-import mtgcogwork.util.MtgJsonUtil;
 
-public final class CardPool {
+public class CardPool {
 
-    private final Map<String, Card> cardNameMap;
-    private final Multiset<Card> cards;
-    private final Map<Card, MagicCardQualityList> cardQualityTable;
-
-    public static CardPool loadConstructedCardPool(Collection<String> setCodes) throws IOException {
-        return createConstructedCardPool(MtgJsonUtil.readMtgJsonSet(setCodes));
-    }
-
-    public static CardPool createConstructedCardPool(Collection<CardSet> sets) {
-        Multiset<Card> cards = sets.stream().
-            map(s -> s.getCards().stream()).
-            flatMap(Function.identity()).
-            distinct().
-            collect(Multisets.toMultiset(Function.identity(), MagicConstants::getMaxCopies, HashMultiset::create));
-        return new CardPool(cards);
-    }
+    protected final Map<String, Card> cardNameMap;
+    protected final Multiset<Card> cards;
+    protected final Map<Card, MagicCardQualityList> cardQualityTable;
 
     public CardPool(Multiset<Card> cards) {
         this.cardNameMap = cards.elementSet().stream().collect(Collectors.toMap(Card::getName, Function.identity()));

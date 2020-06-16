@@ -19,6 +19,7 @@ import mtgcogwork.deckgenerator.metric.Metric;
 import mtgcogwork.deckgenerator.metric.SynergyMetric;
 import mtgcogwork.magic.Card;
 import mtgcogwork.magic.CardPool;
+import mtgcogwork.magic.ConstructedCardPool;
 import mtgcogwork.magic.Deck;
 import mtgcogwork.magic.MagicConstants;
 
@@ -63,7 +64,7 @@ public final class DeckGenerator {
     }
 
     public static final Builder builder(Collection<String> sets) throws IOException {
-        return new Builder(CardPool.loadConstructedCardPool(sets));
+        return new Builder(ConstructedCardPool.load(sets));
     }
 
     public static final Builder builder(CardPool cardPool) {
