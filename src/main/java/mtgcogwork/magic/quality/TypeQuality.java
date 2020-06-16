@@ -1,14 +1,13 @@
 package mtgcogwork.magic.quality;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import mtgcogwork.magic.MagicConstants;
-
 public final class TypeQuality extends MagicCardQuality {
+
+    public static final List<String> PERMANENT_TYPES = List.of("artifact", "creature", "enchantment", "land", "planeswalker");
 
     private final List<String> types;
 
@@ -29,16 +28,12 @@ public final class TypeQuality extends MagicCardQuality {
         return this.types;
     }
 
-    public boolean isType(String... types) {
-        return Arrays.stream(types).allMatch(this.types::contains);
+    public boolean isType(String type) {
+        return this.types.contains(type);
     }
 
-    public boolean isNontype(String... types) {
-        return Arrays.stream(types).noneMatch(this.types::contains);
-    }
-
-    public boolean isPermanent() {
-        return MagicConstants.permanentTypes.stream().anyMatch(this.types::contains);
+    public boolean isNontype(String type) {
+        return !this.isType(type);
     }
 
     public <T> T accept(MagicCardQuality.Visitor<T> visitor) {

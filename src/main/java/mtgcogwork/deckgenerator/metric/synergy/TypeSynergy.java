@@ -15,7 +15,7 @@ public class TypeSynergy extends BaseSynergy {
                 return new TypeSynergy(keyword) {
                     @Override
                     public Boolean visitType(TypeQuality type) {
-                        return type.isPermanent();
+                        return TypeQuality.PERMANENT_TYPES.stream().anyMatch(type::isType);
                     }
                 };
             case "historic":

@@ -7,7 +7,6 @@ public final class MagicConstants {
     public static final List<String> colors = List.of("white", "blue", "black", "red", "green");
     public static final List<String> supertypes = List.of("basic", "legendary", "ongoing", "snow", "world");
     public static final List<String> types = List.of("artifact", "conspiracy", "creature", "enchantment", "instant", "land", "phenomenon", "plane", "planeswalker", "scheme", "sorcery", "tribal", "vanguard");
-    public static final List<String> permanentTypes = List.of("artifact", "creature", "enchantment", "land", "planeswalker");
     public static final List<String> subtypes = List.of(
             // artifact types
             "clue", "contraption", "equipment", "fortification", "treasure", "vehicle",
