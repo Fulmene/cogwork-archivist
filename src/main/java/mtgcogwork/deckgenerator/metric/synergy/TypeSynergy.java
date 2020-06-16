@@ -1,6 +1,5 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-import mtgcogwork.magic.MagicConstants;
 import mtgcogwork.magic.quality.TypeQuality;
 
 public class TypeSynergy extends BaseSynergy {
@@ -8,7 +7,7 @@ public class TypeSynergy extends BaseSynergy {
     private String type;
 
     public static TypeSynergy get(String keyword) {
-        if (MagicConstants.supertypes.contains(keyword) || MagicConstants.types.contains(keyword) || MagicConstants.subtypes.contains(keyword))
+        if (TypeQuality.SUPERTYPES.contains(keyword) || TypeQuality.TYPES.contains(keyword) || TypeQuality.SUBTYPES.contains(keyword))
             return new TypeSynergy(keyword);
         switch (keyword) {
             case "permanent":

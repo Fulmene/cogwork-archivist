@@ -5,6 +5,8 @@ import java.util.List;
 
 public final class ColorQuality extends MagicCardQuality {
 
+    public static final List<String> COLORS = List.of("white", "blue", "black", "red", "green");
+
     private final List<String> colors;
 
     public ColorQuality(String... colors) {

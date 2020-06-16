@@ -1,6 +1,5 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-import mtgcogwork.magic.MagicConstants;
 import mtgcogwork.magic.quality.ColorQuality;
 
 public class ColorSynergy extends BaseSynergy {
@@ -8,7 +7,7 @@ public class ColorSynergy extends BaseSynergy {
     private String color;
 
     public static ColorSynergy get(String keyword) {
-        if (MagicConstants.colors.contains(keyword))
+        if (ColorQuality.COLORS.contains(keyword))
             return new ColorSynergy(keyword);
         switch (keyword) {
             case "colorless":

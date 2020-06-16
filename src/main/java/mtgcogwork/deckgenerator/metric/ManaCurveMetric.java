@@ -6,10 +6,11 @@ import java.util.List;
 
 import mtgcogwork.magic.Card;
 import mtgcogwork.magic.Deck;
-import mtgcogwork.magic.MagicConstants;
 import mtgcogwork.util.NumberUtil;
 
 public final class ManaCurveMetric extends Metric {
+
+    private static final int MAX_MEANINGFUL_CMC = 6;
 
     private final List<Integer> manaCurve;
     private final double maxDistance;
@@ -25,13 +26,13 @@ public final class ManaCurveMetric extends Metric {
     @Override
     public void preprocessDeck(Deck deck) {
         List<Integer> deckCurve = new ArrayList<>();
-        for (int i = 0; i <= MagicConstants.MAX_MEANINGFUL_CMC; i++)
+        for (int i = 0; i <= MAX_MEANINGFUL_CMC; i++)
             deckCurve.add(0);
         deck.forEach(c -> incrementCurve(deckCurve, c));
         this.deckCurve = Collections.unmodifiableList(deckCurve);
 
         List<Double> score = new ArrayList<>();
-        for (int cmc = 0; cmc <= MagicConstants.MAX_MEANINGFUL_CMC; cmc++) {
+        for (int cmc = 0; cmc <= MAX_MEANINGFUL_CMC; cmc++) {
             List<Integer> newCurve = new ArrayList<>(this.deckCurve);
             incrementCurve(newCurve, cmc);
             score.add((this.maxDistance - NumberUtil.euclideanDistance(newCurve, this.manaCurve)) / this.maxDistance);
@@ -46,12 +47,12 @@ public final class ManaCurveMetric extends Metric {
         if (card.getTypes().contains("land"))
             return this.landScore;
         else
-            return this.score.get(Math.min(MagicConstants.MAX_MEANINGFUL_CMC, card.getConvertedManaCost()));
+            return this.score.get(Math.min(MAX_MEANINGFUL_CMC, card.getConvertedManaCost()));
     }
 
     private static void incrementCurve(List<Integer> curve, Card card) {
         if (!card.getTypes().contains("land"))
-            incrementCurve(curve, Math.min(MagicConstants.MAX_MEANINGFUL_CMC, card.getConvertedManaCost()));
+            incrementCurve(curve, Math.min(MAX_MEANINGFUL_CMC, card.getConvertedManaCost()));
     }
 
     private static void incrementCurve(List<Integer> curve, int cmc) {
