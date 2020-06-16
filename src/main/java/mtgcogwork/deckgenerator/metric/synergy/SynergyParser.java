@@ -89,8 +89,8 @@ public final class SynergyParser {
                 return new DamageSynergy();
             case "thisdies":
                 return new ThisDiesSynergy();
-            case "graveyard":
-                return new GraveyardSynergy();
+            case "discard":
+                return new DiscardSynergy();
             case "kicker":
                 return new KickerSynergy();
             case "powerx":
