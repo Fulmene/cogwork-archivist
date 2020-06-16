@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import mtgcogwork.magic.CardSet;
 
-public class MtgJsonUtil {
+public final class MtgJsonUtil {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
@@ -64,6 +64,10 @@ public class MtgJsonUtil {
             }
             return Collections.unmodifiableList(sets);
         }
+    }
+
+    private MtgJsonUtil() {
+        // private constructor to prevent instantiation
     }
 
 }

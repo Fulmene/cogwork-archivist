@@ -28,4 +28,8 @@ public final class FileUtil {
         return oReader.readValues(csvURL);
     }
 
+    private FileUtil() {
+        // private constructor to prevent instantiation
+    }
+
 }

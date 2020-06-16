@@ -70,4 +70,8 @@ public final class NumberUtil {
         return Math.abs(d) < EPSILON;
     }
 
+    private NumberUtil() {
+        // private constructor to prevent instantiation
+    }
+
 }
