@@ -32,10 +32,6 @@ public final class TypeQuality extends MagicCardQuality {
         return this.types.contains(type);
     }
 
-    public boolean isNontype(String type) {
-        return !this.isType(type);
-    }
-
     public <T> T accept(MagicCardQuality.Visitor<T> visitor) {
         return visitor.visitType(this);
     }

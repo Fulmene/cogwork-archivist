@@ -23,10 +23,6 @@ public final class ColorQuality extends MagicCardQuality {
         return this.colors.contains(color);
     }
 
-    public boolean isNoncolor(String color) {
-        return !this.isColor(color);
-    }
-
     @Override
     public <T> T accept(MagicCardQuality.Visitor<T> visitor) {
         return visitor.visitColor(this);
