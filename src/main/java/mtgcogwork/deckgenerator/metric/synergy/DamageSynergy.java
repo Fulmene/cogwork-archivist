@@ -1,5 +1,9 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-public class DamageSynergy extends BaseSynergy {
+public class DamageSynergy extends ActionSynergy {
+
+    public DamageSynergy() {
+        super("damage");
+    }
 
 }
