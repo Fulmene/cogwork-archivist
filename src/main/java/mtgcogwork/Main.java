@@ -29,7 +29,7 @@ public class Main {
 
         CardPool cardPool = ConstructedCardPool.load(sets);
 
-        DeckGenerator generator = DeckGenerator.builder(cardPool).
+        DeckGenerator generator = DeckGenerator.builderConstructed(cardPool).
             withCostEffectivenessMetric().
             withSynergyMetric().
             withManaCurveMetric(manaCurve).

@@ -65,11 +65,15 @@ public final class DeckGenerator {
 
     }
 
-    public static final Builder builder(Collection<String> sets) throws IOException {
+    public static final Builder builderConstructed(Collection<String> sets) throws IOException {
         return new Builder(ConstructedCardPool.load(sets), Format.CONSTRUCTED);
     }
 
-    public static final Builder builder(CardPool cardPool) {
+    public static final Builder builderConstructed(CardPool cardPool) {
+        return new Builder(cardPool, Format.CONSTRUCTED);
+    }
+
+    public static final Builder builderLimited(CardPool cardPool) {
         return new Builder(cardPool, Format.LIMITED);
     }
 
