@@ -1,6 +1,5 @@
 package mtgcogwork.magic.quality;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,24 +19,12 @@ public final class ColorQuality extends MagicCardQuality {
         return this.colors;
     }
 
-    public boolean isColor(String... colors) {
-        return Arrays.stream(colors).allMatch(this.colors::contains);
+    public boolean isColor(String color) {
+        return this.colors.contains(color);
     }
 
-    public boolean isNoncolor(String... colors) {
-        return Arrays.stream(colors).noneMatch(this.colors::contains);
-    }
-
-    public boolean isMonocolored() {
-        return this.colors.size() == 1;
-    }
-
-    public boolean isMulticolored() {
-        return this.colors.size() > 1;
-    }
-
-    public boolean isColorless() {
-        return this.colors.size() == 0;
+    public boolean isNoncolor(String color) {
+        return !this.isColor(color);
     }
 
     @Override
