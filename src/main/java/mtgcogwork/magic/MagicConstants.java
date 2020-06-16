@@ -4,9 +4,6 @@ import java.util.List;
 
 public final class MagicConstants {
 
-    public static final int MIN_DECK_SIZE = 60;
-    public static final int MAX_COPIES = 4;
-
     public static final List<String> colors = List.of("white", "blue", "black", "red", "green");
     public static final List<String> supertypes = List.of("basic", "legendary", "ongoing", "snow", "world");
     public static final List<String> types = List.of("artifact", "conspiracy", "creature", "enchantment", "instant", "land", "phenomenon", "plane", "planeswalker", "scheme", "sorcery", "tribal", "vanguard");
@@ -34,16 +31,5 @@ public final class MagicConstants {
 
     public static final int MAX_MEANINGFUL_POWER = 7;
     public static final int MAX_MEANINGFUL_CMC = 6;
-
-    public static final boolean canHaveAnyNumberOf(Card card) {
-        return (card.getSupertypes().contains("basic") && card.getTypes().contains("land")) || card.getText().contains("A deck can have any number of cards named " + card.getName());
-    }
-
-    public static final int getMaxCopies(Card card) {
-        if (canHaveAnyNumberOf(card))
-            return MIN_DECK_SIZE;
-        else
-            return MAX_COPIES;
-    }
 
 }
