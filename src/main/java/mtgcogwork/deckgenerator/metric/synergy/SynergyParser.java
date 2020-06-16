@@ -56,7 +56,7 @@ public final class SynergyParser {
                         popOperatorStack(operandStack, operatorStack);
                     operatorStack.pop();
                     break;
-                default: operandStack.push(parseBaseSynergy(t)); 
+                default: operandStack.push(BaseSynergy.getInstance(t)); 
             }
         }
         return operandStack.pop();
@@ -99,12 +99,14 @@ public final class SynergyParser {
                 return new SacrificeSynergy();
             case "power":
                 return new PowerSynergy(ComparisonOperation.fromString(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
-            case "quality":
-                return QualitySynergy.createQualitySynergy(synergyArgs[1]);
+            case "color":
+                return ColorSynergy.get(synergyArgs[1]);
+            case "type":
+                return TypeSynergy.get(synergyArgs[1]);
             case "none":
                 return new BaseSynergy() {};
             default:
-                return QualitySynergy.createQualitySynergy(synergyArgs[0]);
+                throw new SynergyFormatException(baseSynergyString);
         }
     }
 
