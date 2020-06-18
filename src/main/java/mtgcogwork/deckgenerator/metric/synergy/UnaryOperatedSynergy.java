@@ -1,6 +1,8 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-import mtgcogwork.magic.quality.MagicCardQualityList;
+import java.util.List;
+
+import mtgcogwork.magic.quality.MagicCardQuality;
 
 public final class UnaryOperatedSynergy extends Synergy {
 
@@ -13,7 +15,7 @@ public final class UnaryOperatedSynergy extends Synergy {
     }
 
     @Override
-    public boolean test(MagicCardQualityList quality) {
+    public boolean test(List<MagicCardQuality> quality) {
         switch (this.unaryOperator) {
             case "~": return !baseSynergy.test(quality);
             default : throw new SynergyFormatException("operator " + this.unaryOperator);

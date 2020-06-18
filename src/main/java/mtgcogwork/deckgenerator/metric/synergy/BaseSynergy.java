@@ -1,12 +1,12 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import mtgcogwork.magic.quality.AbilityQuality;
 import mtgcogwork.magic.quality.ColorQuality;
 import mtgcogwork.magic.quality.MagicCardQuality;
-import mtgcogwork.magic.quality.MagicCardQualityList;
 import mtgcogwork.magic.quality.ManaCostQuality;
 import mtgcogwork.magic.quality.NameQuality;
 import mtgcogwork.magic.quality.StatQuality;
@@ -24,8 +24,8 @@ public abstract class BaseSynergy extends Synergy implements MagicCardQuality.Vi
     }
 
     @Override
-    public boolean test(MagicCardQualityList quality) {
-        return quality.getQualities().stream().anyMatch(q -> q.accept(this));
+    public boolean test(List<MagicCardQuality> quality) {
+        return quality.stream().anyMatch(q -> q.accept(this));
     }
 
     // Visitor default methods
