@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import mtgcogwork.magic.Card;
 
@@ -18,17 +20,19 @@ public abstract class MagicCardQuality {
     public static final List<MagicCardQuality> getCardQualityList(Card card, String additionalQualities) {
         List<MagicCardQuality> qualities = new ArrayList<>();
 
-        qualities.add(new NameQuality(card.getName()));
+        qualities.add(getInstance("name(" + card.getName() + ")"));
 
-        qualities.add(new ColorQuality(card.getColors()));
+        qualities.add(getInstance("color(" + card.getColors() + ")"));
 
-        qualities.add(new ManaCostQuality(card.getManaCost()));
+        qualities.add(getInstance("manacost(" + card.getManaCost() + ")"));
 
-        TypeQuality typeQuality = new TypeQuality(card.getSupertypes(), card.getTypes(), card.getSubtypes());
+        String typeString = Stream.concat(Stream.concat(card.getSupertypes().stream(), card.getTypes().stream()), card.getSubtypes().stream()).
+            collect(Collectors.joining(","));
+        TypeQuality typeQuality = (TypeQuality)getInstance("type(" + typeString + ")");
         qualities.add(typeQuality);
 
         if (typeQuality.isType("creature") || typeQuality.isType("vehicle"))
-            qualities.add(new StatQuality(card.getPower(), card.getToughness()));
+            qualities.add(getInstance("stat(" + card.getPower() + "," + card.getToughness() + ")"));
 
         return qualities;
 
