@@ -22,7 +22,7 @@ public final class SynergyMetric extends Metric {
     public SynergyMetric(CardPool cardPool) {
         try {
             this.cardPool = cardPool;
-            this.synergyTable = FileUtil.readCsvToList(Metric.class.getResource("synergy.csv")).readAll().stream().
+            this.synergyTable = FileUtil.readCsvToList(SynergyMetric.class.getResource("synergy.csv")).readAll().stream().
                 filter(l -> cardPool.contains(l.get(0))).
                 collect(Collectors.toMap(l -> l.get(0), l -> SynergyParser.parseSynergies(l.get(1))));
         } catch (IOException e) {

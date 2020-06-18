@@ -16,7 +16,7 @@ public final class CostEffectivenessMetric extends Metric {
 
     public CostEffectivenessMetric(CardPool cardPool) {
         try {
-            this.costEffectivenessTable = FileUtil.readCsvToList(Metric.class.getResource("costeffectiveness.csv")).readAll().stream().
+            this.costEffectivenessTable = FileUtil.readCsvToList(CostEffectivenessMetric.class.getResource("costeffectiveness.csv")).readAll().stream().
                 filter(l -> cardPool.contains(l.get(0))).
                 collect(Collectors.toMap(l -> l.get(0), l -> Double.parseDouble(l.get(1))));
         } catch (IOException e) {
