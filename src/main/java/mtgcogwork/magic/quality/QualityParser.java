@@ -23,6 +23,8 @@ public final class QualityParser {
                         Arrays.stream(qualityArgs[2].split(";")).map(Action::getInstance).collect(Collectors.toList()),
                         Arrays.stream(qualityArgs[3].split(";")).map(Action::getInstance).collect(Collectors.toList()),
                         List.of(qualityArgs[4].split(";")));
+            case "keyword":
+                return new KeywordQuality(qualityArgs[1]);
             default: throw new QualityFormatException(qualityString);
         }
     }
