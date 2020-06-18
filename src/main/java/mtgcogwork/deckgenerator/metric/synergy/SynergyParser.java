@@ -87,8 +87,8 @@ public final class SynergyParser {
                 return new CmcXSynergy();
             case "damage":
                 return new DamageSynergy();
-            case "thisdies":
-                return new ThisDiesSynergy();
+            case "die":
+                return new DieSynergy();
             case "discard":
                 return new DiscardSynergy();
             case "kicker":

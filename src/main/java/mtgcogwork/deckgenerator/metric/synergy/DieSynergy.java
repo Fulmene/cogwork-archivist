@@ -1,8 +1,8 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-public class ThisDiesSynergy extends ActionSynergy {
+public class DieSynergy extends ActionSynergy {
 
-    public ThisDiesSynergy() {
+    public DieSynergy() {
         super("sacrifice");
     }
 
