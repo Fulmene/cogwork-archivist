@@ -34,6 +34,8 @@ public abstract class MagicCardQuality {
         if (typeQuality.isType("creature") || typeQuality.isType("vehicle"))
             qualities.add(getInstance("stat(" + card.getPower() + "," + card.getToughness() + ")"));
 
+        qualities.addAll(QualityParser.parseQualities(additionalQualities));
+
         return qualities;
 
     }
