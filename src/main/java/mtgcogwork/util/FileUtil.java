@@ -17,14 +17,14 @@ import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 public final class FileUtil {
 
     public static void copyFileFromUrl(URL source, Path dest) throws IOException {
-        try (ReadableByteChannel sourceChannel = Channels.newChannel(source.openStream()); FileOutputStream out = new FileOutputStream(dest.toFile())) {
+        try (var sourceChannel = Channels.newChannel(source.openStream()); FileOutputStream out = new FileOutputStream(dest.toFile())) {
             out.getChannel().transferFrom(sourceChannel, 0, Long.MAX_VALUE);
         }
     }
 
+    private static final CsvMapper mapper = new CsvMapper().enable(CsvParser.Feature.WRAP_AS_ARRAY);
+    private static final ObjectReader oReader = mapper.readerFor(List.class).with(CsvSchema.builder().setColumnSeparator(':').build());
     public static MappingIterator<List<String>> readCsvToList(URL csvURL) throws IOException {
-        CsvMapper mapper = new CsvMapper().enable(CsvParser.Feature.WRAP_AS_ARRAY);
-        ObjectReader oReader = mapper.readerFor(List.class).with(CsvSchema.builder().setColumnSeparator(':').build());
         return oReader.readValues(csvURL);
     }
 

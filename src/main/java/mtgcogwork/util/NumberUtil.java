@@ -10,9 +10,9 @@ public final class NumberUtil {
         EQ("=", x -> x == 0),
         NE("!=", x -> x != 0),
         LT("<", x -> x < 0),
-        MT(">", x -> x > 0),
+        GT(">", x -> x > 0),
         LE("<=", x -> x <= 0),
-        ME(">=", x -> x >= 0),
+        GE(">=", x -> x >= 0),
         ;
 
         private final String sign;
@@ -28,7 +28,7 @@ public final class NumberUtil {
             return this.comparePredicate.test(compareResult);
         }
 
-        public static ComparisonOperation fromString(String s) {
+        public static ComparisonOperation fromSign(String s) {
             for (var c : ComparisonOperation.values())
                 if (c.sign.equals(s))
                     return c;
@@ -43,21 +43,15 @@ public final class NumberUtil {
     }
 
     public static double euclideanDistance(List<Integer> v1, List<Integer> v2) {
-        int result = 0;
+        int resultSquared = 0;
         int size = Integer.max(v1.size(), v2.size());
         for (int i = 0; i < size; i++) {
             int x1, x2;
-            if (i < v1.size())
-                x1 = v1.get(i);
-            else
-                x1 = 0;
-            if (i < v2.size())
-                x2 = v2.get(i);
-            else
-                x2 = 0;
-            result += (x1-x2)*(x1-x2);
+            x1 = i < v1.size() ? v1.get(i) : 0;
+            x2 = i < v2.size() ? v2.get(i) : 0;
+            resultSquared += (x1-x2)*(x1-x2);
         }
-        return Math.sqrt(result);
+        return Math.sqrt(resultSquared);
     }
 
     private static final double EPSILON = 1e-15;
