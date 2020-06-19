@@ -98,7 +98,7 @@ public final class SynergyParser {
             case "sacrifice":
                 return new SacrificeSynergy();
             case "power":
-                return new PowerSynergy(ComparisonOperation.fromString(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
+                return new PowerSynergy(ComparisonOperation.fromSign(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
             case "color":
                 return ColorSynergy.get(synergyArgs[1]);
             case "type":
