@@ -1,28 +1,31 @@
 package mtgcogwork.magic.quality;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import mtgcogwork.magic.Action;
+import mtgcogwork.util.StringUtil;
 
 public final class QualityParser {
 
     public static List<MagicCardQuality> parseQualities(String qualitiesString) {
-        return Arrays.stream(qualitiesString.split("/")).
-            map(MagicCardQuality::getInstance).
-            collect(Collectors.toList());
+        if (qualitiesString.isBlank())
+            return List.of();
+        else
+            return StringUtil.split(qualitiesString, "/").stream().
+                map(MagicCardQuality::getInstance).
+                collect(Collectors.toList());
     }
 
     public static MagicCardQuality parseQuality(String qualityString) {
-        List<String> qualityArgs = List.of(qualityString.split("[(),]"));
+        List<String> qualityArgs = StringUtil.splitArgs(qualityString, "(", ",", ")");
         switch (qualityArgs.get(0)) {
             case "ability":
                 return new AbilityQuality(
                         AbilityQuality.AbilityType.valueOf(qualityArgs.get(1).toUpperCase()),
-                        Arrays.stream(qualityArgs.get(2).split(";")).map(Action::getInstance).collect(Collectors.toList()),
-                        Arrays.stream(qualityArgs.get(3).split(";")).map(Action::getInstance).collect(Collectors.toList()),
-                        List.of(qualityArgs.get(4).split(";")));
+                        StringUtil.split(qualityArgs.get(2), ";").stream().map(Action::getInstance).collect(Collectors.toList()),
+                        StringUtil.split(qualityArgs.get(3), ";").stream().map(Action::getInstance).collect(Collectors.toList()),
+                        StringUtil.split(qualityArgs.get(4), ";"));
             case "keyword":
                 return new KeywordQuality(qualityArgs.get(1));
             case "name":
