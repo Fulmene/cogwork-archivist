@@ -4,185 +4,185 @@ Amulet of Safekeeping:
 Angrath's Marauders:damage
 Apex of Power:
 Arcane Encyclopedia:
-Arclight Phoenix:graveyard/instant|sorcery
+Arclight Phoenix:die|discard/type(instant)|type(sorcery)
 Banefire:
 Barging Sergeant:power(<,4)
 Bloodstone Goblin:kicker
 Blood Sun:
 Boggart Brute:
 Bombard:
-Bonded Horncrest:creature
+Bonded Horncrest:type(creature)
 Book Devourer:
-Brass's Bounty:land
+Brass's Bounty:type(land)
 Brazen Buccaneers:
 Brazen Freebooter:
-Buccaneer's Bravado:pirate
+Buccaneer's Bravado:type(pirate)
 Burning Sun's Avatar:
-Captain Lannery Storm:treasure
+Captain Lannery Storm:type(treasure)
 Captivating Crew:sacrifice
 Catalyst Elemental:
-Champion of the Flame:aura|equipment
+Champion of the Flame:type(aura)|type(equipment)
 Charging Monstrosaur:
 Charging Tuskodon:
 Command the Storm:
 Cosmotronic Wave:
 Crash Through:
-Daring Buccaneer:pirate
+Daring Buccaneer:type(pirate)
 Dark-Dweller Oracle:
 Demanding Dragon:
-Dinosaur Stampede:dinosaur
-Direct Current:graveyard
+Dinosaur Stampede:type(dinosaur)
+Direct Current:discard
 Dire Fleet Daredevil:
 Dismissive Pyromancer:
-Doublecast:instant|sorcery
+Doublecast:type(instant)|type(sorcery)
 Dragon Egg:die
 Dual Shot:
 Electrify:
-Electrostatic Field:instant|sorcery
-Erratic Cyclops:instant|sorcery
+Electrostatic Field:type(instant)|type(sorcery)
+Erratic Cyclops:type(instant)|type(sorcery)
 Etali, Primal Storm:
 Experimental Frenzy:
 Fanatical Firebrand:
 Fathom Fleet Firebrand:
 Fearless Halberdier:
 Fervent Strike:
-Fiery Cannonade:pirate
+Fiery Cannonade:type(pirate)
 Fiery Finish:
 Fiery Intervention:
 Fight with Fire:
 Firecannon Blast:
 Fire Elemental:
-Firefist Adept:wizard
+Firefist Adept:type(wizard)
 Fire Shrine Keeper:
-Fire Urchin:instant|sorcery
-Forerunner of the Empire:dinosaur
+Fire Urchin:type(instant)|type(sorcery)
+Forerunner of the Empire:type(dinosaur)
 Form of the Dinosaur:
-Frenzied Rage:creature
+Frenzied Rage:type(creature)
 Frenzied Raptor:
 Frilled Deathspitter:damage
-Gatekeeper Gargoyle:gate
-Ghitu Chronicler:instant|sorcery
-Ghitu Journeymage:wizard
-Ghitu Lavarunner:instant|sorcery
-Glaive of the Guildpact:gate
+Gatekeeper Gargoyle:type(gate)
+Ghitu Chronicler:type(instant)|type(sorcery)
+Ghitu Journeymage:type(wizard)
+Ghitu Lavarunner:type(instant)|type(sorcery)
+Glaive of the Guildpact:type(gate)
 Goblin Banneret:power(<,3)
 Goblin Barrage:
 Goblin Chainwhirler:
 Goblin Cratermaker:
 Goblin Instigator:
 Goblin Locksmith:
-Goblin Motivator:creature
+Goblin Motivator:type(creature)
 Goblin Trailblazer:
-Goblin Trashmaster:goblin
-Goblin Warchief:goblin
-Gravitic Punch:graveyard/powerx
-Guttersnipe:instant|sorcery
+Goblin Trashmaster:type(goblin)
+Goblin Warchief:type(goblin)
+Gravitic Punch:discard/powerx
+Guttersnipe:type(instant)|type(sorcery)
 Haphazard Bombardment:
 Havoc Devils:
-Headstrong Brute:pirate
+Headstrong Brute:type(pirate)
 Hellkite Whelp:
 Hijack:
 Hostile Minotaur:
 Inescapable Blaze:
 Inferno Hellion:
-Jaya Ballard:red&[instant|sorcery]
-Jaya's Immolating Inferno:legendary&[creature|planeswalker]
-Kargan Dragonrider:dragon
+Jaya Ballard:color(red)&[type(instant)|type(sorcery)]
+Jaya's Immolating Inferno:type(legendary)&[type(creature)|type(planeswalker)]
+Kargan Dragonrider:type(dragon)
 Keldon Overseer:sacrifice
 Keldon Raider:
-Keldon Warcaller:saga
-Lathliss, Dragon Queen:dragon
+Keldon Warcaller:type(saga)
+Lathliss, Dragon Queen:type(dragon)
 Lava Axe:
 Lava Coil:
 Legion Warboss:power(<,2)
 Lightning Mare:
-Lightning-Rig Crew:pirate
+Lightning-Rig Crew:type(pirate)
 Lightning Strike:
-Makeshift Munitions:creature|artifact
+Makeshift Munitions:type(creature)|type(artifact)
 Maniacal Rage:
-Maximize Velocity:graveyard/creature
-Mountain:red
+Maximize Velocity:discard/type(creature)
+Mountain:color(red)
 Mutiny:
 Needletooth Raptor:damage
 Nest Robber:
 Onakke Ogre:
 Orazca Raptor:
-Orcish Vandal:artifact
+Orcish Vandal:type(artifact)
 Ornery Goblin:
-Otepec Huntmaster:dinosaur
+Otepec Huntmaster:type(dinosaur)
 Pirate's Pillage:
 Precision Bolt:
 Pyromantic Pilgrim:
 Radiating Lightning:
 Rampaging Cyclops:
-Rampaging Monument:multicolored
+Rampaging Monument:color(multicolored)
 Raptor Hatchling:damage
 Reckless Rage:
 Rekindling Phoenix:die
 Repeating Barrage:
 Rigging Runner:
 Rile:
-Risk Factor:graveyard
+Risk Factor:discard
 Rowdy Crew:
-Rubblebelt Boar:creature
+Rubblebelt Boar:type(creature)
 Rummaging Goblin:
-Run Amok:creature
-Runaway Steam-Kin:red
-Sarkhan, Fireblood:dragon
-Sarkhan's Unsealing:creature&power(>=,4)/creature&power(>=,7)
-See Red:creature
+Run Amok:type(creature)
+Runaway Steam-Kin:color(red)
+Sarkhan, Fireblood:type(dragon)
+Sarkhan's Unsealing:type(creature)&power(>=,4)/type(creature)&power(>=,7)
+See Red:type(creature)
 Seismic Shift:
 Shake the Foundations:
 Shivan Dragon:
 Shivan Fire:
 Shock:
 Siegebreaker Giant:
-Siege-Gang Commander:goblin
+Siege-Gang Commander:type(goblin)
 Silent Dart:
 Silverclad Ferocidons:damage
-Skirk Prospector:goblin
+Skirk Prospector:type(goblin)
 Skizzik:
 Smelt:
-Smelt-Ward Minotaur:instant|sorcery
+Smelt-Ward Minotaur:type(instant)|type(sorcery)
 Sparktongue Dragon:
-Spit Flame:dragon
+Spit Flame:type(dragon)
 Squee, the Immortal:
-Stampeding Horncrest:dinosaur
+Stampeding Horncrest:type(dinosaur)
 Star of Extinction:
 Storm Fleet Arsonist:
 Storm Fleet Pyromancer:
-Storm Fleet Swashbuckler:permanent
-Street Riot:creature
+Storm Fleet Swashbuckler:type(permanent)
+Street Riot:type(creature)
 Sunbird's Invocation:cmcx
 Sun-Collared Raptor:
 Sun-Crowned Hunters:damage
-Sure Strike:creature
+Sure Strike:type(creature)
 Swaggering Corsair:
 Swap Goblin:
-Swashbuckling:creature
+Swashbuckling:type(creature)
 Tectonic Rift:
 The First Eruption:
-The Flame of Keld:damage&red
-Thrash of Raptors:dinosaur
+The Flame of Keld:damage&color(red)
+Thrash of Raptors:type(dinosaur)
 Thud:
 Tilonalli's Crown:
-Tilonalli's Knight:dinosaur
-Tilonalli's Skinshifter:~legendary&creature
-Tilonalli's Summoner:permanent
-Torch Courier:creature
+Tilonalli's Knight:type(dinosaur)
+Tilonalli's Skinshifter:~type(legendary)&type(creature)
+Tilonalli's Summoner:type(permanent)
+Torch Courier:type(creature)
 Tormenting Voice:
 Trove of Temptation:
-Trumpet Blast:creature
+Trumpet Blast:type(creature)
 Two-Headed Giant:
 Unfriendly Fire:
-Valduk, Keeper of the Flame:aura|equipment
+Valduk, Keeper of the Flame:type(aura)|type(equipment)
 Vance's Blasting Cannons:
 Verix Bladewing:
 Viashino Pyromancer:
 Volcanic Dragon:
-Volley Veteran:goblin
-Warcry Phoenix:creature
+Volley Veteran:type(goblin)
+Warcry Phoenix:type(creature)
 Warlord's Fury:
 Wily Goblin:
-Wizard's Lightning:wizard
-Wojek Bodyguard:creature/power(<,3)
+Wizard's Lightning:type(wizard)
+Wojek Bodyguard:type(creature)/power(<,3)
