@@ -9,12 +9,9 @@ import mtgcogwork.util.StringUtil;
 public final class QualityParser {
 
     public static List<MagicCardQuality> parseQualities(String qualitiesString) {
-        if (qualitiesString.isBlank())
-            return List.of();
-        else
-            return StringUtil.split(qualitiesString, "/").stream().
-                map(MagicCardQuality::getInstance).
-                collect(Collectors.toList());
+        return StringUtil.split(qualitiesString, "/").stream().
+            map(MagicCardQuality::getInstance).
+            collect(Collectors.toList());
     }
 
     public static MagicCardQuality parseQuality(String qualityString) {
