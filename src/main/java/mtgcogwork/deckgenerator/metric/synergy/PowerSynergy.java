@@ -15,7 +15,7 @@ public final class PowerSynergy extends BaseSynergy {
 
     @Override
     public Boolean visitStat(StatQuality stat) {
-        return this.comp.testComparison(stat.getPower(), this.threshold);
+        return this.comp.test(stat.getPower(), this.threshold);
     }
 
 }

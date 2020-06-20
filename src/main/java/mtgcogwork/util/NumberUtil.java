@@ -7,10 +7,10 @@ import java.util.function.Predicate;
 public final class NumberUtil {
 
     public static enum ComparisonOperator {
-        EQ("=", x -> x == 0),
-        NE("!=", x -> x != 0),
-        LT("<", x -> x < 0),
-        GT(">", x -> x > 0),
+        EQUAL("=", x -> x == 0),
+        NOT_EQUAL("!=", x -> x != 0),
+        LESS_THAN("<", x -> x < 0),
+        GREATER_THAN(">", x -> x > 0),
         LE("<=", x -> x <= 0),
         GE(">=", x -> x >= 0),
         ;
@@ -23,7 +23,7 @@ public final class NumberUtil {
             this.comparePredicate = comparePredicate;
         }
 
-        public <T extends Comparable<U>, U> boolean testComparison(T lhs, U rhs) {
+        public <T extends Comparable<U>, U> boolean test(T lhs, U rhs) {
             int compareResult = lhs.compareTo(rhs);
             return this.comparePredicate.test(compareResult);
         }
