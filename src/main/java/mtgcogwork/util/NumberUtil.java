@@ -11,8 +11,8 @@ public final class NumberUtil {
         NOT_EQUAL("!=", x -> x != 0),
         LESS_THAN("<", x -> x < 0),
         GREATER_THAN(">", x -> x > 0),
-        LE("<=", x -> x <= 0),
-        GE(">=", x -> x >= 0),
+        LESS_THAN_OR_EQUAL("<=", x -> x <= 0),
+        GREATER_THAN_OR_EQUAL(">=", x -> x >= 0),
         ;
 
         private final String sign;
