@@ -17,6 +17,10 @@ public final class StringUtil {
 
     public static List<String> splitArgs(String input, String argsBegin, String separator, String argsEnd) {
         int argsBeginIndex = input.indexOf(argsBegin);
+
+        if (argsBeginIndex < 0)
+            return List.of(input);
+
         int argsEndIndex = input.indexOf(argsEnd, argsBeginIndex);
         String head = input.substring(0, argsBeginIndex);
         List<String> result = new ArrayList<>();
@@ -25,9 +29,15 @@ public final class StringUtil {
         return Collections.unmodifiableList(result);
     }
 
-    public static List<String> splitExpression(String expression, String operations) {
-        // TODO stub
-        return List.of();
+    public static List<String> splitExpression(String expression, String operators) {
+        if (expression.isBlank())
+            return List.of();
+        else
+            return Splitter.on(lookAround(operators)).trimResults().splitToList(expression);
+    }
+
+    public static String lookAround(String separator) {
+        return "(?<=[" + separator + "])|(?=[" + separator + "])";
     }
 
     private StringUtil() {

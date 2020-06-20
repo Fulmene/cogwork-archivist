@@ -1,25 +1,19 @@
 package mtgcogwork.deckgenerator.metric.synergy;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 import mtgcogwork.util.NumberUtil.ComparisonOperation;
+import mtgcogwork.util.StringUtil;
 
 public final class SynergyParser {
 
     public static List<Synergy> parseSynergies(String synergiesString) {
-        return Arrays.stream(synergiesString.split("/")).
+        return StringUtil.split(synergiesString, "/").stream().
             map(SynergyParser::parseSynergy).
             collect(Collectors.toList());
     }
-
-    private static String lookAround(String delimiters) {
-        return "(?<=[" + delimiters + "])|(?=[" + delimiters + "])";
-    }
-
-    private static String DELIMITERS = "\\[\\]&|~";
 
     private static int precedence(String operator) {
         switch (operator) {
@@ -31,11 +25,10 @@ public final class SynergyParser {
         }
     }
 
-    public static Synergy parseSynergy(String synergyString) {
-        if (synergyString.matches("[" + DELIMITERS + "]*"))
-            return BaseSynergy.getInstance("none");
+    private static String OPERATORS = "\\[\\]&|~";
 
-        String[] tokens = ("[" + synergyString + "]").split(lookAround(DELIMITERS));
+    public static Synergy parseSynergy(String synergyString) {
+        List<String> tokens = StringUtil.splitExpression("[" + synergyString + "]", OPERATORS);
         Stack<Synergy> operandStack = new Stack<>();
         Stack<String> operatorStack = new Stack<>();
         for (String t : tokens) {
@@ -103,8 +96,6 @@ public final class SynergyParser {
                 return ColorSynergy.get(synergyArgs[1]);
             case "type":
                 return TypeSynergy.get(synergyArgs[1]);
-            case "none":
-                return new BaseSynergy() {};
             default:
                 throw new SynergyFormatException(baseSynergyString);
         }
