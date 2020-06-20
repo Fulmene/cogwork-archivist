@@ -15,7 +15,7 @@ public final class QualityParser {
     }
 
     public static MagicCardQuality parseQuality(String qualityString) {
-        List<String> qualityArgs = StringUtil.splitArgs(qualityString, "(", ",", ")");
+        List<String> qualityArgs = StringUtil.splitArgs(qualityString, '(', ",", ')');
         switch (qualityArgs.get(0)) {
             case "ability":
                 return new AbilityQuality(

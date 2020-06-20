@@ -74,8 +74,8 @@ public final class SynergyParser {
     }
 
     public static BaseSynergy parseBaseSynergy(String baseSynergyString) {
-        String[] synergyArgs = baseSynergyString.split("[(),]");
-        switch (synergyArgs[0]) {
+        List<String> synergyArgs = StringUtil.splitArgs(baseSynergyString, '(', ",", ')');
+        switch (synergyArgs.get(0)) {
             case "cmcx":
                 return new CmcXSynergy();
             case "damage":
@@ -91,11 +91,11 @@ public final class SynergyParser {
             case "sacrifice":
                 return new SacrificeSynergy();
             case "power":
-                return new PowerSynergy(ComparisonOperation.fromSign(synergyArgs[1]), Integer.parseInt(synergyArgs[2]));
+                return new PowerSynergy(ComparisonOperation.fromSign(synergyArgs.get(1)), Integer.parseInt(synergyArgs.get(2)));
             case "color":
-                return ColorSynergy.get(synergyArgs[1]);
+                return ColorSynergy.get(synergyArgs.get(1));
             case "type":
-                return TypeSynergy.get(synergyArgs[1]);
+                return TypeSynergy.get(synergyArgs.get(1));
             default:
                 throw new SynergyFormatException(baseSynergyString);
         }

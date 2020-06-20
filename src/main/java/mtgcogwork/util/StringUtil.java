@@ -15,13 +15,17 @@ public final class StringUtil {
             return Splitter.onPattern(separator).trimResults().splitToList(input);
     }
 
-    public static List<String> splitArgs(String input, String argsBegin, String separator, String argsEnd) {
+    public static List<String> splitArgs(String input, char argsBegin, String separator, char argsEnd) {
         int argsBeginIndex = input.indexOf(argsBegin);
 
         if (argsBeginIndex < 0)
             return List.of(input);
 
         int argsEndIndex = input.indexOf(argsEnd, argsBeginIndex);
+
+        if (argsEndIndex < 0)
+            throw new IllegalArgumentException("Argument list ending character not found in the input");
+
         String head = input.substring(0, argsBeginIndex);
         List<String> result = new ArrayList<>();
         result.add(head);
