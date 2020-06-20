@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 public final class NumberUtil {
 
-    public static enum ComparisonOperation {
+    public static enum ComparisonOperator {
         EQ("=", x -> x == 0),
         NE("!=", x -> x != 0),
         LT("<", x -> x < 0),
@@ -18,7 +18,7 @@ public final class NumberUtil {
         private final String sign;
         private final Predicate<Integer> comparePredicate;
 
-        private ComparisonOperation(String sign, Predicate<Integer> comparePredicate) {
+        private ComparisonOperator(String sign, Predicate<Integer> comparePredicate) {
             this.sign = sign;
             this.comparePredicate = comparePredicate;
         }
@@ -28,8 +28,8 @@ public final class NumberUtil {
             return this.comparePredicate.test(compareResult);
         }
 
-        public static ComparisonOperation fromSign(String s) {
-            for (var c : ComparisonOperation.values())
+        public static ComparisonOperator fromSign(String s) {
+            for (var c : ComparisonOperator.values())
                 if (c.sign.equals(s))
                     return c;
             throw new IllegalArgumentException("Unknown operation " + s);

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
-import mtgcogwork.util.NumberUtil.ComparisonOperation;
+import mtgcogwork.util.NumberUtil.ComparisonOperator;
 import mtgcogwork.util.StringUtil;
 
 public final class SynergyParser {
@@ -91,7 +91,7 @@ public final class SynergyParser {
             case "sacrifice":
                 return new SacrificeSynergy();
             case "power":
-                return new PowerSynergy(ComparisonOperation.fromSign(synergyArgs.get(1)), Integer.parseInt(synergyArgs.get(2)));
+                return new PowerSynergy(ComparisonOperator.fromSign(synergyArgs.get(1)), Integer.parseInt(synergyArgs.get(2)));
             case "color":
                 return ColorSynergy.get(synergyArgs.get(1));
             case "type":
