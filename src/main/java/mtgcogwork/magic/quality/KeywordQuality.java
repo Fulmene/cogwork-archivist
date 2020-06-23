@@ -12,6 +12,7 @@ public class KeywordQuality extends AbilityQuality {
         TRAMPLE(AbilityType.STATIC, List.of(), List.of(Action.getInstance("evasion")), List.of("trample")),
         MENACE(AbilityType.STATIC, List.of(), List.of(Action.getInstance("evasion")), List.of("menace")),
         HASTE(AbilityType.STATIC, List.of(), List.of(), List.of("haste")),
+        DEFENDER(AbilityType.STATIC, List.of(), List.of(Action.getInstance("cantattack")), List.of("defender")),
         ;
 
         private final AbilityType abilityType;
