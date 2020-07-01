@@ -24,7 +24,7 @@ public final class StringUtil {
         int argsEndIndex = input.indexOf(argsEnd, argsBeginIndex);
 
         if (argsEndIndex < 0)
-            throw new IllegalArgumentException("Argument list ending character not found in the input");
+            throw new IllegalArgumentException("Argument list ending character not found in the input " + input);
 
         String head = input.substring(0, argsBeginIndex);
         List<String> result = new ArrayList<>();
@@ -34,10 +34,11 @@ public final class StringUtil {
     }
 
     public static List<String> splitExpression(String expression, String operators) {
+        System.out.println(lookAround(operators));
         if (expression.isBlank())
             return List.of();
         else
-            return Splitter.on(lookAround(operators)).trimResults().splitToList(expression);
+            return Splitter.onPattern(lookAround(operators)).trimResults().splitToList(expression);
     }
 
     public static String lookAround(String separator) {
