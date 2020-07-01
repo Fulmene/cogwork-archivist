@@ -14,10 +14,13 @@ public final class QualityParser {
             collect(Collectors.toList());
     }
 
+    // TODO add generic way to check argument count
     public static MagicCardQuality parseQuality(String qualityString) {
         List<String> qualityArgs = StringUtil.splitArgs(qualityString, '(', ",", ')');
         switch (qualityArgs.get(0)) {
             case "ability":
+                if (qualityArgs.size() != 5)
+                    throw new QualityFormatException(qualityString);
                 return new AbilityQuality(
                         AbilityQuality.AbilityType.valueOf(qualityArgs.get(1).toUpperCase()),
                         StringUtil.split(qualityArgs.get(2), ";").stream().map(Action::getInstance).collect(Collectors.toList()),
