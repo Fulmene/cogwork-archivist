@@ -13,6 +13,11 @@ public class KeywordQuality extends AbilityQuality {
         MENACE(AbilityType.STATIC, List.of(), List.of(Action.getInstance("evasion")), List.of("menace")),
         HASTE(AbilityType.STATIC, List.of(), List.of(), List.of("haste")),
         DEFENDER(AbilityType.STATIC, List.of(), List.of(Action.getInstance("cantattack")), List.of("defender")),
+        FIRSTSTRIKE(AbilityType.STATIC, List.of(), List.of(Action.getInstance("firststrike")), List.of("firststrike")),
+        DOUBLESTRIKE(AbilityType.STATIC, List.of(), List.of(Action.getInstance("firststrike")), List.of("doublestrike")),
+        MENTOR(AbilityType.TRIGGERED, List.of(), List.of(Action.getInstance("put target creature 1 +1")), List.of("mentor")),
+        JUMPSTART(AbilityType.ACTIVATED, List.of(Action.getInstance("discard 1")), List.of(Action.getInstance("cast self")), List.of("jumpstart")),
+        ASCEND(AbilityType.STATIC, List.of(), List.of(Action.getInstance("gain you cityblessing")), List.of("ascend")),
         ;
 
         private final AbilityType abilityType;
