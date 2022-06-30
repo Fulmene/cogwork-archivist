@@ -25,7 +25,7 @@ import mtgcogwork.magic.Format;
 
 public final class DeckGenerator {
 
-    private static final Logger log = LogManager.getLogger(DeckGenerator.class);
+    //private static final Logger log = LogManager.getLogger(DeckGenerator.class);
 
     public static final class Builder {
 
@@ -48,8 +48,18 @@ public final class DeckGenerator {
             return this;
         }
 
+        public final Builder withCostEffectivenessMetric(double metricWeight) {
+            this.metrics.add(new CostEffectivenessMetric(this.cardPool, metricWeight));
+            return this;
+        }
+
         public final Builder withSynergyMetric() {
             this.metrics.add(new SynergyMetric(this.cardPool));
+            return this;
+        }
+
+        public final Builder withSynergyMetric(double metricWeight) {
+            this.metrics.add(new SynergyMetric(this.cardPool, metricWeight));
             return this;
         }
 
@@ -58,8 +68,18 @@ public final class DeckGenerator {
             return this;
         }
 
+        public final Builder withManaCurveMetric(List<Integer> manaCurve, double metricWeight) {
+            this.metrics.add(new ManaCurveMetric(manaCurve, metricWeight));
+            return this;
+        }
+
         public final Builder withCardTypeMetric(List<Integer> cardTypeCount) {
             this.metrics.add(new CardTypeMetric(cardTypeCount));
+            return this;
+        }
+
+        public final Builder withCardTypeMetric(List<Integer> cardTypeCount, double metricWeight) {
+            this.metrics.add(new CardTypeMetric(cardTypeCount, metricWeight));
             return this;
         }
 
@@ -107,11 +127,11 @@ public final class DeckGenerator {
     public Deck generateDeck(Iterable<Card> startingCards) {
         final Deck generatedDeck = new Deck(startingCards);
 
-        log.debug("Start deck generation");
-        log.debug("Starting cards: {}", startingCards);
+        //log.debug("Start deck generation");
+        //log.debug("Starting cards: {}", startingCards);
 
         while (generatedDeck.size() < this.format.minDeckSize) {
-            log.debug("Card #{}", generatedDeck.size()+1);
+            //log.debug("Card #{}", generatedDeck.size()+1);
             this.utilityScores.clear();
             for (Metric m : metrics)
                 m.preprocessDeck(generatedDeck);
@@ -124,7 +144,7 @@ public final class DeckGenerator {
                         this.getUtilityScore(generatedDeck, c2))).
                 get();
             generatedDeck.add(maxUtilityCard);
-            log.debug("Added {}", maxUtilityCard);
+            //log.debug("Added {}", maxUtilityCard);
         }
 
         return generatedDeck;
@@ -132,12 +152,12 @@ public final class DeckGenerator {
 
     private double getUtilityScore(Deck deck, Card card) {
         if (!this.utilityScores.containsKey(card.getName())) {
-            log.debug("    Calculating utility score for {}", card);
+            //log.debug("    Calculating utility score for {}", card);
             double score = this.metrics.stream().
                 mapToDouble(m -> m.getMetricScore(deck, card)).
                 sum();
             this.utilityScores.put(card.getName(), score);
-            log.debug("    Utility score for {}: {}", card, score);
+            //log.debug("    Utility score for {}: {}", card, score);
         }
         return this.utilityScores.get(card.getName());
     }

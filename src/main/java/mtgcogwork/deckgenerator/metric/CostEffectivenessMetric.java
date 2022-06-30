@@ -15,6 +15,11 @@ public final class CostEffectivenessMetric extends Metric {
     private final Map<String, Double> costEffectivenessTable;
 
     public CostEffectivenessMetric(CardPool cardPool) {
+        this(cardPool, 1.0);
+    }
+
+    public CostEffectivenessMetric(CardPool cardPool, double metricWeight) {
+        super(metricWeight);
         try {
             this.costEffectivenessTable = FileUtil.readCsvToList(CostEffectivenessMetric.class.getResource("costeffectiveness.csv")).readAll().stream().
                 filter(l -> cardPool.contains(l.get(0))).

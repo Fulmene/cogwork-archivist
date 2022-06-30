@@ -37,6 +37,11 @@ public final class CardTypeMetric extends Metric {
     private Map<Category, Double> score;
 
     public CardTypeMetric(List<Integer> cardTypeCount) {
+        this(cardTypeCount, 1.0);
+    }
+
+    public CardTypeMetric(List<Integer> cardTypeCount, double metricWeight) {
+        super(metricWeight);
         this.cardTypeCount = cardTypeCount;
         this.maxDistance = NumberUtil.euclideanDistance(cardTypeCount, List.of());
     }

@@ -19,6 +19,11 @@ public final class ManaCurveMetric extends Metric {
     private Double landScore;
 
     public ManaCurveMetric(List<Integer> manaCurve) {
+        this(manaCurve, 1.0);
+    }
+
+    public ManaCurveMetric(List<Integer> manaCurve, double metricWeight) {
+        super(metricWeight);
         this.manaCurve = manaCurve;
         this.maxDistance = NumberUtil.euclideanDistance(manaCurve, List.of());
     }

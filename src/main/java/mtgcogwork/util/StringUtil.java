@@ -34,7 +34,6 @@ public final class StringUtil {
     }
 
     public static List<String> splitExpression(String expression, String operators) {
-        System.out.println(lookAround(operators));
         if (expression.isBlank())
             return List.of();
         else

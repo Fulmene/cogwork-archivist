@@ -20,6 +20,11 @@ public final class SynergyMetric extends Metric {
     private Map<String, List<Synergy>> synergyTable;
 
     public SynergyMetric(CardPool cardPool) {
+        this(cardPool, 1.0);
+    }
+
+    public SynergyMetric(CardPool cardPool, double metricWeight) {
+        super(metricWeight);
         try {
             this.cardPool = cardPool;
             this.synergyTable = FileUtil.readCsvToList(SynergyMetric.class.getResource("synergy.csv")).readAll().stream().
